@@ -80,7 +80,6 @@ If you would like to learn more about OpenShift Virtualization, please visit the
 Your OpenShift cluster console is available https://console-openshift-console.apps.cluster-55nbp.dynamic.redhatworkshops.io[here^].
 
 For access, please use the credentials in your email
-////
 
 === vCenter Access
 
