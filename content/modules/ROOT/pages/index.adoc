@@ -81,8 +81,8 @@ Your OpenShift cluster console is available {openshift_cluster_console_url}[here
 
 Administrator login is available with:
 
-* *User:* {openshift_cluster_admin_username}
-* *Password:* {openshift_cluster_admin_password}
+* *User:* ***your work email***
+* *Password:* 3be8xwrp
 
 ////
 === Command Line Access
