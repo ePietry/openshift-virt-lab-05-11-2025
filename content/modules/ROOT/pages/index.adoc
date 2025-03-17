@@ -82,7 +82,7 @@ Your OpenShift cluster console is available {openshift_cluster_console_url}[here
 Administrator login is available with:
 
 * *User:* ***your work email***
-* *Password:* 3be8xwrp
+* *Password:* ***shown on screen***
 
 ////
 === Command Line Access
