@@ -56,11 +56,9 @@ NOTE: You will not need to migrate the HAproxy (load balancer) VM because OpenSh
 
 To help understand the process of mapping resources, such as datastores and port groups, from vSphere into OpenShift's equivalents, storage classes and network attachment definitions, let's begin by reviewing the source environment for the migrations.
 
-. Navigate to VMware vCenter: https://{vcenter_console}[vCenter Console^]
+. Navigate to VMware vCenter: hhttps://vcsrs00-vc.infra.demo.redhat.com/[VMware vSphere^]
 
-. Login with the following credentials:
-- *User:* {vcenter_full_user}
-- *Password:* {vcenter_password}
+. For access, please use the credentials in your email
 
 . By default you'll land in the *Inventory* view at the top of the navigation tree. Click the *Workloads* icon and expand the navigation tree until you see the folder that matches your username, and the 4 VMs under it. Click the *VMs* tab at the top of the screen to view the VM details.
 +
