@@ -77,29 +77,13 @@ If you would like to learn more about OpenShift Virtualization, please visit the
 
 === Credentials for the OpenShift Console
 
-Your OpenShift cluster console is available {openshift_cluster_console_url}[here^].
+Your OpenShift cluster console is available https://console-openshift-console.apps.cluster-55nbp.dynamic.redhatworkshops.io[here^].
 
-Administrator login is available with:
-
-* *User:* ***your work email***
-* *Password:* ***shown on screen***
-
-////
-=== Command Line Access
-
-To the right you see a Terminal window. Out of the box you are logged in as a service account - that can't do much. However you can log into OpenShift as the cluster administrator using the following command (hit `y` when prompted if you want to connect to an insecure server):
-
-[source,sh,subs="attributes",role=execute]
-----
-oc login -u {openshift_cluster_admin_username} -p {openshift_cluster_admin_password} {openshift_api_server_url}
-----
+For access, please use the credentials in your email
 ////
 
 === vCenter Access
 
-In the migration chapter of the lab, you will be asked to login and examine a https://{vcenter_console}[VMware vSphere^] environment.
+In the migration chapter of the lab, you will be asked to login and examine a https://vcsrs00-vc.infra.demo.redhat.com/[VMware vSphere^] environment.
 
-For access, please use the following credentials:
-
-* *vcenter_user:* {vcenter_full_user}
-* *vcenter_password:* {vcenter_password}
+For access, please use the credentials in your email
