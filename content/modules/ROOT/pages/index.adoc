@@ -1,15 +1,16 @@
-= Virtual Machine Management
+= OpenShift Virtualization on ROSA
 
 == Introduction
 
-The beginning section of this lab will introduce you to the basics of creating and managing VMs in OpenShift Virtualization. Starting with OpenShift 4.18 there is a new Virtualization persona and a tree view for virtual machines that make it easier to visualize and manage your virtualization-based assets. After exploring the UI changes, you will see how the web console guides you through the whole process of creating a virtual machine from a pre-defined template. We will then review the properties of that VM, do some basic customizations, and perform actions like live migration, that are often expected of virtual machine administrators.
+Welcome to the OpenShift Virtualization on Red Hat OpenShift Service on AWS (ROSA) workshop! In this session, we’ll explore how Red Hat OpenShift’s powerful virtualization capabilities integrate seamlessly with the fully managed ROSA platform—giving you the flexibility to run and manage virtual machines alongside containerized workloads in the cloud. ROSA provides a robust, extensible, and multi-tenant application platform that brings the full power of OpenShift to AWS. With deep integration into the AWS ecosystem and a rich Operator framework, ROSA simplifies the deployment and lifecycle management of your applications—including those that rely on traditional virtualization. The first part of this workshop will introduce you to OpenShift Virtualization, a feature that lets you run virtual machines inside your OpenShift cluster. As of OpenShift 4.17, a new Virtualization persona in the web console streamlines VM management and offers a more intuitive interface for administrators. You’ll learn how to spin up virtual machines using predefined templates, customize VM resources, and perform common tasks like live migration between hosts—all within the ROSA environment.
+
 
 .*Goals*
 
-* Create a new virtual machine
-* Review and modify resources for virtual machines
-* Understand how VM power states are managed using the OpenShift console
-* Live migrate a VM between two hosts
+* Deploy a new virtual machine on ROSA using OpenShift Virtualization
+* Review and modify compute, memory, and storage settings for VMs
+* Learn how to manage VM lifecycle and power states via the OpenShift console
+* Perform a live migration of a VM across hosts in the cluster
 
 As a reminder, here are your credentials for the OpenShift Console:
 
