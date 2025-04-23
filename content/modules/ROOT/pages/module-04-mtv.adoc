@@ -261,6 +261,7 @@ image::module-01/NN_VM_Migration_Logs.png[link=self, window=blank, width=60%]
 +
 image::module-01/NN_VM_Migration_Logs_View.png[link=self, window=blank, width=60%]
 
+[[verify]]
 == Validate the Migrated Windows VMs and Application
 
 *SAY:*

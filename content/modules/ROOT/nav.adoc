@@ -19,16 +19,27 @@
 ** xref:module-03-storage.adoc#clone_vm[Clone a Virtual Machine]
 
 * xref:module-04-mtv.adoc[Migrating Existing Virtual Machines]
-* xref:module-04-mtv.adoc#VMware-Environment[Review the VMware Environment and Sample Application]
-* xref:module-04-mtv.adoc#migration[Migration Toolkit for Virtualization]
+** xref:module-04-mtv.adoc#VMware-Environment[Review the VMware Environment and Sample Application]
+** xref:module-04-mtv.adoc#migration[Migration Toolkit for Virtualization]
+** xref:module-04-mtv.adoc#verify[Validate the Migrated Windows VMS and Application]
 
 * xref:module-05.adoc[Declarative IaC for Automating Virtual Machine Creation]
+** xref:module-05.adoc#yaml[Use the YAML manifest to create the virtual machine ]
+** xref:module-05.adoc#deleting[Deleting the Virtual Machine]
 
 * xref:module-06.adoc[Declarative IaC for Automating VM Resources ]
+** xref:module-06.adoc#validating[Verifying Initial CPU Core Count ]
+** xref:module-06.adoc#increasing[Declarative IaC for Automating VM Resources ]
 
 * xref:module-07.adoc[Simplified configuration for load balancing ]
+** xref:module-07.adoc#setupservice[Set up internal load balancing with Services ]
+** xref:module-07.adoc#routes[Set Up External Access to Load Balancing ]
 
 * xref:module-08.adoc[Network Egress Firewall ]
+** xref:module-08.adoc#access[Access the Internet from a Windows virtual machine ]
+** xref:module-08.adoc#policy[Implement a Network Policy to Block Egress ]
+** xref:module-08.adoc#validate[Validate that Internet Access is Blocked from the Windows virtual machine ]
+** xref:module-08.adoc#congratulations[Congratulations ]
 
 * xref:conclusion.adoc[Conclusion]
 ** xref:conclusion.adoc#key_takeaways[Key Takeaways]
