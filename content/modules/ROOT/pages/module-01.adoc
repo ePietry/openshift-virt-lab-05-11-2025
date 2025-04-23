@@ -14,43 +14,6 @@ image::2025_spring/module-01-intro/01_Virt_Perspective.png[link=self, window=bla
 +
 image::2025_spring/module-01-intro/02_Welcome_Virt.png[link=self, window=blank, width=100%]
 
-[[explore_virt]]
-== Exploring OpenShift Virtualization
-
-When you arrive in the *Virtualization* view you will be on the *Overview* page which provides a high-level view of all virtualization resources currently in use, lets take a moment to explore.
-
-image::2025_spring/module-01-intro/03_Virt_Overview.png[link=self, window=blank, width=100%]
-
-NOTE: The *Virtualization* persona is available only when Red Hat OpenShift Virtualization is installed and properly configured. In this lab environment the installation and configuration has already been performed for us.
-
-. Click on the *VirtualMachines* item in the left side menu and you will be presented with the virtualization tree view of all VM assets.
-+
-image::2025_spring/module-01-intro/04_Tree_View.png[link=self, window=blank, width=100%]
-
-. Lets explore this page for a few moments: notice that this view is divided into 3 columns, the left-side management menu, the central column for organization of VM-based projects, and then the virtual machine view.
-
-. The left menu is the main control for Virtualization integrated functions in OpenShift. We can see virtualization related items like the Catalog, Templates and InstanceTypes to build VMs from, and the menus to configure Storage and Netoworking for virtual machines.
-+
-image::2025_spring/module-01-intro/05_Left_Menu.png[link=self, window=blank, width=100%]
-
-. The central column as mentioned is a project view. Like other objects in OpenShift, Projects (which are an abstraction for Kubernetes namespaces), are the boundaries for which permissions and other aspects of using and managing the resources are available to a user. By default there is a slider here that only shows projects with existing VMs. Currently the only project that we can see is *vmimported-{user}*, as it is the only project that we have access to with virtual machines in it.
-+
-image::2025_spring/module-01-intro/06_Project_Tree.png[link=self, window=blank, width=100%]
-
-. In the virtual machine overview column, it will list *All projects* by default, which shows us the VM's for every user in our shared cluster environment. You can sort by columns to make locating VM's easier, or even arrange which columns are visable to make organization easier. This view will change when you highlight a specific project or virtual machine in the center column.
-+
-image::2025_spring/module-01-intro/07_VM_List.png[link=self, window=blank, width=100%]
-
-. From the center column click on the project *vmimported-{user}* to see the virtual machines that are currently deployed and available to your specific user account.
-+
-image::2025_spring/module-01-intro/08_VM_Imported_Project.png[link=self, window=blank, width=100%]
-+
-IMPORTANT: While the lab guide is configured to be dynamic and show your specific user account and project names whenever possible, the images in the lab guide are static and may show a different user, please perform these tasks in reference to your own user account and associated projects.
-
-. The virtual machine overview column will update to only show the virtual machines in the *vmimported-{user}* project. You should see three VMs listed, but they are not currently turned on, these are for a later part of the lab.
-+
-image::2025_spring/module-01-intro/09_VMs_Stopped.png[link=self, window=blank, width=100%]
-
 [[create_project]]
 == Create a New Project
 
