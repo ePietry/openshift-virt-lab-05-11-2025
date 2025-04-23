@@ -2,7 +2,14 @@
 
 == Introduction
 
-Welcome to the OpenShift Virtualization on Red Hat OpenShift Service on AWS (ROSA) workshop! In this session, we’ll explore how Red Hat OpenShift’s powerful virtualization capabilities integrate seamlessly with the fully managed ROSA platform—giving you the flexibility to run and manage virtual machines alongside containerized workloads in the cloud. ROSA provides a robust, extensible, and multi-tenant application platform that brings the full power of OpenShift to AWS. With deep integration into the AWS ecosystem and a rich Operator framework, ROSA simplifies the deployment and lifecycle management of your applications—including those that rely on traditional virtualization. The first part of this workshop will introduce you to OpenShift Virtualization, a feature that lets you run virtual machines inside your OpenShift cluster. As of OpenShift 4.17, a new Virtualization persona in the web console streamlines VM management and offers a more intuitive interface for administrators. You’ll learn how to spin up virtual machines using predefined templates, customize VM resources, and perform common tasks like live migration between hosts—all within the ROSA environment.
+Welcome to the OpenShift Virtualization on Red Hat OpenShift Service on AWS (ROSA) workshop! 
+In this session, we’ll explore how Red Hat OpenShift’s powerful virtualization capabilities integrate seamlessly with the fully managed ROSA platform—giving you the flexibility to run and manage virtual machines alongside containerized workloads in the cloud.
+ROSA provides a robust, extensible, and multi-tenant application platform that brings the full power of OpenShift to AWS. With deep integration into the AWS ecosystem and a rich Operator framework, ROSA simplifies the deployment and lifecycle management of your applications—including those that rely on traditional virtualization.
+
+The first part of this workshop will introduce you to OpenShift Virtualization, a feature that lets you run virtual machines inside your OpenShift cluster.
+
+As of OpenShift 4.17, a new Virtualization persona in the web console streamlines VM management and offers a more intuitive interface for administrators. 
+You’ll learn how to spin up virtual machines using predefined templates, customize VM resources, and perform common tasks like live migration between hosts—all within the ROSA environment.
 
 
 .*Goals*
