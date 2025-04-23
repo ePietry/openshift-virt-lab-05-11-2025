@@ -5,7 +5,7 @@ We hope you’ve enjoyed your hands-on experience with *OpenShift Virtualization
 
 By leveraging *Red Hat OpenShift Service on AWS (ROSA)*, you benefit from a fully managed OpenShift environment deeply integrated with AWS services—making it easier than ever to run both containerized and virtual machine workloads in a scalable, secure, and cloud-native way.
 
-[key_takeaways]
+[[key_takeaways]]
 == Key Takeaways
 
 * OpenShift Virtualization is a solution-oriented platform designed to help you import, run, and manage legacy virtual machines—while also serving as a bridge toward cloud-native application modernization.
@@ -14,7 +14,7 @@ By leveraging *Red Hat OpenShift Service on AWS (ROSA)*, you benefit from a full
 
 * This technology lays a solid foundation for running traditional workloads securely and reliably, while also equipping you with the tools and skills needed for building modern applications on a unified platform.
 
-[additional_info]
+[[additional_info]]
 == Additonal Information
 
 === Free Ebook: 15 Reasons to Adopt Red Hat OpenShift Virtualization
