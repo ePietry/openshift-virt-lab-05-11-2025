@@ -1,4 +1,4 @@
-* xref:index.adoc[Virtual Machine Management ]
+* xref:index.adoc[Introduction ]
 
 * xref:module-01.adoc[Virtual Machine Management ]
 ** xref:module-01.adoc#virt_persona[Switch to the Virtualization Persona]

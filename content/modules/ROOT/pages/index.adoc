@@ -43,11 +43,6 @@ A new browser tab will open.
 image::module-1-console-login.png[Console Login,link=self, window=blank, width=100%]
 +
 . *Enter your username `{user}` and password `{password}`*.
-. By default you will be taken to the Developer perspective.
-Change to the Administrator perspective.
-*Click the drop-down menu on the upper left, and select Administrator*.
-+
-image::module-1-administrator.png[Administrator perspective,link=self, window=blank, width=100%]
 
 Congratulations!
 You're now logged in and ready to begin the workshop!

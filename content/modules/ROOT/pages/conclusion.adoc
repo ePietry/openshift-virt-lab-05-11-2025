@@ -1,19 +1,18 @@
 
 image::2025_spring/conclusion/00_Thank_You.png[link=self, window=blank, width=100%]
 
-We hope you have enjoyed {lab_name} and learning more about *OpenShift Virtualization* and how it can be a useful tool for both the import and management of legacy virtual machines, as well as a stepping stone on the path of application modernization.
+We hope you’ve enjoyed your hands-on experience with *OpenShift Virtualization on ROSA* and gained valuable insights into how this powerful combination can support your journey to modernize and manage workloads in the cloud.
+
+By leveraging *Red Hat OpenShift Service on AWS (ROSA)*, you benefit from a fully managed OpenShift environment deeply integrated with AWS services—making it easier than ever to run both containerized and virtual machine workloads in a scalable, secure, and cloud-native way.
 
 [key_takeaways]
 == Key Takeaways
 
-* OpenShift Virtualization is solution oriented, providing you with a mature, stable, and scalable solution that's easy to get started with.
+* OpenShift Virtualization is a solution-oriented platform designed to help you import, run, and manage legacy virtual machines—while also serving as a bridge toward cloud-native application modernization.
 
-* OpenShift Virtualization is available at every subscription level of Red Hat OpenShift from OpenShift Platform Plus which provides a full hybrid cloud application development platform, to OpenShift Virtualization Engine, an offering that specializes in providing support for virtualized workloads.
+* When deployed on ROSA, OpenShift Virtualization combines the best of both worlds: cloud-native innovation and the flexibility to run traditional VMs—without needing to manage the underlying infrastructure.
 
-* OpenShift Virtualization is fully integrated with a broad ecosystem of partner products, with more coming on board each day. Check with your preferred hardware and software vendors to see if they support OpenShift Virtualization.
-
-* OpenShift Virtualization can help you set a strong foundation for tradtional workloads, while building skills for the future with a modern application platform.
-
+* This technology lays a solid foundation for running traditional workloads securely and reliably, while also equipping you with the tools and skills needed for building modern applications on a unified platform.
 
 [additional_info]
 == Additonal Information
