@@ -22,6 +22,8 @@ You’ll learn how to spin up virtual machines using predefined templates, custo
 * Review and modify compute, memory, and storage settings for VMs
 * Learn how to manage VM lifecycle and power states via the OpenShift console
 * Perform a live migration of a VM across hosts in the cluster
+* Use Declarative IaC for VM creation and modifications
+* Deploy cloud native networking fonctionality of OpenShift
 
 == Accessing the System
 
