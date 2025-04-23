@@ -1,103 +1,84 @@
-= Simplified configuration for load balancing
+= Declarative IaC for Automating VM Resources
 
 == Introduction
 
-In most systems, load balancing virtual machiness typically requires multiple different tools and configurations to work properly.
-For example, to load balance two virtual machines internally and externally you might have to:
+One of the advantages of OpenShift and Kubernetes is that its configuration is managed with declarative YAML manifests.
+The configuration of VMs running on OpenShift is the same.
+In other systems, automating the creation of new virtual machine instances or managing the configuration of existing virtual machines often requires an understanding of complex IaC languages.
 
-* [ ] Create a private internal load balancer
-* [ ] Create an internet facing endpoint and route it to the internal load balancer
-* [ ] Create private DNS records for the internal load balancer
-* [ ] Create public DNS records for the public endpoint for external access
-* [ ] Register virtual machines with the load balancer
-* [ ] Configure the listening/forwarding port or port translation
-* [ ] Configure health check endpoints and tests
-* [ ] Configure health check timeouts and intervals
+In this module you will increase the CPU resources dedicated to a VM using techniques easily adopted by any IaC system.
 
-OpenShift trivializes networking and load balancing.
-In this module, you'll accomplish all of this, without leaving OpenShift.
+[[validating]]
+== Verifying Initial CPU Core Count
 
-[[setupservice]]
-== Set up internal load balancing with Services
-
-Services are internal load balancers in OpenShift.
-Services route traffic to resources by identifing them with a label selector.
-Labels can be applied to any OpenShift resources, including virtual machines,to identify and group them.
-You will create a service and identify the virtual machines it services as a load balancer by means of labels on the virtual machines.
-
-. On the left bar, click the *Virtualization -> VirtualMachines* and on the top bar select the *Project: `windowsmesh-{user}`*
-. To find the label on the virtual machine that will identify it to the Service for selection, *click on the `winweb01`* virtual machine.
-*Click the YAML tab* and *search for "app: winmesh"*.
-It's usualy near line 186.
-This is an arbitrary label assigned to both virtual machines.
+.  To find the VM to change, click on the left bar, *click Virtualization -> VirtualMachines*
+On the top bar, select the *Project `windowsmesh-{user}`*.
 +
-.Identify the label on the virtual machine instance
-image::module-4-find-vm-app-label.png[Find VM label app=winmesh,link=self, window=blank, width=100%]
+.Identifying the `winweb01` virtual machine
+image::module-2-find-winweb01-vm.png[Find winweb01 VM,width=50%,link=self, window=blank]
 +
-. On the left side of the console, click to expand *Networking -> Services* and on the top right corner, click *Create Service*.
+.  *Click on the `winweb01` VM*.
+Notice the CPU | Memory section on the *Overview* tab.
 +
-.Begin Service creation
-image::module-4-create-service.png[Create Service button,link=self, window=blank, width=100%]
+.CPU and Memory consumption of the VM
+image::module-2-winweb01-cpu-ram.png[winweb01 CPU and RAM,link=self, window=blank, width=100%]
 +
-. Modify the Service to load balance between virtual machines
-.. On line 4, change the *name:* to `winmesh`.
-.. Modify line 8 to read `app: winmesh`
-.. Change the *targetPort:* value on line 12 to `80` then *click "Create"* in the bottom left corner
+. Verify the number of cores via powershell in the `winweb01` console.
+.. Click on the *Console tab*, and click into the *black console box* to activate input into the VM console.
+.. Start Powershell by *entering `15`* in the menu.
 +
-.Modify the Service configuration
-image::module-4-create-service-yaml.png[Create Service YAML,float="none",align="left",link=self, window=blank, width=100%]
+.Accessing MicroSoft `SConfig`
+image::module-5-powershell-01.png[SConfig,link=self, window=blank, width=100%]
 +
-. Click the *Pods tab* and notice that the two `winweb` virtual machines have already registered with the service object.
-This will allow applications within the OpenShift cluster to access these virtual machines through the winmesh Service, aka "load balancer".
+.. *Copy* the following command into your clipboard.
 +
-.Examine Pods identified by the label selector
-image::module-4-pods-in-service.png[Pods in Service,float="none",align="left",link=self, window=blank, width=100%]
-
-[[routes]]
-== Set Up External Access to Load Balancing
-
-OpenShift was the first to introduce the concept of Routes in the early days of Kubernetes.
-Use a Route to provide external access to the virtuals machines through the internal Service, aka, load balancer.
-
-. On the left side, Click *Networking -> Routes* and then click *Create Route*.
-+
-.Begin Route creation
-image::module-4-create-route.png[Create Route,float="none",align="left",link=self, window=blank, width=100%]
-+
-. Use the form to create the Route.
-.. In the *name:* field put `winmesh`.
-.. Click the drop down box below *Service* and select the `winmesh` Service you just created.
-.. Click the drop down box below *Target port* and select port `80`.
-.. Tick the *Secure Route* checkbox.
-.. Under *TLS termination*, select `Edge`.
-.. Under *Insecure traffic*, select `Redirect`.
-.. Finally, click *Create* in the bottom left corner.
-+
-.Completed Route
-image::module-4-create-route-form.png[Create Route form,float="none",align="left",link=self, window=blank, width=100%]
-image::module-4-create-route-form1.png[Create Route form,float="none",align="left",link=self, window=blank, width=100%]
-+
-. Test the Route.
-In the middle right, find the *Location* section.
-*Click the link to view your load balanced virtual machines.*
-+
-.Functioning application accessed via the Internet
-image::module-4-test-route.png[Test Route,float="none",align="left",link=self, window=blank, width=100%]
-+
-. A new browser window opens and accesses the web application.
-+
-image:module-4-web-application.png[Web Application,float="none",align="left",link=self, window=blank, width=100%]
-+
-. Routes are implemented by HAProxy inside OpenShift.
-By default, they are sticky sessions based on cookies.
-If you'd like, update the Route to disable cookies and sticky sessions.
-+
-[,sh,role=execute]
+[,powershell,subs="attributes",role=execute]
 ----
-oc annotate route winmesh haproxy.router.openshift.io/disable_cookies='true'
+Get-CimInstance -ClassName win32_processor | Select NumberofCores
 ----
++
+For reference, you get get the physical MEMORY of the Windows virtual machine as follows
++
+[,powershell]
+----
+(Get-CimInstance Win32_PhysicalMemory | Measure-Object -Property capacity -Sum).sum /1gb
+----
++
+. Now *paste* it into the VM console with the *Paste button*.
++
+.Accessing the console to view number of cores before IaC reconfiguration
+image::module-2-winweb01-numcores-1.png[winweb01 numcores 1,link=self, window=blank, width=100%]
+
+[[increasing]]
+== Increasing CPU Core Count
+
+. To increase the CPU core count via IaC, *click the YAML tab* and scroll down until you see `cpu`.
+On approximately line 190, modify `cores` to increase the core count from *1 to 2*.
+. Click *Save*
++
+.Changing the number of cores with a YAML edit
+image::module-2-winweb01-cpu-2-cores.png[winweb01 CPU 2 cores,link=self, window=blank, width=100%]
++
+. To restart the winweb01 VM, click the *circular arrow* &circlearrowright;.
+. Wait for the `winweb01` VM to restart.
+. Verify the number of cores via Powershell in the `winweb01` console.
+.. Click on the *Console* tab, and click into the black console box to activate input into the VM console.
+.. As before, start Powershell by entering *15* in the menu.
+.. To reveal the new number of cores, *Copy/Paste* the following command into the VM console with the Paste button.
++
+[,powershell,subs="attributes",role=execute]
+----
+Get-CimInstance -ClassName win32_processor | Select NumberofCores
+----
++
+.Verifying actual change to number of CPUs
+image::module-2-winweb01-numcores-2.png[winweb01 numcores 2,link=self, window=blank, width=100%]
+
+NOTE: You can also use Infrastructure as Code to trigger the necessary restart.
+You could  implement a pipeline that reconfigures the virtual machine, then uses a Job running `virtctl` to restart the virtual machine.
 
 [[congratulations]]
 == Congratulations
 
-You've implemented internal load balancing through kubernetes Services, and accessed them via the Internet through OpenShift Routes.
+You have increased the resources available to a virtual machine via Infrastructure as Code.
+You can imagine from this example how you might automate the resource reconfiguration from a IaC tool, or from a pipeline.

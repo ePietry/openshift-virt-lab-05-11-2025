@@ -8,6 +8,8 @@ This demo highlights the migration of virtual machines from VMware vSphere to Op
 
 We will use the Migration Toolkit for Virtualization to migrate virtual machines from VMware vSphere to OpenShift Virtualization.
 
+[[VMware-Environment]]
+
 == Review the VMware Environment and Sample Application
 
 *SAY:*
@@ -69,6 +71,7 @@ CAUTION:  *Do not start these VMware VMs.*
 We are not supporting "warm" migrations in this demo.
 If your customer wants you to start and investigate these VMS, you may do so but *must* stop the VMs before beginning migration.
 
+[[migration]]
 == Migration Toolkit for Virtualization
 
 *SAY:*

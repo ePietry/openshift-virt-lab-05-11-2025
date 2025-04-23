@@ -19,14 +19,16 @@
 ** xref:module-03-storage.adoc#clone_vm[Clone a Virtual Machine]
 
 * xref:module-04-mtv.adoc[Migrating Existing Virtual Machines]
+* xref:module-04-mtv.adoc#VMware-Environment[Review the VMware Environment and Sample Application]
+* xref:module-04-mtv.adoc#migration[Migration Toolkit for Virtualization]
 
 * xref:module-05.adoc[Declarative IaC for Automating Virtual Machine Creation]
 
-* xref:module-06.adoc[Simplified configuration for load balancing]
+* xref:module-06.adoc[Declarative IaC for Automating VM Resources ]
 
-* xref:module-07.adoc[Network Egress Firewall]
+* xref:module-07.adoc[Simplified configuration for load balancing ]
 
-* xref:module-08.adoc[Declarative IaC for Automating VM Resources]
+* xref:module-08.adoc[Network Egress Firewall ]
 
 * xref:conclusion.adoc[Conclusion]
 ** xref:conclusion.adoc#key_takeaways[Key Takeaways]
