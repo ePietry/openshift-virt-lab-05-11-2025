@@ -10,6 +10,8 @@
 ** xref:module-01-intro.adoc#vm_state[Controlling Virtual Machine State]
 ** xref:module-01-intro.adoc#live_migrate[Live Migrate a Virtual Machine]
 
+* xref:module-01-intro2.adoc[intro 2 ]
+
 * xref:module-02-mtv.adoc[Migrating Existing Virtual Machines]
 
 * xref:module-03.adoc[Declarative IaC for Automating Virtual Machine Creation]
