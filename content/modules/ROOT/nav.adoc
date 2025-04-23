@@ -1,6 +1,3 @@
-
-* xref:index.adoc[Introduction]
-
 * xref:module-01-intro.adoc[Virtual Machine Management ]
 ** xref:module-01-intro.adoc#virt_persona[Switch to the Virtualization Persona]
 ** xref:module-01-intro.adoc#explore_virt[Exploring OpenShift Virtualization]
@@ -9,8 +6,6 @@
 ** xref:module-01-intro.adoc#admin_vms[Administering Virtual Machines]
 ** xref:module-01-intro.adoc#vm_state[Controlling Virtual Machine State]
 ** xref:module-01-intro.adoc#live_migrate[Live Migrate a Virtual Machine]
-
-* xref:module-01-intro2.adoc[intro 2 ]
 
 * xref:module-02-mtv.adoc[Migrating Existing Virtual Machines]
 
@@ -26,9 +21,8 @@
 ** xref:module-05-tempinst.adoc#create_win[Create a Windows VM Template]
 ** xref:module-05-tempinst.adoc#instance_types[Introduction to Instance Types]
 
-** xref:module-06.adoc[Simplified configuration for load balancing]
-
-** xref:module-07.adoc[Network Egress Firewall]
+* xref:module-06.adoc[Simplified configuration for load balancing]
+* xref:module-07.adoc[Network Egress Firewall]
 
 
 * xref:conclusion.adoc[Conclusion]
