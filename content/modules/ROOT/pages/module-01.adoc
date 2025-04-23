@@ -19,7 +19,7 @@ image::2025_spring/module-01-intro/02_Welcome_Virt.png[link=self, window=blank, 
 
 . Before creating a VM we need to create a new project. Virtual machines are deployed to a specific project, or namespace, where by default, users without permission to the namespace cannot access, manage, or control them. Administrators can access all projects, and therefore view all virtual machines, however regular users must be given access to projects as needed.
 +
-. Click *Create Project* at the top right of the center tree view column.
+. Click *Create Project* at the top right of the console.
 +
 image::2025_spring/module-01-intro/10_Column_Create.png[link=self, window=blank, width=100%]
 
