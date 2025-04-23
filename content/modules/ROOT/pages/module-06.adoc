@@ -1,245 +1,103 @@
-= Istio Traffic Management for Virtual Machines
+= Simplified configuration for load balancing
 
 == Introduction
 
-In the world of containers, service mesh (or Isitio more specifically) is considered one of the most desirable and transformational kubernetes features.
-Whenever we talk about service mesh, it's in the context of words like *modernized*, *12 factor*, *SOA* and containerized apps - never with legacy virtual machines.
+In most systems, load balancing virtual machiness typically requires multiple different tools and configurations to work properly.
+For example, to load balance two virtual machines internally and externally you might have to:
 
-*UpLift and Shift* is about giving additional feature functionality without requiring rewriting or replatforming your applications.
+* [ ] Create a private internal load balancer
+* [ ] Create an internet facing endpoint and route it to the internal load balancer
+* [ ] Create private DNS records for the internal load balancer
+* [ ] Create public DNS records for the public endpoint for external access
+* [ ] Register virtual machines with the load balancer
+* [ ] Configure the listening/forwarding port or port translation
+* [ ] Configure health check endpoints and tests
+* [ ] Configure health check timeouts and intervals
 
-Imagine the situation where a web application is running in Windows IIS and customers are reporting intermittent errors/latency.
-What tooling exists for those legacy virtual machines to troubleshoot?
+OpenShift trivializes networking and load balancing.
+In this module, you'll accomplish all of this, without leaving OpenShift.
 
-In this final section, we'll show how we can use the advanced network telemetry from Istio and Kiali to easily troubleshoot these issues with our legacy windows virtual machines.
+[[setupservice]]
+== Set up internal load balancing with Services
 
-////
+Services are internal load balancers in OpenShift.
+Services route traffic to resources by identifing them with a label selector.
+Labels can be applied to any OpenShift resources, including virtual machines,to identify and group them.
+You will create a service and identify the virtual machines it services as a load balancer by means of labels on the virtual machines.
 
-== Remove the Service and Route
-
-The Service and Route created in the previous modules are no longer necessary.
-Service Mesh will replace these features with a far more robust solution.
-
-CAUTION: Make sure you're in your `windowsmesh-{user}` namespace.
-
-. From the OpenShift Console, on the left, click *Networking -> Services* and delete all the services you find.
-. To delete the route, click *Networking -> Routes* and delete all the routes you find.
-
-Now you can proceed to replace these features with the Service Mesh.
-
-////
-
-== Enable Service Mesh in your VMs
-
-. *Go to each winweb VM* and add the following lines to around *line 175 in the YAML* as part of the `annotations:` section.
+. On the left bar, click the *Virtualization -> VirtualMachines* and on the top bar select the *Project: `windowsmesh-{user}`*
+. To find the label on the virtual machine that will identify it to the Service for selection, *click on the `winweb01`* virtual machine.
+*Click the YAML tab* and *search for "app: winmesh"*.
+It's usualy near line 186.
+This is an arbitrary label assigned to both virtual machines.
 +
-[source,yaml,subs="+attributes",role=execute]
+.Identify the label on the virtual machine instance
+image::module-4-find-vm-app-label.png[Find VM label app=winmesh,link=self, window=blank, width=100%]
++
+. On the left side of the console, click to expand *Networking -> Services* and on the top right corner, click *Create Service*.
++
+.Begin Service creation
+image::module-4-create-service.png[Create Service button,link=self, window=blank, width=100%]
++
+. Modify the Service to load balance between virtual machines
+.. On line 4, change the *name:* to `winmesh`.
+.. Modify line 8 to read `app: winmesh`
+.. Change the *targetPort:* value on line 12 to `80` then *click "Create"* in the bottom left corner
++
+.Modify the Service configuration
+image::module-4-create-service-yaml.png[Create Service YAML,float="none",align="left",link=self, window=blank, width=100%]
++
+. Click the *Pods tab* and notice that the two `winweb` virtual machines have already registered with the service object.
+This will allow applications within the OpenShift cluster to access these virtual machines through the winmesh Service, aka "load balancer".
++
+.Examine Pods identified by the label selector
+image::module-4-pods-in-service.png[Pods in Service,float="none",align="left",link=self, window=blank, width=100%]
+
+[[routes]]
+== Set Up External Access to Load Balancing
+
+OpenShift was the first to introduce the concept of Routes in the early days of Kubernetes.
+Use a Route to provide external access to the virtuals machines through the internal Service, aka, load balancer.
+
+. On the left side, Click *Networking -> Routes* and then click *Create Route*.
++
+.Begin Route creation
+image::module-4-create-route.png[Create Route,float="none",align="left",link=self, window=blank, width=100%]
++
+. Use the form to create the Route.
+.. In the *name:* field put `winmesh`.
+.. Click the drop down box below *Service* and select the `winmesh` Service you just created.
+.. Click the drop down box below *Target port* and select port `80`.
+.. Tick the *Secure Route* checkbox.
+.. Under *TLS termination*, select `Edge`.
+.. Under *Insecure traffic*, select `Redirect`.
+.. Finally, click *Create* in the bottom left corner.
++
+.Completed Route
+image::module-4-create-route-form.png[Create Route form,float="none",align="left",link=self, window=blank, width=100%]
+image::module-4-create-route-form1.png[Create Route form,float="none",align="left",link=self, window=blank, width=100%]
++
+. Test the Route.
+In the middle right, find the *Location* section.
+*Click the link to view your load balanced virtual machines.*
++
+.Functioning application accessed via the Internet
+image::module-4-test-route.png[Test Route,float="none",align="left",link=self, window=blank, width=100%]
++
+. A new browser window opens and accesses the web application.
++
+image:module-4-web-application.png[Web Application,float="none",align="left",link=self, window=blank, width=100%]
++
+. Routes are implemented by HAProxy inside OpenShift.
+By default, they are sticky sessions based on cookies.
+If you'd like, update the Route to disable cookies and sticky sessions.
++
+[,sh,role=execute]
 ----
-  annotations:
-        sidecar.istio.io/inject: "true"
-        proxy.istio.io/config: |
-          holdApplicationUntilProxyStarts: true
-          proxyMetadata:
-            ISTIO_META_DNS_CAPTURE: 'false'
-            ISTIO_META_DNS_AUTO_ALLOCATE: 'false'
+oc annotate route winmesh haproxy.router.openshift.io/disable_cookies='true'
 ----
-
-. *Go to the database VM* and add the following line to around *line 145 in the YAML*, as part of the `annotations:` section.
-+
-[source,yaml,subs="+attributes",role=execute]
-----
-  sidecar.istio.io/inject: 'true'
-----
-
-== Enable Service Mesh in Your Namespace
-
-The administrators have already given your user permissions to activate the service mesh for your namespace.
-Ask your instructor if you are interested in learning how this was achieved.
-
-To enable the Service Mesh for your namespace
-
-. *click the Plus sign on the upper right of the OpenShift Console*.
-. Paste the following YAML.
-+
-[source,yaml,subs="+attributes",role=execute]
-----
-apiVersion: maistra.io/v1
-kind: ServiceMeshMember
-metadata:
-  name: default
-  namespace: windowsmesh-{user}
-spec:
-  controlPlaneRef:
-    namespace: istio-system
-    name: basic
-----
-+
-. Restart all three your virtual machines to start the Istio side-car container.
-.. Click *Virtualization -> VirtualMachines* and make sure you're in the `windowsmesh-{user}` Project.
-.. Use the extended menu on the right side of each virtual machine to *Restart* each of them.
-.. To validate that you have the side-car container added, go to *Workload -> Pods*.
-You should see the number of containers in the pod is now 2.
-The second pod is the Service Mesh side-car pod.
-+
-NOTE:  It will take one or two minutes for the Windows virtual machines to restart, because they are doing graceful shutdowns.
-
-[[prepinfo]]
-== Prepare Information
-
-You're creating several resources via the GUI:
-
-====
-    Route
-        (Ingress into the cluster)
-        ↓
-    Gateway
-        (Handles incoming traffic to the mesh)
-        ↓
-    VirtualService
-        (Defines routing rules in the mesh)
-        ↓
-    DestinationRule
-        (Defines traffic policies to the VMs)
-====
-
-Prepare to enable your app with service mesh by gathering the following information:
-
-[[getroute]]
-=== Get your Route, test your Route
-
-The DestinationRule defines the policy with a number of factors.
-DestinationRules have a `host` parameter which identifies the source of the traffic.
-We'll use the ingress Route that's already been created for you as that value.
-
-Use the OpenShift console to locate your {user} Route and copy it to use soon in the DestinationRule.
-
-. Click *Networking -> Routes*, make sure that the *Project `istio-system`* is selected.
-. Identify your route as matching your user name: `{user}`
-. Copy the route location with the copy button.
-+
-image::module-6-get-route.png[Route,link=self, window=blank, width=100%]
-. *Click the arrow to browse to the application*.
-It should be down, responding with "Application is not available."
-This is because there are no services configured for the route to send traffic to.
-Instead of setting up a kubernetes service, lets's set up  service mesh!
-
-[[accesskiali]]
-== Access Service Mesh UI and Locate resources
-
-=== Access the Service Mesh UI: Kiali
-
-. Log in to the {openshift_console_url}[OpenShift Console] via Cogito as `{user}` with password `{password}`.
-. Change to the Administrator perspective, in the dropdown on the left.
-. To find the Kiali web ui, click *Home -> Projects -> `istio-system`*.
-Click the link on the right side *Launcher* *Kiali* image:fa-external-link-alt.png[]
-+
-image::module-6-kiali-link.png[Kiali route link,link=self, window=blank, width=100%]
-+
-. Log in to the {kiali_url}[Kiali web interface^] with your username `{user}` and password `{password}`.
-. Within Kiali, click *Services* on the left.
-. From the *namespace* drop-down on the top bar, select your namespace: `windowsmesh-{user}`.
-. Notice that we have a service called `winmesh`.
-+
-.Find the `winmesh` istio service
-image::module-6-kiali-namespace-services.png[Kiali namespace,link=self, window=blank, width=100%]
-+
-. *Click the `winmesh` service* - notice that there are two *workloads*, which are our virtual machines, `winweb01` and `winweb02`.
-Though named similarly, these are different virtual machines from the earlier modules virtual machines.
-They have OpenShift Service Mesh enabled, and are in a different project/namespace.
-
-== Create Request Routing for your winmesh Service
-
-CAUTION: This is the complicated part, pay attention.
-
-You will use the web interface to create the service mesh resources to serve up your application.
-You'll learn how the resources fit together.
-
-// start do content.mode == workshop/demo here
-
-. In the top right corner, click *Actions* and *Request Routing*
-+
-.The `winmesh` istio service and components
-image::module-6-kiali-service-winmesh.png[winmesh Service,link=self, window=blank, width=100%]
-+
-. Click *Route To* and notice the two virtual machines are listed.
-. Notice that there's already a *Route Rule* to do 50/50 load balancing.
-. *Click Add Route Rule* to add that rule to what will become your VirtualService
-. Click *Show Advanced Options* at the bottom.
-. *Replace Virtual Service Hosts* by pasting your Route from above.
-This will populate a new VirtualService resource with the route to your Virtual Machines.
-+
-.Request routing
-image::module-6-kiali-request-route-virtual-hosts.png[Request Route VirtualHost,link=self, window=blank, width=100%]
-+
-. Click *Gateways* and click *Add Gateway*.
-. Click *Create Gateway*.
-. Paste your Route into *Gateway Hosts* to identify the source of the traffic which the Gateway will direct into the mesh.
-. *Remove the `https://` from the Gateway Hosts name*
-+
-.Service mesh gateways
-// image::module-6-kiali-select-request-route-gateways.png[Request Route Gateway,link=self, window=blank, width=100%]
-image::module-6-kiali-create-request-route-gateways.png[Request Route Gateway,link=self, window=blank, width=100%]
-+
-// end content.mode == workshop/demo here
-In the Preview popup window you'll see the DestinationRule, Gateway, and VirtualService.
-The DestinationRule indicates which resources will be part of the VirtualService.
-The VirtualService indicates what percentage of traffic is routed to each of the destinations.
-+
-.Destination rule and virtual service
-//image::module-6-kiali-request-route-dr-vs.png[DestinationRule and VirtualService,link=self, window=blank, width=100%]
-image::module-6-kiali-request-route-dr-vs-gw.png[DestinationRule Gateway and VirtualService,link=self, window=blank, width=100%]
-+
-. Review the settings that you just configured and click *Create*.
-. Clear away the confirmation dialog box.
-+
-image::module-6-create-nag.png[Create nag box,link=self, window=blank, width=100%]
-
-Your mesh should now be configured.
-
-image::module-6-overview-deployed.png[Overview deployed,link=self, window=blank, width=100%]
-
-NOTE: You'll likey have to wait a minute or two for the graph visualization to appear in the *Overview* page.
-
-[[visualizingtraffic]]
-== Visualizating Traffic
-
-We've deployed a load-generation tool along side these virtual machines to aide in load visualization.
-It provides traffic through your mesh to your application to mimic a live application receiving traffic.
-When we finally see this application exposed through the service mesh and Route, we'll see a high visitor count because of the load-generator.
-
-. Click *Graph* on the left side.
-. Click the *Display* drop-down box.
-.. Tick *Response Time* to see request latency.
-.. Tick *Throughput* checkbox to see data transfer rate.
-.. Tick *Traffic Distribution* checkbox to view load balancing percentage.
-.. Tick *Traffic Rate* checkbox to see how many requests per second are being sent.
-.. Tick *Traffic Animation* checkbox to see little dots representing individual requests.
-+
-.Kiali detailed traffic graph
-image::module-6-kiali-graph-setup.png[Kiali Graph Set Up,link=self, window=blank, width=100%]
-+
-. Notice the panel on the right side that shows request response code (200, 300, 400, 500s)
-
-Zoom in and out of the graph to see traffic details.
-
-== Verify your application is accessible
-
-Now that the service mesh is set up, we can access the application via the Internet through the Route.
-
-. Paste your application Route into your browser.
-. The application should be working, and we have a high number of application
-+
-.The application served by service mesh with load-generated high visitor count
-image::module-6-many-visitors.png[Kiali Graph Set Up,link=self, window=blank, width=100%]
-
-== More Resources
-
-This detailed guide is used by our Services teams to help customers understand a typical service mesh use case and configuration details.
-
-https://www.redhat.com/en/resources/getting-started-with-openshift-service-mesh-ebook[Getting start with Red Hat OpenShift Service Mesh]
 
 [[congratulations]]
 == Congratulations
 
-The Cloud Native features already present in OpenShift provide a far most robust and complete platform than competing platforms.
-
-We hope this workshop has helped you understand the UpLift and Shift vision, and how you can get far more than simple replatforming when your new platform is OpenShift.
+You've implemented internal load balancing through kubernetes Services, and accessed them via the Internet through OpenShift Routes.
