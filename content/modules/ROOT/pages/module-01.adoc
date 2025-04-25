@@ -23,7 +23,7 @@ image::2025_spring/module-01-intro/02_Welcome_Virt.png[link=self, window=blank, 
 +
 image::2025_spring/module-01-intro/10_Column_Create.png[link=self, window=blank, width=100%]
 
-. In the *Name* field, type *vmexamples-{user}* to name the project, then click *Create*.
+. In the *Name* field, type *vmexamples-userX* to name the project, then click *Create*.
 +
 image::2025_spring/module-01-intro/11_Create_Project.png[link=self, window=blank, width=100%]
 +
@@ -55,7 +55,7 @@ image::2025_spring/module-01-intro/14_Create_VM_Quick.png[link=self, window=blan
 +
 image::2025_spring/module-01-intro/15_Create_VM_Quick_Name.png[link=self, window=blank, width=100%]
 
-. We will return to our tree view and see information about our new VM in the virtual machine overview column. Notice also that we now see our *vmexamples-{user}* project listed in the center column as it contains a VM, and that it is highlighted within the project.
+. We will return to our tree view and see information about our new VM in the virtual machine overview column. Notice also that we now see our *vmexamples-userX* project listed in the center column as it contains a VM, and that it is highlighted within the project.
 +
 If we watch closely we can see the VM Status switch from *Provisioning* to *Starting* and finally *Running* in the virtual machine overview column when it is ready. 
 +
