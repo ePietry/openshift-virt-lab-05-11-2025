@@ -15,7 +15,7 @@ We will use the Migration Toolkit for Virtualization to migrate virtual machines
 
 A three-tier application has been deployed on VMware for us to migrate to OpenShift.
 
-The application will display a visitor counter, and the hostname of the webserver that returned your request.
+The application will display https://console-openshift-console.apps.rosa.rosa-plt6q.zs4d.p3.openshiftapps.com/k8s/all-namespaces/rbac.authorization.k8s.io~v1~Rolea visitor counter, and the hostname of the webserver that returned your request.
 
 This simple application consists of four virtual machines:
 
@@ -79,17 +79,14 @@ Let's have a look at them now.
 *DO:*
 
 . Navigate to the link:{ocp_console_url}[OpenShift Console^].
-. Select *local-cluster* from the *All Clusters* menu at the top.
-+
-image::ocp-local-cluster.png[link=self, window=blank, width=70%]
-+
+
 . Go to *Migration* -> *Providers for virtualization*
 
 image::module-01/NN_Migration_Providers.png[link=self, window=blank, width=80%]
 
 [Sidebar]
 ****
-If you do not see the Providers, select the *openshift-mtv* Project by:
+If you do not see the Providers, select the *mtv-userX* Project by:
 
 . Click the *Projects* dropdown menu
 . Enter `mtv` into the search box
@@ -142,6 +139,7 @@ The web console displays the concerns for each VM in the provider inventory.
 
 * `database-{guid}`
 * `winweb01-{guid}`
+* `winweb02-{guid}`
 
 WARNING: The VMs are far too large to migrate in this short demo.
 But that's OK, we have VMs that are already migrated to show after we've kicked off this migration process.
@@ -224,7 +222,7 @@ So let's click on the progress bar to see the status of our migration.
 
 *DO:*
 
-. Click on the *0 of 2 VMs migrated* link and you will be presented with a page with more details about the migration process.
+. Click on the *0 of 3 VMs migrated* link and you will be presented with a page with more details about the migration process.
 +
 image::module-01/NN_VMs_Migrating_Details.png[link=self, window=blank, width=80%]
 
