@@ -15,8 +15,6 @@ We will use the Migration Toolkit for Virtualization to migrate virtual machines
 
 A three-tier application has been deployed on VMware for us to migrate to OpenShift.
 
-The application will display https://console-openshift-console.apps.rosa.rosa-plt6q.zs4d.p3.openshiftapps.com/k8s/all-namespaces/rbac.authorization.k8s.io~v1~Rolea visitor counter, and the hostname of the webserver that returned your request.
-
 This simple application consists of four virtual machines:
 
 * One HAproxy system that redirects traffic to the web servers.
@@ -115,8 +113,6 @@ First, we'll create a plan that indicates the source provider, *VMware* and the 
 
 . Navigate in the left menu to *Migration* -> *Plans for virtualization* and press *Create plan*.
 +
-link:{ocp_console_url}/k8s/ns/openshift-mtv/forklift.konveyor.io%7Ev1beta1~Plan[Link to Create Migration Plan^]
-+
 image::module-01/NN_Create_VMware_Plan.png[link=self, window=blank, width=100%]
 +
 . You will be asked to select the source provider that you intend to migrate from.
@@ -163,13 +159,12 @@ Please fill in your migration plan with the following values:
 * Plan name: *move-webapp-vmware*
 * Target Provider: *Host*
 * Network map: *Pod Networking*
-* Storage map: *{ocp_mtv_storage_map}*
-ifeval::["{ocp_mtv_storage_map}" == "ocs-storagecluster-ceph-rbd-virtualization"]
+* Storage map: *ocs-storagecluster-ceph-rbd-virtualization*
 +
 CAUTION: The Storage Map name is very similar to the default.
 +
 NOTE: Storage and network mappings should be automatically detected from the discovered virtual machines, but make sure to double-check that the correct values are set as described in this guide.
-Make sure to change it to *{ocp_mtv_storage_map}*.
+Make sure to change it to *ocs-storagecluster-ceph-rbd-virtualization*.
 endif::[]
 
 +
@@ -268,7 +263,7 @@ First, we need to switch to the project that contains our pre-migrated VMs.
 
 . Click on *Virtualization* in the left menu, and then on *Virtual Machines*.
 
-. Go to the Project: `vmimported`.
+. Go to the Project: `windowsmesh-userX     `.
 
 +
 . Click on the `winweb01-{guid}` VM that is running and click on its name to see the VM details page.

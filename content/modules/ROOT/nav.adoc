@@ -23,13 +23,13 @@
 ** xref:module-04-mtv.adoc#migration[Migration Toolkit for Virtualization]
 ** xref:module-04-mtv.adoc#verify[Validate the Migrated Windows VMS and Application]
 
-* xref:module-05.adoc[Declarative IaC for Automating Virtual Machine Creation]
-** xref:module-05.adoc#yaml[Use the YAML manifest to create the virtual machine ]
-** xref:module-05.adoc#deleting[Deleting the Virtual Machine]
+//* xref:module-05.adoc[Declarative IaC for Automating Virtual Machine Creation]
+//** xref:module-05.adoc#yaml[Use the YAML manifest to create the virtual machine ]
+//** xref:module-05.adoc#deleting[Deleting the Virtual Machine]
 
-* xref:module-06.adoc[Declarative IaC for Automating VM Resources ]
-** xref:module-06.adoc#validating[Verifying Initial CPU Core Count ]
-** xref:module-06.adoc#increasing[Declarative IaC for Automating VM Resources ]
+//* xref:module-06.adoc[Declarative IaC for Automating VM Resources ]
+//** xref:module-06.adoc#validating[Verifying Initial CPU Core Count ]
+//** xref:module-06.adoc#increasing[Declarative IaC for Automating VM Resources ]
 
 * xref:module-07.adoc[Simplified configuration for load balancing ]
 ** xref:module-07.adoc#setupservice[Set up internal load balancing with Services ]
