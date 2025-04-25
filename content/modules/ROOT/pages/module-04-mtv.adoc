@@ -78,7 +78,7 @@ We'll create the VMware Provider as our migration source and the Host Provider a
 
 . Go to *Migration* -> *Providers for virtualization*
 
-. Create a namespace called *{mtv-userX}*
+. Create a namespace called *mtv-userX*
 
 image::module-01/select-project-openshift-mtv.png[link=self, window=blank, width=30%]
 
