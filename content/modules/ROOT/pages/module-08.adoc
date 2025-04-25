@@ -50,7 +50,7 @@ image::module-5-netpol-create.png[Create NetworkPolicy,link=self, window=blank, 
 .Use the YAML manifest to create the network policy
 image::module-5-netpol-complete.png[NetworkPolicy Complete,link=self, window=blank, width=100%]
 +
-. Replace the sample YAML with the following NetworkPolicy.
+. Replace the sample YAML with the following NetworkPolicy, *make sure to use the correct namespace*.
 +
 [,yaml,subs="attributes",role=execute]
 ----
@@ -58,7 +58,7 @@ kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
  name: noegress
- namespace: windowsmesh-*userX*
+ namespace: windowsmesh-userX
 spec:
  podSelector:
    matchLabels:
