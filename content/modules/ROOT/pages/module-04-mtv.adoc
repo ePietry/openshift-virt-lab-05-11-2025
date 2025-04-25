@@ -70,28 +70,37 @@ Let's now look at how we're going to migrate the virtual machines.
 
 The Migration Toolkit for Virtualization has *Providers* that support various virtualization platforms.
 
-We'll be using the VMware Provider as our migration source and the Host Provider as our migration target.
-
-Let's have a look at them now.
+We'll create the VMware Provider as our migration source and the Host Provider as our migration target.
 
 *DO:*
 
-. Navigate to the link:{ocp_console_url}[OpenShift Console^].
+. Navigate to the the OpenShift Console and open the Administrator view.
 
 . Go to *Migration* -> *Providers for virtualization*
 
-image::module-01/NN_Migration_Providers.png[link=self, window=blank, width=80%]
-
-[Sidebar]
-****
-If you do not see the Providers, select the *mtv-userX* Project by:
-
-. Click the *Projects* dropdown menu
-. Enter `mtv` into the search box
-. Enable *Show default projects*
+. Create a namespace called *{mtv-userX}*
 
 image::module-01/select-project-openshift-mtv.png[link=self, window=blank, width=30%]
-****
+
+. Create the host provider using YAML by using the plus a the top right corner of the OpenShift Console :
+
+image::module-01/plus.png[link=self, window=blank, width=30%]
+
+. Past this YAML manifest and click on *Create*
+
+. Now let's create the VMWare provider, let's select {Create Provider} and then {vSphere}
+
+. On the next page, use those parameters : 
+
+* Project: `mtv-userX`
+* Provider resource name: `provider-userX`
+* URL: `https://vcsrs00-vc.infra.demo.redhat.com/sdk`
+* VDDK init image: 'check skip'
+* Username: 'ocpvirt-dlqxp@infra'
+* Password: 't256.DWHSmwoM8'
+* Skip certificate validation: 'check skip'
+
+image::module-01/provider.png[link=self, window=blank, width=30%]
 
 *SAY:*
 
