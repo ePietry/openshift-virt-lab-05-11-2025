@@ -80,11 +80,11 @@ We'll create the VMware Provider as our migration source and the Host Provider a
 
 . Create a namespace called *mtv-userX*
 
-image::module-01/select-project-openshift-mtv.png[link=self, window=blank, width=30%]
+image::module-01/select-project-openshift-mtv.png[link=self, window=blank, width=100%]
 
 . Create the host provider using YAML by using the plus a the top right corner of the OpenShift Console :
 
-image::module-01/plus.png[link=self, window=blank, width=30%]
+image::module-01/plus.png[link=self, window=blank, width=100%]
 
 . Past this YAML manifest and click on *Create* (make sur the namespace is correct)
 ----
@@ -112,7 +112,7 @@ spec:
 * Password: `t256.DWHSmwoM8`
 * Skip certificate validation: `Check skip`
 
-image::module-01/provider.png[link=self, window=blank, width=30%]
+image::module-01/provider.png[link=self, window=blank, width=100%]
 
 *SAY:*
 
