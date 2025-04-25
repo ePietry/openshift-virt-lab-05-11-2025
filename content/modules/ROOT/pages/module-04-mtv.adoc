@@ -278,7 +278,7 @@ OpenShift separates work into different projects, and each project can have its 
 
 Let's look at one of the Windows VMs and connect to it to take a closer look.
 
-First, we need to switch to the project that contains our pre-migrated VMs.
+Lets switch to the project that contains our pre-migrated VMs.
 
 *DO:*
 
@@ -306,28 +306,6 @@ What are applications good for if you can't connect to them?
 
 So let's look at the application that has been migrated and exposed to our organization.
 
-For that, we have already created a "route". You can think of this as similar to a DNS name or a load balancer.
+For that, we will create a "route". You can think of this as similar to a DNS name or a load balancer.
 
-*DO:*
-
-. Click Networking in the left menu, and then click on *Routes*.
-
-. There should only be one route, `route-webapp`
-
-. Click the *Location* link and your browser will open with the web application, showing the visitor counter and the web server hostname.
-+
-image::module-01/NN_VM_Networking_Routes.png[link=self, window=blank, width=100%]
-+
-. The application should look something like this
-+
-NOTE: OpenShift Route is providing load balancing between the *winweb01-{guid}* and *winweb02-{guid}* hosts, so you might see either hostname reported.
-+
-image::module-01/NN_VM_Migrated_Application.png[link=self, window=blank, width=70%]
-
-== Summary
-
-*SAY:*
-
-In this segment of the demo, we used the Migration Toolkit for Virtualization to assist with the migration of existing virtual machines from a VMware vSphere environment to OpenShift Virtualization.
-
-NOTE: Please delete this demo from the Red Hat Demo Platform once you have completed practicing or delivering it to your customer.
+Let's explore that in the next chapter of the workshop
