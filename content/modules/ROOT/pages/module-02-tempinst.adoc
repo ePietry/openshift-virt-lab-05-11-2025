@@ -33,9 +33,9 @@ image::2025_spring/module-07-tempinst/03_Create_Custom_Template.png[link=self, w
 . A new menu called *Clone template* will appear, fill in the the following values, and when finished click on the *Clone* button.
 +
 * *Template name:* centos-stream9-server-db-small
-* *Template project:* vmexamples-{user}
+* *Template project:* vmexamples-userX
 * *Template display name:* CentOS Stream 9 VM - Database Template Small
-* *Template provider:* Roadshow {user}
+* *Template provider:* Roadshow userX
 +
 image::2025_spring/module-07-tempinst/04_Clone_Template_Options.png[link=self, window=blank, width=100%]
 
@@ -316,7 +316,7 @@ image::2025_spring/module-07-tempinst/27_Stop_Button.png[link=self, window=blank
 
 . With the machine powered down we want to make a clone of the root volume that we can use for future Windows template-based installs, without having to run through the customization process each time.
 
-. On the left-side menu, click on *Storage* and then *PersistentVolumeClaims* to see a list of PVCs available in the *vmexamples-{user}* namespace. 
+. On the left-side menu, click on *Storage* and then *PersistentVolumeClaims* to see a list of PVCs available in the *vmexamples-userX* namespace. 
 
 . Find the *win-sysprep* PVC created with our installation, and using the three-dot menu on the right select *Clone PVC*.
 +
@@ -391,12 +391,9 @@ image::2025_spring/module-07-tempinst/39_VM_Overview.png[link=self, window=blank
 To save resources for the next lab, please stop any VMs that you created in this module.
 
 . Navigate to *Virtualization* persona in the left-side menu and then click on *Virtualmachines*.
-. Each project that you have access to that is hosting VM workloads will be listed in the center column treeview. (At a minimum you should expand projects *vmimported-{user}* and *vmexamples-{user}* to check virtual machine status.)
 . If any VMs are showing a status of *Running*, highlight the VM in the center tree column, and select the *Stop* button or option from the *Actions* dropdown menu..
 
 Now all VMs should be in *Stopped* state.
-
-image::2025_spring/module-07-tempinst/40_All_Stopped.png[link=self, window=blank, width=100%]
 
 
 == Summary
