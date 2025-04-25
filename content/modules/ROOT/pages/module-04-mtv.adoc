@@ -86,19 +86,31 @@ image::module-01/select-project-openshift-mtv.png[link=self, window=blank, width
 
 image::module-01/plus.png[link=self, window=blank, width=30%]
 
-. Past this YAML manifest and click on *Create*
+. Past this YAML manifest and click on *Create* (make sur the namespace is correct)
+----
+apiVersion: forklift.konveyor.io/v1beta1
+kind: Provider
+metadata:
+  name: host
+  namespace: mtv-userX
+spec:
+  secret: {}
+  type: openshift
+  url: ''	
 
-. Now let's create the VMWare provider, let's select {Create Provider} and then {vSphere}
+----
+
+. Now let's create the VMWare provider, let's select *Create Provider* and then *vSphere*
 
 . On the next page, use those parameters : 
 
 * Project: `mtv-userX`
 * Provider resource name: `provider-userX`
 * URL: `https://vcsrs00-vc.infra.demo.redhat.com/sdk`
-* VDDK init image: 'check skip'
-* Username: 'ocpvirt-dlqxp@infra'
-* Password: 't256.DWHSmwoM8'
-* Skip certificate validation: 'check skip'
+* VDDK init image: `Check skip`
+* Username: `ocpvirt-dlqxp@infra`
+* Password: `t256.DWHSmwoM8`
+* Skip certificate validation: `Check skip`
 
 image::module-01/provider.png[link=self, window=blank, width=30%]
 
