@@ -32,9 +32,6 @@ Now, we will navigate to the VMware vCenter and take note of the names of the vi
 * `database-dlqxp`
 * `winweb01-dlqxp`
 
-CAUTION: Only migrate the database and *ONE* of the webservers, so we'll have one free to migrate automatically with Ansible in the next module.
-We cannot migrate a virtual machine twice; mac addresses are not unique.
-
 *DO:*
 
 . Navigate to the https://vcsrs00-vc.infra.demo.redhat.com/[vCenter Console^]
@@ -43,8 +40,8 @@ image::vsphere-launch.png[link=self, window=blank, width=30%]
 +
 . If necesary, click *LAUNCH VSPHERE CLIENT*
 . Login with the following credentials:
-* *User:* {ocpvirt-dlqxp@infra}
-* *Password:* {t256.DWHSmwoM8}
+* *User:* `ocpvirt-dlqxp@infra`
+* *Password:* `t256.DWHSmwoM8`
 +
 image::vsphere-login.png[link=self, window=blank, width=30%]
 
@@ -61,13 +58,10 @@ Check the operating system details by looking at the virtual machines.
 
 *DO:*
 
-. Click `winweb01-{guid}` in the list of virtual machines.
+. Click `winweb01-dlqxp` in the list of virtual machines.
 +
 image::module-01/NN_vSphere_VM_Details.png[link=self, window=blank, width=100%]
 
-CAUTION:  *Do not start these VMware VMs.*
-We are not supporting "warm" migrations in this demo.
-If your customer wants you to start and investigate these VMS, you may do so but *must* stop the VMs before beginning migration.
 
 [[migration]]
 == Migration Toolkit for Virtualization
