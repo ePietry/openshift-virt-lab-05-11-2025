@@ -44,7 +44,7 @@ A new browser tab will open.
 +
 image::module-1-console-login.png[Console Login,link=self, window=blank, width=100%]
 +
-. *Enter your username `{user}` and password `{password}`*.
+. *Enter your username `userX` and password `openshift@1`*.
 
 Congratulations!
 You're now logged in and ready to begin the workshop!
