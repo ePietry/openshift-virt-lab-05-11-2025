@@ -325,7 +325,7 @@ image::2025_spring/module-07-tempinst/28_Storage_PVC.png[link=self, window=blank
 . On the menu that pops up, fill in the following options, then click the *Clone* button:
 * *Name*: windows-2k19-sysprep-template
 * *Access mode*:  Shared access (RWX) 
-* *StorageClass*: ocs-external-storagecluster-ceph-rbd-immediate 
+* *StorageClass*: ocs-external-storagecluster-ceph-rbd-virtualization 
 +
 image::2025_spring/module-07-tempinst/29_Clone_Menu.png[link=self, window=blank, width=100%]
 
