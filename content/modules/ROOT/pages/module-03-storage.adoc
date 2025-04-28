@@ -6,6 +6,8 @@ Some physical storage system examples include: Dell/EMC, Fujitsu, Hitachi, NetAp
 
 Some software-defined storage examples include: IBM Fusion Data Foundation, OpenShift Data Foundation (ODF), and Portworx. 
 
+For ROSA, we recommend the use of Amazon FSx for NetApp ONTAP.
+
 NOTE: This list is not exhaustive, please see the https://catalog.redhat.com/platform/red-hat-openshift/virtualization#virtualization-infrastructure[Red Hat EcoSystem Catalog^] for information on all of the supported storage solutions.
 
 This workshop segment will explore Persistent Volume Claims (PVCs), which are used to request storage from the provider and store a VM disk. Many storage providers also support snapshots and clones of their devices, be sure to check with your vendor to verify the features supported by the CSI driver and storage device.
