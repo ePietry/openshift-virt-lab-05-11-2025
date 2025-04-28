@@ -10,10 +10,6 @@ image::2025_spring/module-01-intro/00_Dev_Perspective.png[link=self, window=blan
 +
 image::2025_spring/module-01-intro/01_Virt_Perspective.png[link=self, window=blank, width=100%]
 
-. You will be greated by an introductory prompt welcoming you to OpenShift Virtualization. Click the check box for *Do not show this again* and the window will disappear.
-+
-image::2025_spring/module-01-intro/02_Welcome_Virt.png[link=self, window=blank, width=100%]
-
 [[create_project]]
 == Create a New Project
 
