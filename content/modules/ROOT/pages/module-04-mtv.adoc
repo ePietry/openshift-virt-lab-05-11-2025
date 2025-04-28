@@ -38,8 +38,8 @@ image::vsphere-launch.png[link=self, window=blank, width=30%]
 +
 . If necesary, click *LAUNCH VSPHERE CLIENT*
 . Login with the following credentials:
-* *User:* `ocpvirt-dlqxp@infra`
-* *Password:* `t256.DWHSmwoM8`
+* *User:* `ocpvirt-6nthg@infra`
+* *Password:* `t0hqRhURmMPcN6`
 +
 image::vsphere-login.png[link=self, window=blank, width=30%]
 
