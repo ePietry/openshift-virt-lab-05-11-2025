@@ -1,6 +1,6 @@
 = VM Management on ROSA and OpenShift Virtualization
 
-== Switch to the Virtualization Persona
+== Switch to the Virtualization Persona 
 
 . When you first log in, you will be placed in the *Developer* persona, with an introductory prompt. Click the *Skip tour* button to close the window.
 +
