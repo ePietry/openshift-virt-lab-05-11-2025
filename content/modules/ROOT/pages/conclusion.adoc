@@ -36,4 +36,19 @@ image::2025_spring/conclusion/01_Ebook.png[link=self, window=blank, width=50%]
 * Stratégies pour connecter les VM sur OpenShift aux services du datacenter externes à leur cluster OpenShift, tels que le stockage et les bases de données.
 * Stratégies pour migrer des VM depuis des hyperviseurs compatibles vers OpenShift Virtualization à l'aide de l'opérateur Migration Toolkit for Virtualization.
 
-Cliquez sur le lien https://www
+Cliquez sur le lien https://www.redhat.com/en/services/training/managing-virtual-machines-red-hat-openshift-virtualization-exam[ici^] ou scannez le code QR ci-dessous pour en savoir plus :
+
+
+image::2025_spring/conclusion/02_DO317_Training.png[link=self, window=blank, width=50%]
+
+=== Évaluation de Migration de Virtualisation (Virtualization Migration Assessment)
+
+* Un atelier interactif de deux semaines sur site et un rapport de suivi.
+* Des architectes Red Hat expérimentés animent une courte série d'ateliers sur site pour vous aider à développer votre parcours de migration.
+* Ils fournissent un examen approfondi de votre environnement de virtualisation et de ses intégrations actuelles, y compris : réseau, stockage, sécurité, sauvegarde et reprise après sinistre.
+* Vous recevez un rapport VMA (Virtualization Migration Assessment) avec une proposition sur mesure pour votre migration complète, incluant des recommandations de haut niveau et des considérations de conception.
+* Cela peut vous aider à comprendre où vous allez, comment vous y arriverez, combien de temps cela prendra et combien cela coûtera.
+
+Cliquez sur le lien https://www.redhat.com/en/resources/virtualization-migration-assessment-datasheet[ici^] ou scannez le code QR ci-dessous pour en savoir plus :
+
+image::2025_spring/conclusion/03_VMA_QR.png[link=self, window=blank, width=50%]
