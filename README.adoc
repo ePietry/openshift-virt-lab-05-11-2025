@@ -1,4 +1,4 @@
-Welcome to the OpenShift Virtualization Roadshow!
+Welcome to the OpenShift Virtualization Roadshow !
 
 == Introduction
 This repository hosts the lab guide for the OpenShift Virtualization Roadshow, which can be delivered by Red Hat Associates to customers and interested parties all over the world.
