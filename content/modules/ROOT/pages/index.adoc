@@ -3,7 +3,7 @@
 
 == Introduction
 
-Welcome to the *OpenShift Virtualization* on *Red Hat OpenShift Service on AWS (ROSA)* workshop! 
+Bienvenue à l'atelier *OpenShift Virtualization* du *Connect Tech Day Red Hat* ! 
 
 In this session, we’ll explore how *Red Hat OpenShift’s* powerful virtualization capabilities integrate seamlessly with the fully managed ROSA platform—giving you the flexibility to run and manage virtual machines alongside containerized workloads in the cloud.
 
