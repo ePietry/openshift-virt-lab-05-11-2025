@@ -1,4 +1,3 @@
-= Connect Tech Day 
 = Les VM passent en mode cloud-native avec OpenShift Virtualization
 
 == Introduction
