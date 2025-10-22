@@ -5,8 +5,6 @@
 
 Bienvenue à l'atelier *OpenShift Virtualization* du *Connect Tech Day Red Hat* ! 
 
-Bienvenue dans cette session avancée dédiée à *OpenShift Virtualization* !
-
 Durant cet atelier, nous explorerons en profondeur les capacités de personnalisation avancées des VM sur la plateforme OpenShift. 
 
 L'objectif est de dépasser les déploiements standards pour intégrer pleinement vos VM dans un environnement d'entreprise complexes.
@@ -32,10 +30,12 @@ Vous réaliserez l'intégralité de cet atelier via la console OpenShift.
 Un nouvel onglet s'ouvrira dans votre navigateur.
 
 *Cliquez sur htpasswd_provider*.
+
 +
 image::module-1-console-login.png[Console Login,link=self, window=blank, width=100%]
 +
-. *Entrez votre nom d'utilisateur et le mot de passe qui vous a été transmis par email*.
+
+*Entrez votre nom d'utilisateur et le mot de passe qui vous a été transmis par email*.
 
 Félicitations !
 Vous êtes désormais connecté et prêt à commencer l'atelier !
