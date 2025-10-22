@@ -5,46 +5,37 @@
 
 Bienvenue à l'atelier *OpenShift Virtualization* du *Connect Tech Day Red Hat* ! 
 
-In this session, we’ll explore how *Red Hat OpenShift’s* powerful virtualization capabilities integrate seamlessly with the fully managed ROSA platform—giving you the flexibility to run and manage virtual machines alongside containerized workloads in the cloud.
+Bienvenue dans cette session avancée dédiée à OpenShift Virtualization !
 
-ROSA provides a robust, extensible, and multi-tenant application platform that brings the full power of OpenShift to AWS. With deep integration into the AWS ecosystem and a rich Operator framework, ROSA simplifies the deployment and lifecycle management of your applications—including those that rely on traditional virtualization.
+Durant cet atelier, nous explorerons en profondeur les capacités de personnalisation avancées des VM sur la plateforme OpenShift. 
 
-The first part of this workshop will introduce you to *OpenShift Virtualization*, a feature that lets you run virtual machines inside your OpenShift cluster.
+L'objectif est de dépasser les déploiements standards pour intégrer pleinement vos VM dans des environnements d'entreprise complexes.
 
-As of OpenShift 4.17, a new *Virtualization persona* in the web console streamlines VM management and offers a more intuitive interface for administrators. 
-You’ll learn how to spin up virtual machines using predefined templates, customize VM resources, and perform common tasks like live migration between hosts—all within the ROSA environment.
+Nous verrons notamment comment :
+* Créer des templates personnalisés pour standardiser et accélérer le déploiement de vos VM.
+* Connecter nos machines virtuelles à notre réseau d'entreprise.
+* Mettre en œuvre un load balancer en utilisant MetalLB pour exposer efficacement les services hébergés sur les VM.
+* Optimiser la répartition des charges de travail au sein du cluster grâce au Descheduler Operator pour garantir une utilisation équilibrée des ressources.
+* Mettre en place une stratégie robuste de sauvegarde et de restauration pour vos machines virtuelles en intégrant la solution Veeam Kasten.
 
+== Accès au Cluster
 
+Votre environnement d'atelier se trouve sur un cluster partagé.
+Les autres participants à cet atelier se trouvent également sur ce cluster, vous avez donc un accès limité aux coulisses d'OpenShift.
+Lorsque des fonctionnalités importantes d'OpenShift ne sont pas visibles pour les utilisateurs, ce guide vous fournira des explications et des captures d'écran des parties concernées.
+Ce contrôle d'accès strict des utilisateurs met en évidence la puissante multi-tenancy d'OpenShift.
+De nombreux projets peuvent être exploités sur un seul cluster OpenShift sans interférer les uns avec les autres.
 
+Vous réaliserez l'intégralité de cet atelier via la console OpenShift.
 
-.*Goals*
+. *Ouvrez la https://console-openshift-console.apps.rosa.rosa-z7drp.md52.p3.openshiftapps.com[Console OpenShift^]*.
+Un nouvel onglet s'ouvrira dans votre navigateur.
 
-* Deploy a new virtual machine on ROSA using OpenShift Virtualization
-* Review and modify compute, memory, and storage settings for VMs
-* Learn how to manage VM lifecycle and power states via the OpenShift console
-* Perform a live migration of a VM across hosts in the cluster
-* Deploy cloud native networking fonctionality of OpenShift
-
-== Accessing the System
-
-Your workshop environment is on a shared ROSA cluster.
-Other participants in this workshop are also on this cluster, so you have limited access to the behind-the-scenes workings of OpenShift.
-Where important features of OpenShift are not visible to your user, this Workshop Guide will offer explanations and screenshots of the relevatnt parts.
-This tight user access control shows off the powerful multi-tenancy of OpenShift.
-Many projects can run on a single OpenShift cluster, and not interfere with each other.
-
-You'll be doing this whole workshop through the OpenShift Console.
-
-TIP: If you're on an ordinary laptop, the workshop experience is best done at full-screen.  The OpenShift Console is a robust interface, and you'll have the best experience in full screen mode.  Switch between these instructions and the OpenShift Console as you progress through these instructions.
-
-. *Open the https://console-openshift-console.apps.rosa.rosa-z7drp.md52.p3.openshiftapps.com[OpenShift Console^]*.
-A new browser tab will open.
-. ROSA offers optional integreation with Amazon Cognito, an identity platform for web and mobile apps.
-*Click Cognito*.
+*Cliquez sur htpasswd_provider*.
 +
 image::module-1-console-login.png[Console Login,link=self, window=blank, width=100%]
 +
-. *Enter your username `userX` and password `openshift@1`*.
+. *Entrez votre nom d'utilisateur et le mot de passe qui vous a été transmis par email*.
 
-Congratulations!
-You're now logged in and ready to begin the workshop!
+Félicitations !
+Vous êtes désormais connecté et prêt à commencer l'atelier !
