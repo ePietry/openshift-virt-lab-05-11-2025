@@ -1,56 +1,39 @@
-
 image::2025_spring/conclusion/00_Thank_You.png[link=self, window=blank, width=100%]
 
-We hope you’ve enjoyed your hands-on experience with *OpenShift Virtualization on ROSA* and gained valuable insights into how this powerful combination can support your journey to modernize and manage workloads in the cloud.
+Nous espérons que vous avez apprécié cette expérience pratique avec *OpenShift Virtualization* et que vous avez acquis un aperçu précieux de la manière dont cette puissante solution peut vous accompagner dans votre parcours de modernisation et de gestion des charges de travail dans le cloud.
 
-By leveraging *Red Hat OpenShift Service on AWS (ROSA)*, you benefit from a fully managed OpenShift environment deeply integrated with AWS services—making it easier than ever to run both containerized and virtual machine workloads in a scalable, secure, and cloud-native way.
+En tirant parti de *Red Hat OpenShift*, vous bénéficiez d'une plateforme puissante facilitant plus que jamais l'exécution de charges de travail conteneurisées et de machines virtuelles de manière évolutive, sécurisée et cloud-native.
 
 [[key_takeaways]]
-== Key Takeaways
+== Points Clés à Retenir
 
-* OpenShift Virtualization is a solution-oriented platform designed to help you import, run, and manage legacy virtual machines—while also serving as a bridge toward cloud-native application modernization.
+* OpenShift Virtualization est une plateforme orientée solution, conçue pour vous aider à importer, exécuter et gérer les machines virtuelles existantes, tout en servant de passerelle vers la modernisation des applications cloud-natives.
 
-* When deployed on ROSA, OpenShift Virtualization combines the best of both worlds: cloud-native innovation and the flexibility to run traditional VMs—without needing to manage the underlying infrastructure.
+* Lorsqu'elle est déployée sur OpenShift, OpenShift Virtualization combine le meilleur des deux mondes : l'innovation cloud-native et la flexibilité d'exécuter des VM traditionnelles, sur une plateforme unifiée et cloud-native.
 
-* This technology lays a solid foundation for running traditional workloads securely and reliably, while also equipping you with the tools and skills needed for building modern applications on a unified platform.
+* Cette technologie jette des bases solides pour exécuter les charges de travail traditionnelles de manière sécurisée et fiable, tout en vous dotant des outils et des compétences nécessaires pour créer des applications modernes sur une plateforme unifiée.
 
 [[additional_info]]
-== Additonal Information
+== Informations Complémentaires
 
-=== Free Ebook: 15 Reasons to Adopt Red Hat OpenShift Virtualization
+=== Ebook Gratuit : 15 Raisons d'Adopter Red Hat OpenShift Virtualization
 
-* Discover how virtualization infrastruture continues to evolve.
-* Explore options for migration of your existing virtual machines.
-* Take advantage of a large number of benefits across your organization.
-* Learn about deploying a consistent foundation for innovation.
-* Learn how to get started through no cost demonstrations or a Virtual Migration Assessment.
+* Découvrez comment l'infrastructure de virtualisation continue d'évoluer.
+* Explorez les options de migration pour vos machines virtuelles existantes.
+* Tirez parti d'un grand nombre d'avantages pour l'ensemble de votre organisation.
+* Apprenez à déployer une base cohérente pour l'innovation.
+* Découvrez comment démarrer grâce à des démonstrations gratuites ou une Évaluation de Migration de Virtualisation (Virtual Migration Assessment).
 
-Click the link https://www.redhat.com/en/resources/15-reasons-adopt-openshift-virtualization-ebook[here^] or scan the QR code below to learn more:
+Cliquez sur le lien https://www.redhat.com/en/resources/15-reasons-adopt-openshift-virtualization-ebook[ici^] ou scannez le code QR ci-dessous pour en savoir plus :
 
 image::2025_spring/conclusion/01_Ebook.png[link=self, window=blank, width=50%]
 
-=== Red Hat Learning Services: DO317 Managing Virtual Machines with Red Hat OpenShift Virtualization
+=== Services de Formation Red Hat : DO317 Gestion des Machines Virtuelles avec Red Hat OpenShift Virtualization
 
-* Skills required to create, access, and manage VMs on OpenShift clusters.
-* Skills required to control usage and access of cpu, memory, storage, and networking resources from VMs using the same Kubernetes features that would also control usage and access to these resources for containers.
-* Sample architectures to manage High Availability (HA) of VMs using standard Kubernetes features and extensions from OpenShift Virtualization.
-* Strategies to connect VMs on OpenShift to data center services outside of their OpenShift cluster, such as storage and databases.
-* Strategies to migrate VMs from compatible hypervisors to OpenShift Virtualization by using the Migration Toolkit for Virtualization operator.
+* Compétences requises pour créer, accéder et gérer des VM sur des clusters OpenShift.
+* Compétences requises pour contrôler l'utilisation et l'accès aux ressources CPU, mémoire, stockage et réseau depuis les VM en utilisant les mêmes fonctionnalités Kubernetes qui contrôlent également ces ressources pour les conteneurs.
+* Exemples d'architectures pour gérer la Haute Disponibilité (HA) des VM à l'aide des fonctionnalités Kubernetes standard et des extensions d'OpenShift Virtualization.
+* Stratégies pour connecter les VM sur OpenShift aux services du datacenter externes à leur cluster OpenShift, tels que le stockage et les bases de données.
+* Stratégies pour migrer des VM depuis des hyperviseurs compatibles vers OpenShift Virtualization à l'aide de l'opérateur Migration Toolkit for Virtualization.
 
-Click the link https://www.redhat.com/en/services/training/managing-virtual-machines-red-hat-openshift-virtualization-exam[here^] or scan the QR code below to learn more:
-
-
-image::2025_spring/conclusion/02_DO317_Training.png[link=self, window=blank, width=50%]
-
-=== Virtualization Migration Assessment
-
-* A two-week onsite interactive workshop and follow-up report. 
-* Experienced Red Hat architects run a short series of onsite workshops to help develop your migration journey.
-* They provide an extensive review of your virtualization environment and it's current integrations including: networking, storage, security, backup, and disaster recovery.
-* You recieve a VMA report with a tailored proposal for your complete migration incluing high-level recommendations and design considerations.
-* This can help with understanding of where you're going, how you'll get there, how long it will take, and how much it will cost.
-
-Click the link https://www.redhat.com/en/resources/virtualization-migration-assessment-datasheet[here^] or scan the QR code below to learn more:
-
-image::2025_spring/conclusion/03_VMA_QR.png[link=self, window=blank, width=50%]
-
+Cliquez sur le lien https://www

@@ -1,4 +1,4 @@
-= VM Management on ROSA and OpenShift Virtualization
+= VM Management on OpenShift Virtualization
 
 == Switch to the Virtualization Persona 
 
