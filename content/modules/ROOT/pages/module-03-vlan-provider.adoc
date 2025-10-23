@@ -8,24 +8,6 @@ This scenario presents a common challenge: how to bridge the gap between modern 
 
 In this module, you will learn how OpenShift Virtualization uses a two-part system to solve this. First, you'll observe the **NodeNetworkConfigurationPolicy (NNCP)**, which tells the cluster *nodes* how to configure their physical hardware. Second, you'll create a **NetworkAttachmentDefinition (NAD)**, which defines a *usable network* for our VMs. Finally, you'll launch a new Virtual Machine with two network cards: one on the default pod network and one connected directly to our secure VLAN.
 
-== Credentials for the Red Hat OpenShift Console
-
-Your OpenShift cluster console is available {openshift_cluster_console_url}[here^].
-
-Your local admin login is available with the following credentials:
-
-* *User:* `{openshift_cluster_admin_username}`
-* *Password:* `{openshift_cluster_admin_password}`
-
-You will first see a page that asks you to choose an authentication provider, click on *htpasswd_provider*.
-
-image::module-02-vlan/00-htpasswd_login.png[title="OpenShift Authentication", link=self, window=blank, width=100%]
-
-You will then be presented with a login screen where you can copy/paste your credentials.
-
-image::module-02-vlan/01-openshift_login.png[title="OpenShift Login", link=self, window=blank, width=100%]
-
-[[nncp-observe]]
 == Understanding and Observing the Node Network Configuration (NNCP)
 
 Before we can create a network for our VM, the cluster's *nodes* must be physically prepared. This is the job of the **NodeNetworkConfigurationPolicy (NNCP)**.

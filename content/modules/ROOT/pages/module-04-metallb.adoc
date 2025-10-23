@@ -8,24 +8,6 @@ This creates a new challenge: how do we provide a *single, stable IP address* fo
 
 In this module, you will learn how to use standard Kubernetes concepts to solve this. You will first create two identical web server VMs using the *clone* feature. You'll then group them using a Kubernetes **Service** and its **label selector**. Finally, you will expose that Service to the outside world using a `LoadBalancer` type, which in our lab cluster is provided by **MetalLB**. You will then simulate a VM failure and watch the Service automatically redirect traffic, ensuring our application stays online.
 
-== Credentials for the Red Hat OpenShift Console
-
-Your OpenShift cluster console is available {openshift_cluster_console_url}[here^].
-
-Your local admin login is available with the following credentials:
-
-* *User:* `{openshift_cluster_admin_username}`
-* *Password:* `{openshift_cluster_admin_password}`
-
-You will first see a page that asks you to choose an authentication provider, click on *htpasswd_provider*.
-
-image::module-03-loadbalancer/00-htpasswd_login.png[title="OpenShift Authentication", link=self, window=blank, width=100%]
-
-You will then be presented with a login screen where you can copy/paste your credentials.
-
-image::module-03-loadbalancer/01-openshift_login.png[title="OpenShift Login", link=self, window=blank, width=100%]
-
-[[vm-create-ha]]
 == Create and Label the Virtual Machines
 
 The key to grouping any resources in Kubernetes—whether pods or VMs—is **labels**. We will create two VMs and give them both the same label.

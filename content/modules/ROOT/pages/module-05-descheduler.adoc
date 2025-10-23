@@ -4,23 +4,6 @@
 
 Our journey begins with a major challenge; the annual "Mega-Sale Monday" event. Our flagship e-commerce website, now partially migrated to VM-based services on OpenShift Virtualization, is anticipating an unprecedented surge in traffic. Last year, our website crashed due to unexpected traffic spikes, leading to significant lost sales and frustrated customers. This year, while we are determined to be prepared, we need to know how to recognize unexpected issues in our environment and how to address them to ensure that the scenario from last year does not repeat itself. In this module you will learn how to discover a high-load scenario on your cluster, how to mitigate and remediate the cluster by scaling resources both vertically and horizontally, and finally learn how to balance the resources on your cluster for future events.
 
-== Credentials for the Red Hat OpenShift Console
-
-Your OpenShift cluster console is available {openshift_cluster_console_url}[here^].
-
-Your local admin login is available with the following credentials:
-
-* *User:* `{openshift_cluster_admin_username}`
-* *Password:* `{openshift_cluster_admin_password}`
-
-You will first see a page that asks you to choose an authentication provider, click on *htpasswd_provider*.
-
-image::module-01-perf-scale-ts/00-htpasswd_login.png[title="OpenShift Authentication", link=self, window=blank, width=100%]
-
-You will then be presented with a login screen where you can copy/paste your credentials.
-
-image::module-01-perf-scale-ts/01-openshift_login.png[title="OpenShift Login", link=self, window=blank, width=100%]
-
 [[alerts_graphs_logs]]
 == Enable and Explore Alerts, Graphs, and Logs
 
