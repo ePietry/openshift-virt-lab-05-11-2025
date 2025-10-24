@@ -32,15 +32,11 @@ image::2025\_spring/module-07-tempinst/03\_Create\_Custom\_Template.png[link=sel
 
 . Un nouveau menu appelé *Clone template* apparaîtra, remplissez les valeurs suivantes, et lorsque vous aurez terminé, cliquez sur le bouton *Clone*.
 +
-
-  * *Template name:* centos-stream9-server-db-small
-  * *Template project:* vmexamples-userX
-  * *Template display name:* CentOS Stream 9 VM - Database Template Small
-  * *Template provider:* Roadshow userX
-
-<!-- end list -->
-
-  + 
+* *Template name:* centos-stream9-server-db-small
+* *Template project:* vmexamples-userX
+* *Template display name:* CentOS Stream 9 VM - Database Template Small
+* *Template provider:* Roadshow userX
++
 image::2025\_spring/module-07-tempinst/04\_Clone\_Template\_Options.png[link=self, window=blank, width=100%]
 
 . Cela vous amènera à la page *Details* du *template* où nous pourrons personnaliser certaines options. Commencez par trouver le CPU et la Mémoire (Memory) près du bas de la page, et cliquez sur l'icône en forme de crayon pour les modifier.
@@ -55,11 +51,22 @@ image::2025\_spring/module-07-tempinst/06\_Edit\_CPU\_Mem.png[link=self, window=
 +
 image::2025\_spring/module-07-tempinst/09\_Scripts\_CloudInit.png[link=self, window=blank, width=100%]
 
- . Lorsque le dialogue *Cloud-init* s'ouvre, cliquez sur le bouton radio *Configure via: Script* puis *remplacez* (replace) le YAML par le *snippet* YAML suivant. + [source,yaml,role=execute]
-
- userData: |- \#cloud-config user: centos password: ${CLOUD\_USER\_PASSWORD} chpasswd: { expire: False } packages: - mariadb-server runcmd: - systemctl enable mariadb - systemctl start mariadb
-
-  + 
+. Lorsque le dialogue *Cloud-init* s'ouvre, cliquez sur le bouton radio *Configure via: Script* puis *remplacez* (replace) le YAML par le *snippet* YAML suivant.
++
+[source,yaml,role=execute]
+----
+userData: |-
+  #cloud-config
+  user: centos
+  password: ${CLOUD_USER_PASSWORD}
+  chpasswd: { expire: False }
+  packages:
+    - mariadb-server
+  runcmd:
+    - systemctl enable mariadb
+    - systemctl start mariadb
+----
++
 image::2025\_spring/module-07-tempinst/10\_Cloud\_Init\_Script.png[link=self, window=blank, width=100%]
 
 . Cliquez sur le bouton *Save*, vous verrez une invite (*prompt*) verte *Saved*, puis cliquez sur le bouton *Apply*.
@@ -80,11 +87,13 @@ image::2025\_spring/module-07-tempinst/13\_VM\_From\_Template.png[link=self, win
 +
 image::2025\_spring/module-07-tempinst/14\_VM\_Console.png[link=self, window=blank, width=100%]
 
- . Une fois connecté à la machine virtuelle, exécutez la commande suivante pour tester l'installation de MariaDB. + [source,sh,role=execute]
-
- sudo mysql -u root
-
-  + 
+ . Une fois connecté à la machine virtuelle, exécutez la commande suivante pour tester l'installation de MariaDB.
+ +
+[source,sh,role=execute]
+----
+sudo mysql -u root
+----
++
 image::2025\_spring/module-07-tempinst/15\_MariaDB\_Login.png[link=self, window=blank, width=100%]
 
 . Appuyez sur *Ctrl-D* deux fois pour vous déconnecter (*log out*) de la VM.
@@ -112,17 +121,15 @@ image::2025\_spring/module-07-tempinst/17\_Windows\_2k19\_Dialog.png[link=self, 
 +
 . Dans ce dialogue :
 
-  * Spécifiez le nom *win-sysprep*
-  * Cochez la *checkbox* (case à cocher) *Boot from CD*
-  * Choisissez URL *(creates PVC)* dans le menu *drop-down* (déroulant)
-  * Spécifiez l'*image URL* : [https://catalog-item-assets.s3.us-east-2.amazonaws.com/qcow\_images/Windows2019.iso](https://catalog-item-assets.s3.us-east-2.amazonaws.com/qcow_images/Windows2019.iso)
-  * Réduisez la taille du disque CD à *5 GiB*
-  * Gardez la *Disk source* (Source du disque) à *Blank* (Vide) et la taille définie à la valeur par défaut *60 GiB*
-  * Assurez-vous que la *checkbox* *Mount Windows drivers disk* est cochée. **Ceci est nécessaire pour installer les systèmes Windows, et fournira les *drivers* (pilotes) pour *VirtIO*.**
+* Spécifiez le nom *win-sysprep*
+* Cochez la *checkbox* (case à cocher) *Boot from CD*
+* Choisissez URL *(creates PVC)* dans le menu *drop-down* (déroulant)
+* Spécifiez l'*image URL* : [https://catalog-item-assets.s3.us-east-2.amazonaws.com/qcow\_images/Windows2019.iso](https://catalog-item-assets.s3.us-east-2.amazonaws.com/qcow_images/Windows2019.iso)
+* Réduisez la taille du disque CD à *5 GiB*
+* Gardez la *Disk source* (Source du disque) à *Blank* (Vide) et la taille définie à la valeur par défaut *60 GiB*
+* Assurez-vous que la *checkbox* *Mount Windows drivers disk* est cochée. **Ceci est nécessaire pour installer les systèmes Windows, et fournira les *drivers* (pilotes) pour *VirtIO*.**
++
 
-<!-- end list -->
-
-  + 
 . Une fois les options remplies, nous voulons cliquer sur le bouton *Customize VirtualMachine* en bas pour continuer à configurer notre *Template*.
 +
 image::2025\_spring/module-07-tempinst/18\_Windows\_2k19\_Parameters.png[link=self, window=blank, width=100%]
@@ -365,12 +372,12 @@ image::2025\_spring/module-07-tempinst/35\_Select\_RHEL9.png[link=self, window=b
 image::2025\_spring/module-07-tempinst/36\_Select\_InstanceType.png[link=self, window=blank, width=100%]
 +
 
-  * Les *instance types* fournis par Red Hat sont destinés aux utilisations suivantes :
-    \*\* *N series* : Conçue pour les *workloads* *DPDK* intensifs en réseau, comme les *VNFs*.
-    \*\* *O series* : *Instance type* spécialisé d'usage général avec le *memory overcommit* préconfiguré.
-    \*\* *CX series* : Conçue pour les *workloads* intensifs en calcul (*compute*) en demandant des CPUs dédiés supplémentaires pour le *function offload* (déchargement de fonction) additionnel.
-    \*\* *U series* : L'*instance type* le plus généraliste ou "universel".
-    \*\* *M series* : Conçue pour les *workloads* intensifs en mémoire.
+* Les *instance types* fournis par Red Hat sont destinés aux utilisations suivantes :
+** *N series*: Conçue pour les *workloads* *DPDK* intensifs en réseau, comme les *VNFs*.
+** *O series*: *Instance type* spécialisé d'usage général avec le *memory overcommit* préconfiguré.
+** *CX series*: Conçue pour les *workloads* intensifs en calcul (*compute*) en demandant des CPUs dédiés supplémentaires pour le *function offload* (déchargement de fonction) additionnel.
+** *U series*: L'*instance type* le plus généraliste ou "universel".
+** *M series*: Conçue pour les *workloads* intensifs en mémoire.
 
 . Cliquez sur la tuile (*tile*) *U series* pour voir une *dropdown list* (liste déroulante) des ressources définies pour les *instance types* généraux. L'option par défaut ici est *medium: 1 CPUs, 4 GiB Memory*. Sélectionnez-la. Encore une fois, la sélection sera indiquée par une ligne bleue et une mise en gras (*bolding*) de la police pour l'*instance type*.
 +
