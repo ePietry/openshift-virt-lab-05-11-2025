@@ -31,7 +31,7 @@ Un nouvel onglet s'ouvrira dans votre navigateur.
 *Cliquez sur htpasswd_provider*
 
 +
-image::module-1-console-login.png[Console Login,link=self, window=blank, width=100%]
+image::2025_spring/module-1-console-login.png[Console Login,link=self, window=blank, width=100%]
 
 
 *Entrez votre nom d'utilisateur et le mot de passe qui vous a été transmis par email*
