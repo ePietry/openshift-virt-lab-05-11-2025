@@ -6,10 +6,10 @@ Les *templates* de machine virtuelle Red Hat préconfigurés sont listés sous *
 
 La page *Templates* affiche quatre types de *templates* de machine virtuelle :
 
-  * Les *templates* *Red Hat Supported* sont entièrement supportés par Red Hat.
-  * Les *templates* *User Supported* sont des *templates* *Red Hat Supported* qui ont été clonés et créés par les utilisateurs.
-  * Les *templates* *Red Hat Provided* ont un support limité de Red Hat.
-  * Les *templates* *User Provided* sont des *templates* *Red Hat Provided* qui ont été clonés et créés par les utilisateurs.
+* Les *templates* *Red Hat Supported* sont entièrement supportés par Red Hat.
+* Les *templates* *User Supported* sont des *templates* *Red Hat Supported* qui ont été clonés et créés par les utilisateurs.
+* Les *templates* *Red Hat Provided* ont un support limité de Red Hat.
+* Les *templates* *User Provided* sont des *templates* *Red Hat Provided* qui ont été clonés et créés par les utilisateurs.
 
 [[clone\_customize\_template]]
 == Cloner et Personnaliser un Template
@@ -87,7 +87,7 @@ image::2025\_spring/module-07-tempinst/13\_VM\_From\_Template.png[link=self, win
 +
 image::2025\_spring/module-07-tempinst/14\_VM\_Console.png[link=self, window=blank, width=100%]
 
- . Une fois connecté à la machine virtuelle, exécutez la commande suivante pour tester l'installation de MariaDB.
+. Une fois connecté à la machine virtuelle, exécutez la commande suivante pour tester l'installation de MariaDB.
  +
 [source,sh,role=execute]
 ----
