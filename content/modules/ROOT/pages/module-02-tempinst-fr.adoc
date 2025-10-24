@@ -1,6 +1,6 @@
 = Gestion des Templates et des InstanceTypes
 
-Dans cette seconde partie, nous allons créer des templates personnalisés pour des VM Linux et Windows.
+Dans cette seconde partie, nous allons créer des templates personnalisés pour des VM Linux et Windows
 
 
 == Introduction
