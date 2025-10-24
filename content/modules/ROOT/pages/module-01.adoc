@@ -21,7 +21,7 @@ image::2025_spring/module-01-intro/01_Virt_Perspective.png[link=self, window=bla
 +
 image::2025_spring/module-01-intro/10_Column_Create.png[link=self, window=blank, width=100%]
 
-. Dans le champ *Name*, tapez *vmexamples-userX* pour nommer le *project*, puis cliquez sur *Create*.
+. Dans le champ *Name*, tapez *vmexamples-userX*, en remplaçant le X avec votre numéro d'utilisateur, pour nommer le *project*, puis cliquez sur *Create*.
 +
 image::2025_spring/module-01-intro/11_Create_Project.png[link=self, window=blank, width=100%]
 +
