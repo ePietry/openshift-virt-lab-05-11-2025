@@ -24,9 +24,6 @@ image::2025_spring/module-01-intro/10_Column_Create.png[link=self, window=blank,
 . Dans le champ *Name*, tapez *vmexamples-userX*, en remplaçant le X avec votre numéro d'utilisateur, pour nommer le *project*, puis cliquez sur *Create*.
 +
 image::2025_spring/module-01-intro/11_Create_Project.png[link=self, window=blank, width=100%]
-+
-NOTE: La colonne d'aperçu des machines virtuelles est changée pour voir ce nouveau *project* immédiatement, mais il n'apparaît pas actuellement dans la colonne centrale car il n'y a pas de VMs dans le *project* et l'option pour ne pas l'afficher est *toggled on* (activée) par défaut.
-
 
 [[create_vm]]
 == Créer une Machine Virtuelle Linux
