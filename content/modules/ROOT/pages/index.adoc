@@ -32,7 +32,7 @@ Un nouvel onglet s'ouvrira dans votre navigateur.
 
 image::module-1-console-login.png[link=self, window=blank, width=100%]
 
-. *Entrez votre nom d'utilisateur et le mot de passe qui vous a été transmis par email*
+*Entrez votre nom d'utilisateur et le mot de passe qui vous a été transmis par email*
 
 Félicitations !
 Vous êtes désormais connecté et prêt à commencer l'atelier !
