@@ -1,6 +1,6 @@
 = Gestion des VM sur OpenShift Virtualization
 
-Dans cette première partie, nous allons prendre en main la plateforme en créant des VMs Linux et Windows et en effectuant nos premières actions d'administration.
+Dans cette première partie, nous allons prendre en main la plateforme en créant une VM Linux et en effectuant nos premières actions d'administration.
 
 == Passer à la Persona Virtualization
 

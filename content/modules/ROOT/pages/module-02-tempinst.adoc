@@ -1,6 +1,6 @@
-\= Gestion des Templates et des InstanceTypes
+= Gestion des Templates et des InstanceTypes
 
-\== Introduction
+== Introduction
 
 Les *templates* de machine virtuelle Red Hat préconfigurés sont listés sous *Virtualization* sur la page *Templates*. Ces *templates* sont disponibles pour différentes versions de Red Hat Enterprise Linux, Fedora, CentOS, Microsoft Windows Desktop, et Microsoft Windows Server. Chaque *template* de machine virtuelle associé à Red Hat est préconfiguré avec une image de système d'exploitation (*boot source*), les paramètres par défaut pour le système d'exploitation, la *flavor* (CPU et mémoire), et le *workload type* (serveur). Les *templates* pour d'autres systèmes d'exploitation n'incluent pas d'images d'OS, mais sont préconfigurés comme recommandé pour leur système d'exploitation.
 
@@ -12,26 +12,26 @@ La page *Templates* affiche quatre types de *templates* de machine virtuelle :
   * Les *templates* *User Provided* sont des *templates* *Red Hat Provided* qui ont été clonés et créés par les utilisateurs.
 
 [[clone\_customize\_template]]
-\== Cloner et Personnaliser un Template
+== Cloner et Personnaliser un Template
 
 Par défaut, les *templates* préconfigurés fournis par Red Hat OpenShift Virtualization ne peuvent pas être personnalisés. Cependant, vous pouvez cloner un *template* et y apporter des ajustements pour votre *workload* particulier afin de faciliter la demande de types spécifiques de machines virtuelles pour des *workloads* spécifiques. Dans cette section du *lab*, c'est exactement ce que nous allons faire, en créant un *template* qui fournira un serveur de base de données préconfiguré à la demande pour nos utilisateurs finaux (*end users*).
 
 . Pour commencer, cliquez sur *Templates* dans le menu de gauche (*left-side menu*), et sélectionnez *openshift* pour votre *project*. Vous devrez peut-être basculer (to *toggle*) le bouton *Show default projects* pour que le *project* *openshift* apparaisse.
-\+
++
 image::2025\_spring/module-07-tempinst/01\_Project\_Toggle.png[link=self, window=blank, width=100%]
-\+
++
 image::2025\_spring/module-07-tempinst/01\_Template\_List.png[link=self, window=blank, width=100%]
 
 . Dans la barre de recherche (*search bar*), tapez *centos9* et appuyez sur Entrée. Dans la liste de *templates* qui apparaît, trouvez le *template* *centos-stream9-server-small*.
-\+
++
 image::2025\_spring/module-07-tempinst/02\_Search\_Centos9.png[link=self, window=blank, width=100%]
 
 . Cliquez sur le nom du *template* *centos-stream9-server-small*, un message vous indiquera que les *templates* par défaut ne peuvent pas être modifiés et vous demandera si vous souhaitez en *cloner* un. Cliquez sur l'option *Create a new custom Template*.
-\+
++
 image::2025\_spring/module-07-tempinst/03\_Create\_Custom\_Template.png[link=self, window=blank, width=100%]
 
 . Un nouveau menu appelé *Clone template* apparaîtra, remplissez les valeurs suivantes, et lorsque vous aurez terminé, cliquez sur le bouton *Clone*.
-\+
++
 
   * *Template name:* centos-stream9-server-db-small
   * *Template project:* vmexamples-userX
@@ -44,15 +44,15 @@ image::2025\_spring/module-07-tempinst/03\_Create\_Custom\_Template.png[link=sel
 image::2025\_spring/module-07-tempinst/04\_Clone\_Template\_Options.png[link=self, window=blank, width=100%]
 
 . Cela vous amènera à la page *Details* du *template* où nous pourrons personnaliser certaines options. Commencez par trouver le CPU et la Mémoire (Memory) près du bas de la page, et cliquez sur l'icône en forme de crayon pour les modifier.
-\+
++
 image::2025\_spring/module-07-tempinst/05\_Clone\_Details.png[link=self, window=blank, width=100%]
 
 . Une nouvelle fenêtre apparaîtra (*pop out*) où vous pourrez modifier la quantité de CPU et de Mémoire (Memory). Pour notre *template* personnalisé, réglez la valeur des CPUs à 2, et la Mémoire (Memory) à 4 GiB, puis cliquez sur le bouton *Save*.
-\+
++
 image::2025\_spring/module-07-tempinst/06\_Edit\_CPU\_Mem.png[link=self, window=blank, width=100%]
 
 . Ensuite, cliquez sur l'onglet *Scripts* en haut, et dans la section appelée *Cloud-init*, cliquez sur le bouton *Edit*.
-\+
++
 image::2025\_spring/module-07-tempinst/09\_Scripts\_CloudInit.png[link=self, window=blank, width=100%]
 
 ## . Lorsque le dialogue *Cloud-init* s'ouvre, cliquez sur le bouton radio *Configure via: Script* puis *remplacez* (replace) le YAML par le *snippet* YAML suivant. + [source,yaml,role=execute]
@@ -65,19 +65,19 @@ image::2025\_spring/module-07-tempinst/10\_Cloud\_Init\_Script.png[link=self, wi
 . Cliquez sur le bouton *Save*, vous verrez une invite (*prompt*) verte *Saved*, puis cliquez sur le bouton *Apply*.
 
 . Maintenant, cliquez sur l'élément *Catalog* dans le menu de gauche (*left-side menu*), sélectionnez l'option *Template catalog*, suivie de *User templates*. Vous devriez voir le *template* que vous avez créé disponible sous forme de tuile (*tile*).
-\+
++
 image::2025\_spring/module-07-tempinst/11\_User\_Templates.png[link=self, window=blank, width=100%]
 
 . Cliquez sur la tuile (*tile*) et l'écran de démarrage de la VM s'affichera. Cliquez sur le bouton *Quick create VirtualMachine*.
-\+
++
 image::2025\_spring/module-07-tempinst/12\_Quick\_Create\_Template.png[link=self, window=blank, width=100%]
 
 . Lorsque la machine virtuelle démarre (*boots*), vous pouvez voir sur la page *Overview* qu'elle a été créée à partir de notre *template*, et qu'elle dispose des ressources supplémentaires que nous avons définies. Nous devons juste vérifier qu'elle a bien installé *MariaDB* pour nous.
-\+
++
 image::2025\_spring/module-07-tempinst/13\_VM\_From\_Template.png[link=self, window=blank, width=100%]
 
 . Cliquez sur l'onglet *Console* en haut et utilisez les *Guest login credentials* (identifiants de connexion invité) qui sont fournis ainsi que les boutons *Copy* et *Paste to console* pour vous connecter à la console de la machine virtuelle.
-\+
++
 image::2025\_spring/module-07-tempinst/14\_VM\_Console.png[link=self, window=blank, width=100%]
 
 ## . Une fois connecté à la machine virtuelle, exécutez la commande suivante pour tester l'installation de MariaDB. + [source,sh,role=execute]
@@ -90,7 +90,7 @@ image::2025\_spring/module-07-tempinst/15\_MariaDB\_Login.png[link=self, window=
 . Appuyez sur *Ctrl-D* deux fois pour vous déconnecter (*log out*) de la VM.
 
 [[create\_win]]
-\== Créer un Template de VM Windows
+== Créer un Template de VM Windows
 
 Dans cette partie de notre *lab*, nous installerons Microsoft Windows Server 2019 en utilisant un ISO hébergé sur un serveur web. Cela représente une façon d'installer un système d'exploitation sur une machine virtuelle qui tire parti de la capacité à sourcer des disques depuis de nombreux emplacements, y compris un serveur web, un *object storage*, ou d'autres *persistent volumes* dans le cluster.
 
@@ -101,15 +101,15 @@ NOTE: Le processus spécifique de préparation du système d'exploitation invit�
 . Dans le menu de gauche, naviguez vers *Catalog*, et cliquez sur l'onglet *Template catalog* près du haut..
 
 . Tapez le mot *win* dans la barre de recherche, ou faites défiler vers le bas jusqu'à ce que vous trouviez la tuile *Microsoft Windows Server 2019 VM*.
-\+
++
 image::2025\_spring/module-07-tempinst/16\_Windows\_2k19\_Tile.png[link=self, window=blank, width=100%]
 
 . Un dialogue apparaîtra montrant la configuration par défaut liée au *template*.
-\+
++
 NOTE: Remarquez qu'il n'y a initialement aucune option pour créer rapidement (*quick create*) cette VM car il n'y a pas de *boot source* (source de démarrage) fournie. Nous devons personnaliser la VM pour qu'elle corresponde à nos besoins.
-\+
++
 image::2025\_spring/module-07-tempinst/17\_Windows\_2k19\_Dialog.png[link=self, window=blank, width=100%]
-\+
++
 . Dans ce dialogue :
 
   * Spécifiez le nom *win-sysprep*
@@ -124,23 +124,23 @@ image::2025\_spring/module-07-tempinst/17\_Windows\_2k19\_Dialog.png[link=self, 
 
   + 
 . Une fois les options remplies, nous voulons cliquer sur le bouton *Customize VirtualMachine* en bas pour continuer à configurer notre *Template*.
-\+
++
 image::2025\_spring/module-07-tempinst/18\_Windows\_2k19\_Parameters.png[link=self, window=blank, width=100%]
 
 . Sur l'écran *Customize and create VirtualMachine*, cliquez sur le crayon d'édition à côté de l'option *Boot mode*.
-\+
++
 image::2025\_spring/module-07-tempinst/19\_Boot\_Mode.png[link=self, window=blank, width=100%]
 
 . Lorsque le menu *Boot mode* apparaît (*pops up*), sélectionnez le *boot mode* *BIOS* dans le menu *drop-down* (déroulant) et cliquez sur le bouton *Save*.
-\+
++
 image::2025\_spring/module-07-tempinst/19a\_Boot\_BIOS.png[link=self, window=blank, width=100%]
 
 . Maintenant, cliquez sur l'onglet *Scripts*, puis *scrollez* (faites défiler) vers le bas jusqu'à la section *Sysprep* et cliquez sur le bouton *Edit*.
-\+
++
 image::2025\_spring/module-07-tempinst/20\_Customize\_Scripts.png[link=self, window=blank, width=100%]
 
 . Une nouvelle fenêtre apparaîtra (*pop up*) pour vous permettre de créer des actions *Sysprep* pour votre nouveau *template*.
-\+
++
 image::2025\_spring/module-07-tempinst/21\_Sysprep.png[link=self, window=blank, width=100%]
 
 ## . Copiez et collez (*Copy and paste*) le bloc de code (*code block*) suivant dans la section *autounattend.xml* : + [source,xml,role=execute]
@@ -150,27 +150,27 @@ image::2025\_spring/module-07-tempinst/21\_Sysprep.png[link=self, window=blank, 
 ## \<unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="[http://schemas.microsoft.com/WMIConfig/2002/State](http://schemas.microsoft.com/WMIConfig/2002/State)" xmlns:xsi="[http://www.w3.org/2001/XMLSchema-instance](http://www.w3.org/2001/XMLSchema-instance)" xsi:schemaLocation="urn:schemas-microsoft-com:unattend"\> \<settings pass="windowsPE"\> \<component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS"\> \<DiskConfiguration\> \<Disk wcm:action="add"\> \<CreatePartitions\> \<CreatePartition wcm:action="add"\> \<Order\>1\</Order\> \<Extend\>true\</Extend\> \<Type\>Primary\</Type\> \</CreatePartition\> \</CreatePartitions\> \<ModifyPartitions\> \<ModifyPartition wcm:action="add"\> \<Active\>true\</Active\> \<Format\>NTFS\</Format\> \<Label\>System\</Label\> \<Order\>1\</Order\> \<PartitionID\>1\</PartitionID\> \</ModifyPartition\> \</ModifyPartitions\> \<DiskID\>0\</DiskID\> \<WillWipeDisk\>true\</WillWipeDisk\> \</Disk\> \</DiskConfiguration\> \<ImageInstall\> \<OSImage\> \<InstallFrom\> \<MetaData wcm:action="add"\> \<Key\>/IMAGE/NAME\</Key\> \<Value\>Windows Server 2019 SERVERSTANDARD\</Value\> \</MetaData\> \</InstallFrom\> \<InstallTo\> \<DiskID\>0\</DiskID\> \<PartitionID\>1\</PartitionID\> \</InstallTo\> \</OSImage\> \</ImageInstall\> \<UserData\> \<AcceptEula\>true\</AcceptEula\> \<FullName\>Administrator\</FullName\> \<Organization\>My Organization\</Organization\> \</UserData\> \<EnableFirewall\>false\</EnableFirewall\> \</component\> \<component name="Microsoft-Windows-International-Core-WinPE" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS"\> \<SetupUILanguage\> \<UILanguage\>en-US\</UILanguage\> \</SetupUILanguage\> \<InputLocale\>en-US\</InputLocale\> \<SystemLocale\>en-US\</SystemLocale\> \<UILanguage\>en-US\</UILanguage\> \<UserLocale\>en-US\</UserLocale\> \</component\> \</settings\> \<settings pass="offlineServicing"\> \<component name="Microsoft-Windows-LUA-Settings" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS"\> \<EnableLUA\>false\</EnableLUA\> \</component\> \</settings\> \<settings pass="specialize"\> \<component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS"\> \<AutoLogon\> \<Password\> \<Value\>R3dh4t1\!\</Value\> \<PlainText\>true\</PlainText\> \</Password\> \<Enabled\>true\</Enabled\> \<LogonCount\>999\</LogonCount\> \<Username\>Administrator\</Username\> \</AutoLogon\> \<OOBE\> \<HideEULAPage\>true\</HideEULAPage\> \<HideLocalAccountScreen\>true\</HideLocalAccountScreen\> \<HideOnlineAccountScreens\>true\</HideOnlineAccountScreens\> \<HideWirelessSetupInOOBE\>true\</HideWirelessSetupInOOBE\> \<NetworkLocation\>Work\</NetworkLocation\> \<ProtectYourPC\>3\</ProtectYourPC\> \<SkipMachineOOBE\>true\</SkipMachineOOBE\> \</OOBE\> \<UserAccounts\> \<LocalAccounts\> \<LocalAccount wcm:action="add"\> \<Description\>Local Administrator Account\</Description\> \<DisplayName\>Administrator\</DisplayName\> \<Group\>Administrators\</Group\> \<Name\>Administrator\</Name\> \</LocalAccount\> \</LocalAccounts\> \</UserAccounts\> \<TimeZone\>Eastern Standard Time\</TimeZone\> \</component\> \</settings\> \<settings pass="oobeSystem"\> \<component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS"\> \<InputLocale\>en-US\</InputLocale\> \<SystemLocale\>en-US\</SystemLocale\> \<UILanguage\>en-US\</UILanguage\> \<UserLocale\>en-US\</UserLocale\> \</component\> \<component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS"\> \<AutoLogon\> \<Password\> \<Value\>R3dh4t1\!\</Value\> \<PlainText\>true\</PlainText\> \</Password\> \<Enabled\>true\</Enabled\> \<LogonCount\>999\</LogonCount\> \<Username\>Administrator\</Username\> \</AutoLogon\> \<OOBE\> \<HideEULAPage\>true\</HideEULAPage\> \<HideLocalAccountScreen\>true\</HideLocalAccountScreen\> \<HideOnlineAccountScreens\>true\</HideOnlineAccountScreens\> \<HideWirelessSetupInOOBE\>true\</HideWirelessSetupInOOBE\> \<NetworkLocation\>Work\</NetworkLocation\> \<ProtectYourPC\>3\</ProtectYourPC\> \<SkipMachineOOBE\>true\</SkipMachineOOBE\> \</OOBE\> \<UserAccounts\> \<LocalAccounts\> \<LocalAccount wcm:action="add"\> \<Description\>Local Administrator Account\</Description\> \<DisplayName\>Administrator\</DisplayName\> \<Group\>Administrators\</Group\> \<Name\>Administrator\</Name\> \</LocalAccount\> \</LocalAccounts\> \</UserAccounts\> \<TimeZone\>Eastern Standard Time\</TimeZone\> \</component\> \</settings\> \</unattend\>
 
 . Une fois le code collé, cliquez sur le bouton *Save* dans le dialogue.
-\+
++
 image::2025\_spring/module-07-tempinst/22\_Windows\_2k19\_Sysprep.png[link=self, window=blank, width=100%]
 
 . Avec le *Sysprep* en place, cliquez sur le bouton *Create VirtualMachine* en bas de l'écran.
-\+
++
 image::2025\_spring/module-07-tempinst/23\_Create\_VirtualMachine.png[link=self, window=blank, width=100%]
 
 . La Machine Virtuelle démarrera le processus de *provisioning* en téléchargeant l'image ISO, en configurant et en démarrant l'instance.
-\+
++
 image::2025\_spring/module-07-tempinst/24\_Windows\_2k19\_Provisioning.png[link=self, window=blank, width=100%]
 
 . Ce processus peut prendre quelques minutes car il doit télécharger l'image ISO de *boot*. Vous pouvez vérifier la progression du téléchargement en cliquant sur l'onglet *Diagnostics*.
-\+
++
 image::2025\_spring/module-07-tempinst/25\_CD\_Import.png[link=self, window=blank, width=100%]
 
 . Après quelques instants, la machine virtuelle démarrera, et le statut passera à *Running*. Cliquez sur l'onglet *Console* pour voir le processus d'installation *autoattend* :
-\+
++
 image::2025\_spring/module-07-tempinst/26\_Windows\_2k19\_Console.png[link=self, window=blank, width=100%]
 
 . Une fois le processus d'installation de la VM terminé (le *provisioning* prendra 3-5 minutes, le démarrage et la configuration prendront environ 10 minutes), éteignez-la avec le bouton *Stop*.
-\+
++
 image::2025\_spring/module-07-tempinst/27\_Stop\_Button.png[link=self, window=blank, width=100%]
 
 . Une fois la machine éteinte, nous voulons faire un *clone* du volume racine (*root volume*) que nous pourrons utiliser pour de futures installations basées sur des *templates* Windows, sans avoir à repasser par le processus de personnalisation à chaque fois.
@@ -178,7 +178,7 @@ image::2025\_spring/module-07-tempinst/27\_Stop\_Button.png[link=self, window=bl
 . Dans le menu de gauche, cliquez sur *Storage* puis *PersistentVolumeClaims* pour voir une liste des *PVCs* disponibles dans le *namespace* *vmexamples-userX*.
 
 . Trouvez le *PVC* *win-sysprep* créé avec notre installation, et en utilisant le menu à trois points (*three-dot menu*) sur la droite, sélectionnez *Clone PVC*.
-\+
++
 image::2025\_spring/module-07-tempinst/28\_Storage\_PVC.png[link=self, window=blank, width=100%]
 
 . Dans le menu qui apparaît, remplissez les options suivantes, puis cliquez sur le bouton *Clone* :
@@ -195,40 +195,40 @@ image::2025\_spring/module-07-tempinst/29\_Clone\_Menu.png[link=self, window=bla
 . Une fois cela sauvegardé, vous pouvez l'utiliser pour créer rapidement de futures VMs Windows.
 
 . Retournez à l'élément de menu *Catalog*, et utilisez ce *PVC* cloné comme *boot source* pour créer rapidement (*quick-creating*) de nouvelles machines virtuelles en sélectionnant l'option *PVC (clone PVC)* comme *Disk source*, et en sélectionnant le *PVC* *Windows-2k19-Sysprep-Template* comme *PVC name* à cloner, et cliquez sur le bouton *Customize VirtualMachine* pour configurer le *boot mode* *BIOS* au lieu d'*UEFI*.
-\+
++
 image::2025\_spring/module-07-tempinst/30\_Windows\_Template.png[link=self, window=blank, width=100%]
 
 . Configurez le *BIOS* et appuyez sur *Create VirtualMachine*
-\+
++
 image::2025\_spring/module-07-tempinst/31\_Windows\_Template\_BIOS.png[link=self, window=blank, width=100%]
 
 . Dans quelques instants, la nouvelle machine virtuelle Windows Server 2019 démarrera (*boot up*) à partir de notre *PVC* cloné.
-\+
++
 image::2025\_spring/module-07-tempinst/32\_Windows\_Template\_Running.png[link=self, window=blank, width=100%]
 
 [[instance\_types]]
-\== Introduction aux Instance Types
+== Introduction aux Instance Types
 
 Afin de simplifier le processus de déploiement des machines virtuelles, à partir d'OpenShift 4.14, le mécanisme de configuration par défaut a été modifié pour mettre l'accent sur l'utilisation des *Instance Types*. Un *instance type* est un objet réutilisable où vous pouvez définir des ressources et des caractéristiques à appliquer à une nouvelle VM. Vous pouvez définir des *instance types* personnalisés ou utiliser la variété incluse lors de l'installation d'OpenShift Virtualization lors du *provisioning* de votre propre VM. Cela ressemble beaucoup plus à ce que les utilisateurs expérimentent lors de l'utilisation d'un catalogue en *self-service* chez les *cloud providers* (fournisseurs de cloud) populaires.
 
 Cette section explore le *provisioning* d'une VM à l'aide d'un *instance type*.
 
 . Pour commencer, cliquez sur *Catalog* dans le menu de gauche (*left-side menu*). Vous verrez que l'élément de catalogue par défaut est *InstanceType*.
-\+
++
 image::2025\_spring/module-07-tempinst/33\_Left\_Menu\_Catalog.png[link=self, window=blank, width=100%]
 
 . La première étape lors de l'utilisation d'un *instance type* est de sélectionner un volume à partir duquel démarrer (*boot from*). Similaires aux *templates* qui fournissent des *boot sources*, ces *boot sources* sont disponibles pour les invités provisionnés avec un *InstanceType*. Vous pouvez voir les volumes inclus en sélectionnant le *project* *openshift-virtualization-os-images*, ou vous pouvez téléverser (*upload*) les vôtres avec le bouton *Add volume*.
-\+
++
 image::2025\_spring/module-07-tempinst/34\_Volume\_Boot.png[link=self, window=blank, width=100%]
 
 . Cliquez sur le volume de *boot* *rhel9* pour le sélectionner comme type de volume à partir duquel démarrer. La sélection sera indiquée par une petite ligne bleue verticale à gauche du nom de l'image et le nom lui-même passant en police grasse (*bold font*).
-\+
++
 image::2025\_spring/module-07-tempinst/35\_Select\_RHEL9.png[link=self, window=blank, width=100%]
 
 . Ensuite, vous pouvez sélectionner l'*instance type* que vous souhaitez utiliser. Il existe des *instance types* fournis par Red Hat par défaut, ou vous pouvez créer les vôtres pour votre cas d'utilisation (*use case*) spécifique. Si vous survolez (*hover over*) un *instance type* fourni, vous pouvez voir une description de l'utilisation prévue.
-\+
++
 image::2025\_spring/module-07-tempinst/36\_Select\_InstanceType.png[link=self, window=blank, width=100%]
-\+
++
 
   * Les *instance types* fournis par Red Hat sont destinés aux utilisations suivantes :
     \*\* *N series* : Conçue pour les *workloads* *DPDK* intensifs en réseau, comme les *VNFs*.
@@ -238,19 +238,19 @@ image::2025\_spring/module-07-tempinst/36\_Select\_InstanceType.png[link=self, w
     \*\* *M series* : Conçue pour les *workloads* intensifs en mémoire.
 
 . Cliquez sur la tuile (*tile*) *U series* pour voir une *dropdown list* (liste déroulante) des ressources définies pour les *instance types* généraux. L'option par défaut ici est *medium: 1 CPUs, 4 GiB Memory*. Sélectionnez-la. Encore une fois, la sélection sera indiquée par une ligne bleue et une mise en gras (*bolding*) de la police pour l'*instance type*.
-\+
++
 image::2025\_spring/module-07-tempinst/37\_InstanceType\_Resources.png[link=self, window=blank, width=100%]
 
 . La dernière section à compléter lors du *provisioning* à l'aide d'un *instance type* est similaire à la section des *templates*. Vous devez fournir un nom pour la machine virtuelle, et sélectionner la *storage class* à utiliser pour un *backing disk* (disque de stockage). Par défaut, un nom sera généré pour la VM, et la *storage class* par défaut sera sélectionnée. Lorsque vous êtes satisfait, cliquez sur le bouton *Create VirtualMachine*.
-\+
++
 image::2025\_spring/module-07-tempinst/38\_VM\_Details.png[link=self, window=blank, width=100%]
 
 . Vous serez dirigé vers la page d'aperçu (*overview*) de la machine virtuelle, et verrez que la VM provisionnée à l'aide d'un *instance type* est maintenant opérationnelle (*up and running*).
-\+
++
 image::2025\_spring/module-07-tempinst/39\_VM\_Overview.png[link=self, window=blank, width=100%]
 
 [[cleanup]]
-\== Nettoyage (Cleanup)
+== Nettoyage (Cleanup)
 
 Pour économiser des ressources pour le prochain *lab*, veuillez arrêter toutes les VMs que vous avez créées dans ce module.
 
@@ -259,6 +259,6 @@ Pour économiser des ressources pour le prochain *lab*, veuillez arrêter toutes
 
 Toutes les VMs devraient maintenant être à l'état *Stopped* (Arrêtée).
 
-\== Résumé
+== Résumé
 
 Dans cette section, nous avons appris à cloner et à personnaliser un *template* existant pour en créer un qui peut être utilisé pour des *workloads* spécifiques comme les bases de données. Nous avons également appris à configurer l'un des *templates* Windows existants qui n'a pas de *boot source*, et d'automatiser son processus d'installation, afin que nous puissions créer de futurs déploiements facilement en clonant le *PVC* d'installation qui a été créé avec cette VM. Nous avons également introduit comment utiliser les *instance types* pour personnaliser davantage nos machines virtuelles pour des *workloads* spécifiques pour une expérience plus proche du *cloud* (*cloud-like*).
