@@ -29,7 +29,6 @@ Vous réaliserez l'intégralité de cet atelier via la console OpenShift.
 Un nouvel onglet s'ouvrira dans votre navigateur.
 
 *Cliquez sur htpasswd_provider*
-
 +
 image::2025_spring/module-1-console-login.png[Console Login,link=self, window=blank, width=100%]
 
