@@ -1,5 +1,8 @@
 = Gestion des Templates et des InstanceTypes
 
+Dans cette seconde partie, nous allons créer des templates personnalisés pour des VM Linux et Windows.
+
+
 == Introduction
 
 Les *templates* de machine virtuelle Red Hat préconfigurés sont listés sous *Virtualization* sur la page *Templates*. Ces *templates* sont disponibles pour différentes versions de Red Hat Enterprise Linux, Fedora, CentOS, Microsoft Windows Desktop, et Microsoft Windows Server. Chaque *template* de machine virtuelle associé à Red Hat est préconfiguré avec une image boot source, les paramètres par défaut pour le système d'exploitation, la *flavor* (CPU et mémoire), et le *workload type* (serveur). Les *templates* pour d'autres systèmes d'exploitation n'incluent pas d'images d'OS, mais sont préconfigurés comme recommandé pour leur système d'exploitation.
