@@ -63,4 +63,125 @@ Maintenant que nous avons confirmé que la "plomberie" est en place sur les nœu
 
 La NNCP a préparé les *nœuds*, mais elle n'a pas créé de *réseau* que nos pods ou VM peuvent utiliser. Pour cela, nous avons besoin d'une **NetworkAttachmentDefinition (NAD)**.
 
-Pensez à la NAD comme à l'**"invitation réseau"**. C'est une ressource limitée à un espace de noms (namespace-scoped) qui définit un réseau spécifique. Notre NAD dira : "Je crée un réseau appelé 'vlan-100-finance' qui utilise le type `cnv-bridge`, se connecte au pont `br1` (de la
+Pensez à la NAD comme à l'**"invitation réseau"**. C'est une ressource limitée à un espace de noms (namespace-scoped) qui définit un réseau spécifique. Notre NAD dira : "Je crée un réseau appelé 'vlan-100-finance' qui utilise le type `cnv-bridge`, se connecte au pont `br1` (de la NNCP), et marque tout le trafic avec l'**ID de VLAN 100**."
+
+. Dans le menu de navigation de gauche, cliquez sur *Networking* -> *NetworkAttachmentDefinitions*.
+. Dans la liste déroulante *Project* en haut, sélectionnez un projet où vous souhaitez que votre VM réside. Pour ce laboratoire, utilisons le projet *default*, ou créez-en un nommé `finance-vms`.
+. Cliquez sur le bouton *Create Network Attachment Definition*.
++
+image::module-02-vlan/04-create-nad-button.png[title="Bouton Create NAD", link=self, window=blank, width=100%]
++
+. Remplissez le formulaire avec les détails suivants :
+    * *Name:* `vlan-100-finance`
+    * *Description:* `Réseau financier de l'entreprise sur le VLAN 100`
+    * *Network Type:* Sélectionnez `CNV Linux bridge` dans la liste déroulante. C'est le type utilisé par OpenShift Virtualization.
++
+. Une fois le type sélectionné, le formulaire se mettra à jour. Remplissez les nouveaux champs :
+    * *Bridge Name:* `br1` (Cela *doit* correspondre au nom du pont de la NNCP que nous avons observée).
+    * *VLAN Tag Number:* `100` (C'est l'ID de VLAN spécifique requis par notre base de données).
++
+image::module-02-vlan/05-nad-form-fill.png[title="Remplir le formulaire NAD", link=self, window=blank, width=100%]
++
+NOTE: Nous laissons *IP Address Management* (Gestion des adresses IP) vide. Cela signifie que nous n'utilisons *pas* Kubernetes pour attribuer une adresse IP. La VM obtiendra une IP soit du serveur DHCP de l'entreprise sur le VLAN 100, soit nous configurerons une IP statique *depuis l'intérieur* du système d'exploitation invité, tout comme un serveur bare-metal traditionnel.
+
+. Cliquez sur le bouton *Create*.
+. Vous verrez votre nouvelle NAD `vlan-100-finance` dans la liste. Si vous cliquez dessus et allez dans l'onglet *YAML*, vous verrez la configuration résultante :
+
+[source,yaml]
+----
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  name: vlan-100-finance
+  namespace: default
+spec:
+  config: '{
+    "cniVersion": "0.3.1",
+    "name": "vlan-100-finance",
+    "type": "cnv-bridge", <1>
+    "bridge": "br1", <2>
+    "vlan": 100, <3>
+    "ipam": {} <4>
+  }'
+----
+<1> Le type de plugin réseau.
+<2> Le pont Linux sur le nœud à utiliser.
+<3> Le tag VLAN à appliquer à tout le trafic.
+<4> Le bloc IPAM vide, confirmant qu'aucune attribution d'IP n'est faite côté cluster.
+
+[[vm-create]]
+== Créer une VM avec Plusieurs Interfaces Réseau
+
+Nous sommes prêts à créer notre VM de base de données. Nous l'attacherons à *deux* réseaux :
+1.  Le **Réseau des Pods** (Pod Network) par défaut (pour la connectivité de base au cluster, SSH, etc.).
+2.  Notre nouveau réseau **vlan-100-finance** (pour le trafic sécurisé de la base de données).
+
+. Dans le menu de navigation de gauche, basculez vers la perspective *Virtualization*.
+. Cliquez sur *Virtualization* -> *VirtualMachines*.
+. Assurez-vous d'être dans le même projet où vous avez créé la NAD (par ex., *default*).
+. Cliquez sur *Create* -> *VirtualMachine*.
+. Dans l'assistant, remplissez la section *General* :
+    * *Name:* `finance-db-01`
+    * *Operating System:* Sélectionnez une image RHEL ou Fedora.
+    * *Flavor:* Sélectionnez `small` ou `medium`.
+. Cliquez sur l'onglet *Networking*.
++
+image::module-02-vlan/06-vm-wizard-networking.png[title="Onglet Networking de l'assistant VM", link=self, window=blank, width=100%]
++
+. Vous verrez une interface déjà présente, connectée au *Pod Networking*. C'est la valeur par défaut.
+. Cliquez sur le bouton *Add Network Interface*.
+. Une nouvelle fenêtre modale apparaîtra. Configurez la seconde interface :
+    * *Name:* `nic-1-vlan100` (C'est juste un nom convivial).
+    * *Model:* `virtio` (C'est la valeur par défaut et recommandée).
+    * *Network:* Cliquez sur la liste déroulante et sélectionnez notre NAD **vlan-100-finance**.
+    * *Type:* `Bridge`
+    * *MAC Address:* (Laissez vide pour une génération automatique).
++
+image::module-02-vlan/07-vm-add-nic-modal.png[title="Modale d'ajout d'interface réseau", link=self, window=blank, width=100%]
++
+. Cliquez sur le bouton *Add* dans la modale.
+. Vous devriez maintenant voir *deux* interfaces réseau listées pour votre VM.
++
+image::module-02-vlan/08-vm-two-nics.png[title="VM avec deux NICs", link=self, window=blank, width=100%]
++
+. Cliquez sur le bouton *Create VirtualMachine* en bas et attendez que la VM démarre.
+
+[[vm-verify]]
+== Vérifier la Configuration Réseau de la VM
+
+Confirmons que notre VM dispose des deux connexions réseau.
+
+. Cliquez sur la VM `finance-db-01` que vous venez de créer.
+. Allez à l'onglet *Network Interfaces*.
+. Vous verrez les deux interfaces listées :
+    * L'interface `Pod Networking` affichera une adresse IP attribuée par le cluster (par ex., `10.131.x.x`).
+    * L'interface `vlan-100-finance` n'affichera *pas* d'adresse IP. C'est normal, car OpenShift ne gère pas son IP.
++
+image::module-02-vlan/09-vm-details-nic-tab.png[title="NICs dans les détails de la VM", link=self, window=blank, width=100%]
++
+. Maintenant, vérifions à l'intérieur du système d'exploitation invité (guest OS).
+. Cliquez sur l'onglet *Console* et connectez-vous à la VM.
+. Une fois connecté, lancez la commande `ip a` pour lister toutes les interfaces réseau.
+. Vous verrez (au moins) deux interfaces, probablement `eth0` et `eth1` :
+    * `eth0`: Ce sera la première NIC, connectée au réseau Pod. Elle aura l'adresse IP du cluster (par ex., `10.131.5.20`).
+    * `eth1`: Ce sera la seconde NIC, connectée à notre VLAN. Elle n'aura pas d'IP *ou* aura une IP provenant de votre serveur DHCP d'entreprise sur le VLAN 100.
++
+[source,sh]
+----
+$ ip a
+...
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> ...
+    inet 10.131.5.20/23 ...
+...
+3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> ...
+    <pas d'adresse IP, ou une venant du DHCP du VLAN 100>
+----
++
+. Cela confirme que la VM est connectée avec succès au VLAN. À partir de là, vous (ou votre équipe applicative) pouvez vous connecter à la VM et configurer une IP statique sur l'interface `eth1` (par ex., `192.168.100.50`) pour communiquer de manière sécurisée avec d'autres services sur le réseau financier.
+
+== Résumé
+
+Dans ce module, vous avez mis en place une connectivité réseau hybride pour une Machine Virtuelle. Vous avez appris la différence critique entre les deux composants qui rendent cela possible :
+
+* **NodeNetworkConfigurationPolicy (NNCP):** La ressource de bas niveau, gérée par l'administrateur du cluster, qui configure le matériel physique du *nœud*, en créant un pont Linux (`br1`) sur une NIC physique.
+* **NetworkAttachmentDefinition (NAD):** La ressource de haut niveau, limitée à un espace de noms, qui définit un *réseau utilisable* en pointant vers le pont de la NNCP (`br1`) et en ajoutant un tag VLAN spécifique (`100`).
