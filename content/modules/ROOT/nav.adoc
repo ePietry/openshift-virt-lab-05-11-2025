@@ -8,7 +8,7 @@
 ** xref:module-01.adoc#vm_state[Contrôler l'État d'une VM]
 ** xref:module-01.adoc#live_migrate[Effectuer une Live Migration]
 
-* xref:module-02-tempinst.adoc[Template and InstanceType Management]
+* xref:module-02-tempinst.adoc[Gestion des Templates]
 ** xref:module-02-tempinst.adoc#clone_customize_template[Clone and Customize a Template]
 ** xref:module-02-tempinst.adoc#create_win[Create a Windows VM Template]
 ** xref:module-02-tempinst.adoc#instance_types[Introduction to Instance Types]
