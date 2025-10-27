@@ -11,7 +11,7 @@ L'objectif est de dépasser les déploiements standards pour intégrer pleinemen
 .Nous verrons notamment comment :
 * Créer des templates personnalisés pour standardiser et accélérer le déploiement de vos VM.
 * Connecter nos machines virtuelles à notre réseau d'entreprise.
-* Mettre en œuvre un load balancer en utilisant MetalLB pour exposer efficacement les services hébergés sur les VM.
+* Mettre en place une bulle réseau UDN pour la communication de vos VMs.
 * Optimiser la répartition des charges de travail au sein du cluster grâce au Descheduler Operator pour garantir une utilisation équilibrée des ressources.
 * Mettre en place une stratégie robuste de sauvegarde et de restauration pour vos machines virtuelles en intégrant la solution Veeam Kasten.
 
