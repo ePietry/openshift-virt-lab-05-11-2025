@@ -4,18 +4,18 @@ Dans cette première partie, nous allons prendre en main la plateforme en créan
 
 == Passer à la Persona Virtualization 
 
-. Lors de votre première connexion, vous serez placé dans la *Administrator* persona, avec une invite d'introduction. Cliquez sur le bouton *Skip tour* pour fermer la fenêtre.
+. Lors de votre première connexion, vous serez placé dans la vue *Administrator* avec une fenêtre d'introduction. Cliquez sur le bouton *Skip tour* pour fermer la fenêtre.
 +
 image::2025_spring/module-01-intro/00_Dev_Perspective.png[link=self, window=blank, width=60%]
 
-. Maintenant, cliquez sur *Developer* dans le coin supérieur gauche et passez à la *Virtualization* persona.
+. Maintenant, cliquez sur *Administrator* dans le coin supérieur gauche et passez à la vue *Virtualization*.
 +
 image::2025_spring/module-01-intro/01_Virt_Perspective.png[link=self, window=blank, width=60%]
 
 [[create_project]]
 == Créer un Nouveau Project 
 
-. Avant de créer une VM, nous devons créer un nouveau *project*. Les machines virtuelles sont déployées dans un *project*, ou *namespace*, spécifique où, par défaut, les utilisateurs sans permission sur le *namespace* ne peuvent pas y accéder, les gérer ou les contrôler. Les administrateurs peuvent accéder à tous les *projects*, et donc voir toutes les machines virtuelles, cependant les utilisateurs réguliers doivent recevoir l'accès aux *projects* selon leurs besoins.
+. Avant de créer une VM, nous devons créer un nouveau *project*. Les machines virtuelles sont déployées dans un *project* spécifique où, par défaut, les utilisateurs sans permission sur le *projet* ne peuvent pas y accéder, les gérer ou les contrôler. Les administrateurs peuvent accéder à tous les *projects*, et donc voir toutes les machines virtuelles, cependant les utilisateurs réguliers doivent recevoir l'accès aux *projects* selon leurs besoins.
 +
 . Cliquez sur *Create Project* en haut à droite de la console.
 +
@@ -36,9 +36,9 @@ image::2025_spring/module-01-intro/12_Create_VM_Button.png[link=self, window=bla
 
 . Vous serez redirigé vers l'écran *Catalog*, où un certain nombre de tuiles apparaîtront, montrant les *templates* de VM prédéfinis disponibles.
 +
-En examinant la liste des *templates* disponibles, vous remarquerez que certains ont un badge bleu qui indique _Source available_. Ce sont des *templates* qui utilisent des disques sources de *template* automatiquement téléchargés et stockés.
+En examinant la liste des *templates* disponibles, vous remarquerez que certains ont un badge bleu qui indique _Source available_. Ce sont des *templates* qui utilisent des images sources fournies par Red Hat
 +
-Si vous déployiez dans votre propre environnement où vous pouvez personnaliser les options disponibles, vous pouvez choisir de modifier la disponibilité de ces sources de *boot* par défaut, et/ou supprimer ces disques sources, en faveur de la création de disques personnalisés pour les besoins de votre organisation.
+En deployant votre propre cluster environnement, vous pourrez personnaliser les options disponibles, vous pouvez choisir de modifier la disponibilité de ces sources de *boot* par défaut, et/ou supprimer ces disques sources, en faveur de la création de disques personnalisés pour les besoins de votre organisation.
 +
 image::2025_spring/module-01-intro/13_Create_VM_Templates.png[link=self, window=blank, width=100%]
 
