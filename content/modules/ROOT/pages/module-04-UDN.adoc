@@ -1,0 +1,225 @@
+Voici la section mise à jour, conservant le jargon technique en anglais comme demandé :
+
+```adoc
+[[udn-create]]
+== User-Defined Networks (UDN) : IP Persistantes et Micro-segmentation
+
+Avec les versions récentes d'OpenShift, une nouvelle fonctionnalité puissante est disponible : les **User-Defined Networks (UDN)**.
+
+Alors que la méthode NAD (NetworkAttachmentDefinition) de la section précédente nous a permis de nous connecter à un pont (`br1`), elle laissait l'**IPAM** (IP Address Management) vide (`"ipam": {}`). La VM dépendait d'un DHCP externe ou d'une configuration statique manuelle.
+
+Les UDN vont plus loin :
+
+1.  **IPAM Géré par le Cluster :** L'UDN gère un pool d'adresses IP. Il attribue une IP à la VM.
+2.  **IP Persistante :** Cette adresse IP est *persistante*. Elle est liée à la VM, et non au pod. Si vous redémarrez, arrêtez ou effectuez une *Live Migration* de la VM, elle conservera la *même adresse IP*.
+3.  **Intégration des NetworkPolicy :** Les UDN sont pleinement intégrés avec les **`NetworkPolicy`** standard de Kubernetes, vous permettant d'appliquer une micro-segmentation de niveau 4 directement à vos VMs.
+
+Voyons comment mettre cela en place.
+
+=== 1. Création d'un User-Defined Network (UDN)
+
+La création d'un UDN ne se fait pas via une NAD, mais via une nouvelle **CustomResourceDefinition (CRD)** appelée `Network.v1alpha1.kubevirt.io`. Cette ressource, gérée par l'administrateur, définit le réseau, son pool d'IP (subnet), et à quel pont de nœud (de notre NNCP) il doit se connecter.
+
+. En tant qu'administrateur, dans le menu *Administration* -> *CustomResourceDefinitions*, recherchez `Network` (de l'API group `network.v1alpha1.kubevirt.io`).
+. Créez une nouvelle instance avec le YAML suivant :
+
+[source,yaml]
+----
+apiVersion: network.v1alpha1.kubevirt.io/v1alpha1
+kind: Network
+metadata:
+  name: udn-backend <1>
+spec:
+  networkName: udn-backend
+  bridgeName: br1 <2>
+  subnets:
+    - name: subnet-1
+      ipv4: 192.168.200.0/24 <3>
+      gateway: 192.168.200.1 <4>
+----
+<1> Le nom de notre nouveau réseau UDN.
+<2> Le nom du pont Linux sur les nœuds (défini dans la NNCP `br-flat`).
+<3> Le bloc CIDR que l'UDN va gérer.
+<4> La **Gateway** (optionnelle) pour ce sous-réseau.
+
+Une fois créé, ce réseau `udn-backend` est disponible pour les VMs.
+
+=== 2. Création de VMs sur l'UDN
+
+Créons maintenant deux VMs, `vm-web` et `vm-db`, et attachons-les à cet UDN. Nous leur ajoutons également des **labels** (`app: web` et `app: db`) que nous utiliserons plus tard pour les politiques réseau.
+
+. Basculez sur la perspective *Virtualization* et assurez-vous d'être dans le bon projet.
+. Créez une nouvelle `VirtualMachine` (par ex. `vm-web`).
+. Dans l'onglet *Networking* de l'assistant, cliquez sur *Add Network Interface*.
+. Dans la modale, pour le champ *Network*, vous verrez maintenant votre UDN `udn-backend` listé sous la section "User-Defined Networks". Sélectionnez-le.
++
+image::module-03-udn/01-vm-select-udn.png[title="Sélection d'un UDN lors de la création de la VM", link=self, window=blank, width=100%]
++
+. Cliquez sur *Add*.
+. Dans l'onglet *YAML*, ajoutez les **labels** `app: web` au pod de la VM, sous `spec.template.metadata.labels`:
+
+[source,yaml]
+----
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: vm-web
+  labels:
+    app: web <1>
+spec:
+  template:
+    metadata:
+      labels:
+        app: web <1>
+...
+    spec:
+      domain:
+...
+      networks:
+        - name: default
+          pod: {}
+        - name: udn-backend
+          network:
+            kind: Network
+            name: udn-backend <2>
+      interfaces:
+        - name: default
+          masquerade: {}
+        - name: udn-backend
+          bridge: {}
+          model: virtio
+----
+<1> Ces **labels** sont cruciaux pour la micro-segmentation.
+<2> Notez que nous lions au `kind: Network` (l'UDN) et non à une NAD.
+
+. Répétez ce processus pour une seconde VM nommée `vm-db`, en utilisant le **label** `app: db`.
+
+=== 3. Vérification de la Persistance d'IP (Live Migration)
+
+Démarrons `vm-db` et vérifions son IP. Ensuite, effectuons une **Live Migration** pour prouver que l'IP ne change pas.
+
+. Démarrez la VM `vm-db`.
+. Une fois démarrée, vérifiez l'IP qui lui a été attribuée par l'UDN depuis la CLI :
++
+[source,bash]
+----
+$ oc get vmi vm-db -o jsonpath='{.status.interfaces[?(@.name=="udn-backend")].ipAddress}'
+192.168.200.12 <1>
+----
+<1> Notez cette IP (par ex. `192.168.200.12`).
++
+. Maintenant, lancez une **Live Migration** de la VM :
++
+[source,bash]
+----
+$ virtctl migrate vm-db
+----
++
+. Vous pouvez observer la migration dans l'onglet *Events* de la VM. Une fois terminée, la VM s'exécute sur un nœud worker différent.
+. Vérifions à nouveau son adresse IP :
++
+[source,bash]
+----
+$ oc get vmi vm-db -o jsonpath='{.status.interfaces[?(@.name=="udn-backend")].ipAddress}'
+192.168.200.12
+----
++
+Vous constaterez que l'adresse IP est **exactement la même**. L'UDN garantit la persistance de l'IP, ce qui est essentiel pour les services de base de données ou les applications qui dépendent d'IP stables.
+
+=== 4. Micro-segmentation avec les NetworkPolicies
+
+Maintenant, sécurisons nos VMs. Notre objectif :
+1.  Bloquer *tout* le trafic entrant vers `vm-db` par défaut.
+2.  Autoriser *uniquement* `vm-web` à se connecter à `vm-db` sur le port `3306` (MySQL).
+3.  Bloquer tous les autres flux (comme SSH ou ICMP/ping) depuis `vm-web`.
+
+Nous faisons cela en utilisant des ressources **`NetworkPolicy`** standard de Kubernetes.
+
+. Dans le menu de gauche, cliquez sur *Networking* -> *NetworkPolicies*.
+. Assurez-vous d'être dans le bon projet (où se trouvent vos VMs).
+. Cliquez sur *Create Network Policy*.
+
+. **Politique 1 : Deny All**
++
+Créez une politique qui sélectionne `vm-db` et refuse tout le trafic entrant (ingress).
++
+[source,yaml]
+----
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: db-deny-all
+spec:
+  podSelector: <1>
+    matchLabels:
+      app: db
+  policyTypes:
+    - Ingress
+  ingress: [] <2>
+----
+<1> `podSelector` fonctionne car la VM est gérée par un pod `virt-launcher` qui porte nos **labels**.
+<2> Une liste `ingress` vide signifie "ne rien autoriser".
++
+. **Politique 2 : Autoriser le flux Web vers BDD**
++
+Créez une seconde politique qui autorise le trafic depuis `vm-web` vers `vm-db` *uniquement* sur le port TCP 3306.
++
+[source,yaml]
+----
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-web-to-db
+spec:
+  podSelector:
+    matchLabels:
+      app: db <1>
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: web <2>
+      ports:
+        - protocol: TCP
+          port: 3306 <3>
+----
+<1> Cette politique s'applique à `vm-db`.
+<2> Elle autorise le trafic *provenant* de `vm-web`.
+<3> Elle autorise le trafic *uniquement* sur le port TCP 3306.
+
+=== 5. Vérification des Flux Réseau
+
+Testons nos règles. Nous allons nous connecter à `vm-web` et essayer d'atteindre `vm-db` (ex: `192.168.200.12`).
+
+. Ouvrez la console de `vm-web`.
+. **Test 1 : Flux non autorisé (ex: PING ou SSH)**
++
+Essayez de pinger `vm-db`.
++
+[source,sh]
+----
+$ ping 192.168.200.12
+PING 192.168.200.12 (192.168.200.12) 56(84) bytes of data.
+...
+--- 192.168.200.12 ping statistics ---
+4 packets transmitted, 0 received, 100% packet loss, time 3068ms
+----
++
+*Résultat :* Échec. Le trafic ICMP n'est pas autorisé par notre politique. Tenter un `ssh user@192.168.200.12` échouerait également.
+
+. **Test 2 : Flux autorisé (TCP/3306)**
++
+Utilisons un outil comme `telnet` ou `nc` (netcat) pour tester le port 3306.
++
+[source,sh]
+----
+$ nc -v -z -w 3 192.168.200.12 3306
+Connection to 192.168.200.12 3306 port [tcp/mysql] succeeded!
+----
++
+*Résultat :* Succès. La connexion est établie car elle correspond parfaitement à notre **`NetworkPolicy`** `allow-web-to-db`.
+
+Vous avez maintenant mis en place une micro-segmentation granulaire entre vos VMs, en plus de leur fournir des adresses IP persistantes gérées par le cluster, le tout grâce aux UDN.
+```

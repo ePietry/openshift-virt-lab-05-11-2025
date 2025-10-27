@@ -15,7 +15,7 @@
 
 * xref:module-03-vlan-provider.adoc[Attach external network]
 
-* xref:module-04-metallb.adoc[Configure Loab Balancing with MetalLB]
+* xref:module-04-UDN.adoc[UDN & Microsegmentation]
 
 * xref:module-05-descheduler.adoc[Load Aware Cluster Rebalancing]
 
