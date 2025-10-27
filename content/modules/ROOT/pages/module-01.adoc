@@ -4,9 +4,9 @@ Dans cette première partie, nous allons prendre en main la plateforme en créan
 
 == Passer à la Persona Virtualization
 
-. Lors de votre première connexion, vous serez placé dans la *Developer* persona, avec une invite d'introduction. Cliquez sur le bouton *Skip tour* pour fermer la fenêtre.
+. Lors de votre première connexion, vous serez placé dans la *Administrator* persona, avec une invite d'introduction. Cliquez sur le bouton *Skip tour* pour fermer la fenêtre.
 +
-image::2025_spring/module-01-intro/00_Dev_Perspective.png[link=self, window=blank, width=100%]
+image::2025_spring/module-01-intro/00_Dev_Perspective.png[link=self, window=blank, width=50%]
 
 . Maintenant, cliquez sur *Developer* dans le coin supérieur gauche et passez à la *Virtualization* persona.
 +
