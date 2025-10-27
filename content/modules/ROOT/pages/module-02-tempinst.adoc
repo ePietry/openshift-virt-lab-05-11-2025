@@ -2,14 +2,15 @@
 
 == Introduction
 
-Les *templates* de machine virtuelle Red Hat préconfigurés sont listés sous *Virtualization* sur la page *Templates*. Ces *templates* sont disponibles pour différentes versions de Red Hat Enterprise Linux, Fedora, CentOS, Microsoft Windows Desktop, et Microsoft Windows Server. Chaque *template* de machine virtuelle associé à Red Hat est préconfiguré avec une image de système d'exploitation (*boot source*), les paramètres par défaut pour le système d'exploitation, la *flavor* (CPU et mémoire), et le *workload type* (serveur). Les *templates* pour d'autres systèmes d'exploitation n'incluent pas d'images d'OS, mais sont préconfigurés comme recommandé pour leur système d'exploitation.
+Les *templates* sont la clé pour standardiser et accélérer le déploiement des machines virtuelles. Ils permettent de définir un modèle réutilisable (système d'exploitation, *flavor*, scripts) afin de provisionner de nouvelles VMs de manière cohérente et rapide.
 
-La page *Templates* affiche quatre types de *templates* de machine virtuelle :
+Dans cette partie de l'atelier, nous allons explorer les différentes facettes de la gestion des *templates* :
 
-* Les *templates* *Red Hat Supported* sont entièrement supportés par Red Hat.
-* Les *templates* *User Supported* sont des *templates* *Red Hat Supported* qui ont été clonés et créés par les utilisateurs.
-* Les *templates* *Red Hat Provided* ont un support limité de Red Hat.
-* Les *templates* *User Provided* sont des *templates* *Red Hat Provided* qui ont été clonés et créés par les utilisateurs.
+* Nous commencerons par cloner et personnaliser un *template* Linux fourni par Red Hat pour l'adapter à un besoin spécifique (un serveur de base de données).
+* Ensuite, nous créerons un *template* pour Windows Server à partir d'une image ISO, en incluant l'automatisation via `Sysprep`.
+* Enfin, nous découvrirons les *Instance Types*, la nouvelle approche introduite dans OpenShift 4.14 pour simplifier la sélection des ressources VM.
+
+Commençons par cloner un *template* existant.
 
 [[clone_customize_template]]
 == Cloner et Personnaliser un Template
