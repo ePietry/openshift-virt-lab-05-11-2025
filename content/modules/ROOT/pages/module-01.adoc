@@ -52,19 +52,19 @@ image::2025_spring/module-01-intro/15_Create_VM_Quick_Name.png[link=self, window
 
 . Nous retournerons à notre vue en arborescence et il est possible de voir les informations sur notre nouvelle VM dans la colonne d'aperçu des machines virtuelles. Remarquez aussi que nous voyons maintenant notre *project* *vmexamples-userX* listé dans la colonne de droite car il contient désormais une VM.
 +
-Si nous regardons attentivement, nous pouvons voir le statut de la VM passer de *Provisioning* à *Starting* et finalement *Running* dans la colonne d'aperçu des machines virtuelles quand elle est prête.
+Si nous regardons attentivement, nous pouvons voir le statut de la VM passer de *Provisioning* à *Starting* et finalement *Running* quand elle est prête.
 +
-Pendant ce temps, le *storage provider* (fournisseur de stockage) a cloné le disque du *template* pour qu'il puisse être utilisé par la machine virtuelle nouvellement créée. Le temps que cela prend peut varier en fonction du *storage provider* utilisé pour créer le disque de *boot*, et de la charge actuelle (*load*) sur le système.
+Pendant ce temps, le *storage provider* a cloné le disque du *template* pour qu'il puisse être utilisé par la machine virtuelle nouvellement créée. Le temps que cela prend peut varier en fonction du *storage provider* utilisé pour créer le disque de *boot*, et de la charge actuelle sur le système.
 +
 image::2025_spring/module-01-intro/16_Fedora_Running.png[link=self, window=blank, width=100%]
 
-. Une fois la machine virtuelle en cours d'exécution (*running*), nous pouvons explorer davantage la page *Overview* dans la colonne de droite.
+. Une fois la machine virtuelle passé en status *running*, nous pouvons explorer davantage la page *Overview*.
 +
 * *Details* : Cette tuile nous montre des informations sur notre VM, y compris son nom, son statut, l'heure de création, l'OS, les ressources virtuelles, et le *template* à partir duquel elle a été créée. Elle contient aussi un terminal *VNC* miniature, et la possibilité de lancer une console web en plein écran.
 * *General* : Cette tuile nous montre des informations spécifiques à OpenShift, y compris le *Namespace* (*Project*), le nom de l'instance, et le *pod* Kubernetes où le *guest* (l'invité) s'exécute.
 * *Snapshots* : Cette tuile nous donne des informations sur les *snapshots* existants, et dispose aussi du bouton pour créer rapidement un *snapshot*.
-* *Network* : Cette tuile nous donne l'adresse IP de la machine virtuelle sur le *software-defined network (SDN)* et son *hostname* interne. Si aucun réseau avancé n'est défini, les VMs sont automatiquement attachées au *pod network*. Plus tard dans ce *lab*, nous explorerons les options de réseau avancées, et comment personnaliser la connectivité pour les VMs.
-* *Utilization* : Cette tuile nous donne un aperçu des ressources actuellement utilisées par cette machine virtuelle, y compris le CPU, la Mémoire (Memory), le Stockage (Storage), et le débit Réseau (Network throughput).
+* *Network* : Cette tuile nous donne l'adresse IP de la machine virtuelle sur le *software-defined network (SDN)* et son *hostname* interne. Si aucun réseau supplémentaire n'est défini, les VMs sont automatiquement attachées au *pod network*. Plus tard dans ce *lab*, nous explorerons les options de réseau avancées, et comment personnaliser la connectivité pour les VMs.
+* *Utilization* : Cette tuile nous donne un aperçu des ressources actuellement utilisées par cette machine virtuelle, y compris le CPU, la Mémoire, le Stockage, et le débit Réseau.
 +
 image::2025_spring/module-01-intro/17_Fedora_Details.png[link=self, window=blank, width=100%]
 
@@ -72,8 +72,8 @@ image::2025_spring/module-01-intro/17_Fedora_Details.png[link=self, window=blank
 +
 image::2025_spring/module-01-intro/18_Fedora_Events.png[link=self, window=blank, width=100%]
 +
-* Un _DataVolume_ a été créé. Les _DataVolumes_ sont utilisés pour gérer la création d'un disque de VM, abstrayant le processus de clone ou d'importation sur le stockage natif OpenShift pendant le *workflow* de création de la machine virtuelle.
-* La nouvelle _instance de VM_ Fedora01 a été démarrée.
+* Un _DataVolume_ a été créé. Les _DataVolumes_ sont utilisés pour gérer la création d'un disque de VM, abstrayant le processus de clone ou d'importation sur le stockage natif OpenShift pendant le workflow de création de la machine virtuelle.
+* Un autre event nous indique que la VM_ Fedora01 a été démarrée.
 
 [[admin_vms]]
 == Administration des Machines Virtuelles
