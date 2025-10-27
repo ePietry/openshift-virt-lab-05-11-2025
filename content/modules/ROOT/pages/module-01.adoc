@@ -2,7 +2,7 @@
 
 Dans cette première partie, nous allons prendre en main la plateforme en créant une VM Linux et en effectuant nos premières actions d'administration.
 
-== Passer à la Persona Virtualization 
+== Passer en vue Virtualization 
 
 . Lors de votre première connexion, vous serez placé dans la vue *Administrator* avec une fenêtre d'introduction. Cliquez sur le bouton *Skip tour* pour fermer la fenêtre.
 +
@@ -149,7 +149,7 @@ image::2025_spring/module-01-intro/27_VM_Actions_Paused.png[link=self, window=bl
 . Sortez la Machine Virtuelle de pause en utilisant le menu *Actions* et l'option *Unpause*, ou en utilisant le bouton de raccourci.
 
 [[live_migrate]]
-== Effectuer une Live Migration (Migration à Chaud) d'une Machine Virtuelle
+== Effectuer une Live Migration de VM
 
 Dans cette section, nous allons migrer la VM d'un *node* OpenShift à un autre sans arrêter la VM. La *Live migration* (migration à chaud) nécessite un stockage *ReadWriteMany* (RWX) pour que les disques de la VM puissent être montés à la fois sur les *nodes* source et de destination en même temps. *OpenShift Virtualization*, contrairement à d'autres solutions de virtualisation que vous connaissez peut-être, n'utilise pas de *datastores* monolithiques montés sur chaque membre du cluster qui contiennent de nombreux disques de VM pour de nombreuses VMs différentes. Au lieu de cela, chaque disque de VM est stocké dans son propre volume qui n'est monté que quand et où il est nécessaire.
 
