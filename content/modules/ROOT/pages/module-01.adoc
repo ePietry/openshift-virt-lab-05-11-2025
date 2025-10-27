@@ -26,7 +26,7 @@ image::2025_spring/module-01-intro/10_Column_Create.png[link=self, window=blank,
 image::2025_spring/module-01-intro/11_Create_Project.png[link=self, window=blank, width=50%]
 
 [[create_vm]]
-== Créer une Machine Virtuelle Linux
+== Créer une VM Linux
 
 . Depuis la colonne d'aperçu des machines virtuelles, cliquez sur le bouton *Create VirtualMachine* et sélectionnez *From template* dans le menu déroulant.
 +
@@ -76,7 +76,7 @@ image::2025_spring/module-01-intro/18_Fedora_Events.png[link=self, window=blank,
 * Un autre event nous indique que la VM_ Fedora01 a été démarrée.
 
 [[admin_vms]]
-== Administration des Machines Virtuelles
+== Administration des VMs
 
 Administrer et utiliser des machines virtuelles, c'est plus que simplement créer et personnaliser leur configuration. En tant qu'administrateur de la plateforme, nous devons aussi être capables de contrôler les états de la VM et de déclencher des *live migrations* (migrations à chaud) afin de pouvoir équilibrer les ressources, effectuer des tâches de maintenance, et reconfigurer les *nodes* de notre cluster.
 
@@ -113,7 +113,7 @@ Quand une VM est créée, une interface sur le réseau *Pod Networking* de type 
 De plus, une VM connectée au *SDN* peut être accédée de l'extérieur en utilisant une *Route*, ou un *Service* de type *load balancer*, ou même avoir une *Network Attachment Definition* configurée pour permettre un accès direct aux réseaux externes, un concept que nous explorerons plus en détail plus tard.
 
 [[vm_state]]
-== Contrôler l'État de la Machine Virtuelle
+== Contrôler l'État d'une VM
 
 En tant qu'utilisateur avec les permissions pour nécessaire pour gérer votre projet OpenShift : vous pouvez arrêter (*stop*), démarrer (*start*), redémarrer (*restart*), mettre en pause (*pause*), et sortir de pause (*unpause*) les machines virtuelles depuis la console web.
 
@@ -149,7 +149,7 @@ image::2025_spring/module-01-intro/27_VM_Actions_Paused.png[link=self, window=bl
 . Sortez la Machine Virtuelle de pause en utilisant le menu *Actions* et l'option *Unpause*, ou en utilisant le bouton de raccourci.
 
 [[live_migrate]]
-== Effectuer une Live Migration de VM
+== Effectuer une Live Migration
 
 Dans cette section, nous allons migrer la VM d'un *node* OpenShift à un autre sans arrêter la VM. La *Live migration* (migration à chaud) nécessite un stockage *ReadWriteMany* (RWX) pour que les disques de la VM puissent être montés à la fois sur les *nodes* source et de destination en même temps. *OpenShift Virtualization*, contrairement à d'autres solutions de virtualisation que vous connaissez peut-être, n'utilise pas de *datastores* monolithiques montés sur chaque membre du cluster qui contiennent de nombreux disques de VM pour de nombreuses VMs différentes. Au lieu de cela, chaque disque de VM est stocké dans son propre volume qui n'est monté que quand et où il est nécessaire.
 
@@ -179,6 +179,6 @@ image::2025_spring/module-01-intro/32_Migrated_Status.png[link=self, window=blan
 +
 image::2025_spring/module-01-intro/33_Pod_Details_Node_Migrated.png[link=self, window=blank, width=100%]
 
-== Résumé
+== Conclusion
 
 Dans ce *lab*, nous avons fait un tour d'horizon de l'environnement de gestion *Virtualization* dans *OpenShift Virtualization*, et effectué quelques tâches de gestion de base des machines virtuelles, y compris la gestion de l'état des VMs et la *live migration* entre les hôtes physiques. Ces deux tâches sont courantes et souvent nécessaires en tant qu'administrateurs de plateforme et constituent un excellent moyen de vous familiariser avec certaines fonctionnalités de base disponibles lorsque vous travaillez avec des VMs dans *OpenShift Virtualization*.

@@ -6,7 +6,7 @@
 ** xref:module-01.adoc#create_vm[Créer une VM Linux]
 ** xref:module-01.adoc#admin_vms[Administration des VMs]
 ** xref:module-01.adoc#vm_state[Contrôler l'État d'une VM]
-** xref:module-01.adoc#live_migrate[Effectuer une Live Migration de VM]
+** xref:module-01.adoc#live_migrate[Effectuer une Live Migration]
 
 * xref:module-02-tempinst.adoc[Template and InstanceType Management]
 ** xref:module-02-tempinst.adoc#clone_customize_template[Clone and Customize a Template]
