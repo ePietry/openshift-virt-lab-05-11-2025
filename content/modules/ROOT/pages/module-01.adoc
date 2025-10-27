@@ -13,7 +13,7 @@ image::2025_spring/module-01-intro/00_Dev_Perspective.png[link=self, window=blan
 image::2025_spring/module-01-intro/01_Virt_Perspective.png[link=self, window=blank, width=60%]
 
 [[create_project]]
-== Créer un Nouveau Project 
+== Créer un nouveau Project 
 
 . Avant de créer une VM, nous devons créer un nouveau *project*. Les machines virtuelles sont déployées dans un *project* spécifique où, par défaut, les utilisateurs sans permission sur le *projet* ne peuvent pas y accéder, les gérer ou les contrôler. Les administrateurs peuvent accéder à tous les *projects*, et donc voir toutes les machines virtuelles, cependant les utilisateurs réguliers doivent recevoir l'accès aux *projects* selon leurs besoins.
 +

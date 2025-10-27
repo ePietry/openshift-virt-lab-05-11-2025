@@ -1,12 +1,12 @@
 * xref:index.adoc[Introduction ]
 
 * xref:module-01.adoc[Gestion d'une Machine Virtuelle]
-** xref:module-01.adoc#virt_persona[Passer en vue Virtualization]
-** xref:module-01.adoc#create_project[Créer un Nouveau Project]
-** xref:module-01.adoc#create_vm[Créer une VM Linux]
+** xref:module-01.adoc#virt_persona[Passer en vue virtualization]
+** xref:module-01.adoc#create_project[Créer un nouveau project]
+** xref:module-01.adoc#create_vm[Créer une VM linux]
 ** xref:module-01.adoc#admin_vms[Administration des VMs]
-** xref:module-01.adoc#vm_state[Contrôler l'État d'une VM]
-** xref:module-01.adoc#live_migrate[Effectuer une Live Migration]
+** xref:module-01.adoc#vm_state[Contrôler l'état d'une VM]
+** xref:module-01.adoc#live_migrate[Effectuer une live migration]
 
 * xref:module-02-tempinst.adoc[Gestion des Templates]
 ** xref:module-02-tempinst.adoc#clone_customize_template[Clone and Customize a Template]
