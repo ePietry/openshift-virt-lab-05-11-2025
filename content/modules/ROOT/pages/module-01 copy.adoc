@@ -4,7 +4,7 @@
 
 . When you first log in, you will be placed in the *Developer* persona, with an introductory prompt. Click the *Skip tour* button to close the window.
 +
-image::2025_spring/module-01-intro/00_Dev_Perspective.png[link=self, window=blank, width=100%]
+image::2025_spring/module-01-intro/00_Dev_Perspective.png[link=self, window=blank, width=50%]
 
 . Now, click on *Developer* in the upper left corner and switch to the *Virtualization* persona.
 +
