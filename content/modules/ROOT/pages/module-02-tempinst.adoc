@@ -124,7 +124,7 @@ image::2025_spring/module-07-tempinst/17_Windows_2k19_Dialog.png[link=self, wind
 * Spécifiez le nom *win-sysprep*
 * Cochez la *checkbox* (case à cocher) *Boot from CD*
 * Choisissez URL *(creates PVC)* dans le menu déroulant
-* Spécifiez l'*image URL* : [https://catalog-item-assets.s3.us-east-2.amazonaws.com/qcow\_images/Windows2019.iso](https://catalog-item-assets.s3.us-east-2.amazonaws.com/qcow_images/Windows2019.iso)
+* Spécifiez l'*image URL* : https://catalog-item-assets.s3.us-east-2.amazonaws.com/qcow_images/Windows2019.iso
 * Réduisez la taille du disque CD à *5 GiB*
 * Gardez la *Disk source* à *Blank* et la taille définie à la valeur par défaut *60 GiB*
 * Assurez-vous que la *checkbox* *Mount Windows drivers disk* est cochée. **Ceci est nécessaire pour installer les systèmes Windows, et fournira les *drivers* pour *VirtIO*.**
