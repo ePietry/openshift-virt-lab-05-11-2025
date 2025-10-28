@@ -293,27 +293,27 @@ image::2025_spring/module-07-tempinst/21_Sysprep.png[link=self, window=blank, wi
 
 . Une fois le code collé, cliquez sur le bouton *Save* dans le dialogue.
 +
-image::2025\_spring/module-07-tempinst/22\_Windows\_2k19\_Sysprep.png[link=self, window=blank, width=100%]
+image::2025\_spring/module-07-tempinst/22_Windows_2k19_Sysprep.png[link=self, window=blank, width=100%]
 
 . Avec le *Sysprep* en place, cliquez sur le bouton *Create VirtualMachine* en bas de l'écran.
 +
-image::2025\_spring/module-07-tempinst/23\_Create\_VirtualMachine.png[link=self, window=blank, width=100%]
+image::2025\_spring/module-07-tempinst/23_Create_VirtualMachine.png[link=self, window=blank, width=100%]
 
 . La Machine Virtuelle démarrera le processus de *provisioning* en téléchargeant l'image ISO, en configurant et en démarrant l'instance.
 +
-image::2025\_spring/module-07-tempinst/24\_Windows\_2k19\_Provisioning.png[link=self, window=blank, width=100%]
+image::2025\_spring/module-07-tempinst/24_Windows_2k19_Provisioning[link=self, window=blank, width=100%]
 
 . Ce processus peut prendre quelques minutes car il doit télécharger l'image ISO de *boot*. Vous pouvez vérifier la progression du téléchargement en cliquant sur l'onglet *Diagnostics*.
 +
-image::2025\_spring/module-07-tempinst/25\_CD\_Import.png[link=self, window=blank, width=100%]
+image::2025\_spring/module-07-tempinst/25_CD_Import[link=self, window=blank, width=100%]
 
 . Après quelques instants, la machine virtuelle démarrera, et le statut passera à *Running*. Cliquez sur l'onglet *Console* pour voir le processus d'installation *autoattend* :
 +
-image::2025\_spring/module-07-tempinst/26\_Windows\_2k19\_Console.png[link=self, window=blank, width=100%]
+image::2025\_spring/module-07-tempinst/26_Windows_2k19_Console[link=self, window=blank, width=100%]
 
 . Une fois le processus d'installation de la VM terminé (le *provisioning* prendra 3-5 minutes, le démarrage et la configuration prendront environ 10 minutes), éteignez-la avec le bouton *Stop*.
 +
-image::2025\_spring/module-07-tempinst/27\_Stop\_Button.png[link=self, window=blank, width=100%]
+image::2025\_spring/module-07-tempinst/27_Stop_Button.png[link=self, window=blank, width=100%]
 
 . Une fois la machine éteinte, nous voulons faire un *clone* du root volume que nous pourrons utiliser pour de futures installations basées sur des *templates* Windows, sans avoir à repasser par le processus de personnalisation à chaque fois.
 
