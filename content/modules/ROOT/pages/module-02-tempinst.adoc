@@ -97,7 +97,7 @@ sudo mysql -u root
 +
 image::2025_spring/module-07-tempinst/15_MariaDB_Login.png[link=self, window=blank, width=100%]
 
-. Appuyez sur *Ctrl-D* deux fois pour vous déconnecter (*log out*) de la VM.
+. Appuyez sur *Ctrl-D* deux fois pour vous log out de la VM.
 
 [[create_win]]
 == Créer un Template de VM Windows
@@ -106,9 +106,7 @@ Dans cette partie de notre *lab*, nous installerons Microsoft Windows Server 201
 
 Ce processus peut être rationalisé après l'installation initiale du système d'exploitation en créant un root disk cloné à partir d'une machine virtuelle préparée avec un script *sysprep* pour l'utiliser avec d'autres *templates*.
 
-NOTE: Le processus spécifique de préparation du système d'exploitation invité pour être utilisé comme *template* variera, assurez-vous de suivre les directives et les exigences de votre organisation lors de la préparation d'un OS pour *template*.
-
-. Dans le menu de gauche, naviguez vers *Catalog*, et cliquez sur l'onglet *Template catalog* près du haut..
+. Dans le menu de gauche, naviguez vers *Catalog*, et cliquez sur l'onglet *Template catalog* en haut a gauche.
 
 . Tapez le mot *win* dans la barre de recherche, ou faites défiler vers le bas jusqu'à ce que vous trouviez la tuile *Microsoft Windows Server 2019 VM*.
 +
@@ -123,7 +121,7 @@ image::2025_spring/module-07-tempinst/17_Windows_2k19_Dialog.png[link=self, wind
 . In this dialog:
 * Spécifiez le nom *win-sysprep*
 * Cochez la *checkbox* (case à cocher) *Boot from CD*
-* Choisissez URL *(creates PVC)* dans le menu déroulant
+* Choisissez *URL (creates PVC)* dans le menu déroulant
 * Spécifiez l'*image URL* : https://catalog-item-assets.s3.us-east-2.amazonaws.com/qcow_images/Windows2019.iso
 * Réduisez la taille du disque CD à *5 GiB*
 * Gardez la *Disk source* à *Blank* et la taille définie à la valeur par défaut *60 GiB*
@@ -293,27 +291,27 @@ image::2025_spring/module-07-tempinst/21_Sysprep.png[link=self, window=blank, wi
 
 . Une fois le code collé, cliquez sur le bouton *Save* dans le dialogue.
 +
-image::2025\_spring/module-07-tempinst/22_Windows_2k19_Sysprep.png[link=self, window=blank, width=100%]
+image::2025_spring/module-07-tempinst/22_Windows_2k19_Sysprep.png[link=self, window=blank, width=100%]
 
 . Avec le *Sysprep* en place, cliquez sur le bouton *Create VirtualMachine* en bas de l'écran.
 +
-image::2025\_spring/module-07-tempinst/23_Create_VirtualMachine.png[link=self, window=blank, width=100%]
+image::2025_spring/module-07-tempinst/23_Create_VirtualMachine.png[link=self, window=blank, width=100%]
 
 . La Machine Virtuelle démarrera le processus de *provisioning* en téléchargeant l'image ISO, en configurant et en démarrant l'instance.
 +
-image::2025\_spring/module-07-tempinst/24_Windows_2k19_Provisioning[link=self, window=blank, width=100%]
+image::2025_spring/module-07-tempinst/24_Windows_2k19_Provisioning[link=self, window=blank, width=100%]
 
 . Ce processus peut prendre quelques minutes car il doit télécharger l'image ISO de *boot*. Vous pouvez vérifier la progression du téléchargement en cliquant sur l'onglet *Diagnostics*.
 +
-image::2025\_spring/module-07-tempinst/25_CD_Import[link=self, window=blank, width=100%]
+image::2025_spring/module-07-tempinst/25_CD_Import[link=self, window=blank, width=100%]
 
 . Après quelques instants, la machine virtuelle démarrera, et le statut passera à *Running*. Cliquez sur l'onglet *Console* pour voir le processus d'installation *autoattend* :
 +
-image::2025\_spring/module-07-tempinst/26_Windows_2k19_Console[link=self, window=blank, width=100%]
+image::2025_spring/module-07-tempinst/26_Windows_2k19_Console[link=self, window=blank, width=100%]
 
 . Une fois le processus d'installation de la VM terminé (le *provisioning* prendra 3-5 minutes, le démarrage et la configuration prendront environ 10 minutes), éteignez-la avec le bouton *Stop*.
 +
-image::2025\_spring/module-07-tempinst/27_Stop_Button.png[link=self, window=blank, width=100%]
+image::2025_spring/module-07-tempinst/27_Stop_Button.png[link=self, window=blank, width=100%]
 
 . Une fois la machine éteinte, nous voulons faire un *clone* du root volume que nous pourrons utiliser pour de futures installations basées sur des *templates* Windows, sans avoir à repasser par le processus de personnalisation à chaque fois.
 
