@@ -13,7 +13,7 @@ Avant de créer un réseau pour notre VM, les *nœuds* du cluster doivent être 
 Un NNCP, autrement dit un NodeNetworkConfigurationPolicy, permet de configurer de maniere declarative les interfaces physique des noeuds de notre cluster. Pour notre scénario, un administrateur a déjà créé une NNCP qui :
 
 1.  Sélectionne les nœuds workers.
-2.  Prend une interface réseau physique (par ex., `ens2`).
+2.  Prend une interface réseau physique (par ex., `enp3s0`).
 3.  Crée un nouveau **Bridge Linux** (ici nommé `br-flat`) et y attache cette interface physique.
 
 Ce pont `br-flat` est maintenant connecté au réseau d'entreprise. Tout le trafic des VM destiné à ce réseau passera par ce pont. Observons cette configuration existante.
@@ -46,12 +46,12 @@ spec:
             stp:
               enabled: false
           port:
-            - name: ens2 <2>
+            - name: enp3s0 <2>
   nodeSelector:
     node-role.kubernetes.io/worker: "" <3>
 ----
 <1> Définit le nouveau pont Linux nommé `br-flat`. C'est le nom dont nous aurons besoin pour la prochaine étape.
-<2> Attache la carte réseau physique (NIC) `ens2` du nœud au pont `br-flat`.
+<2> Attache la carte réseau physique (NIC) `enp3s0` du nœud au pont `br-flat`.
 <3> Cette politique est appliquée à tous les nœuds ayant le rôle "worker".
 
 Maintenant que nous avons confirmé que la "plomberie" est en place sur les nœuds, nous pouvons créer un réseau qui l' *utilise*.
