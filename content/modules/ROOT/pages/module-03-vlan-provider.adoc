@@ -19,11 +19,17 @@ Un *NNCP*,, permet de configurer de maniere *declarative* les interfaces physiqu
 Ce bridge `br-flat` est maintenant connecté au réseau d'entreprise. Tout le trafic des VM destiné à ce réseau passera par ce bridge. Observons cette configuration existante.
 
 . Dans le menu de navigation de gauche, cliquez sur *Networking* -> *NodeNetworkConfigurationPolicy*.
++
 image::2025_spring/module-09-networking/23.png[link=self, window=blank, width=100%]
+
 . Vous devriez voir une politique nommée br-flat. Cliquez dessus.
 . Cliquez sur l'onglet *YAML* pour voir la définition de la politique
-image::module-02-vlan/02-search-nncp.png[link=self, window=blank, width=100%]
++
+image::2025_spring/module-09-networking/24.png[link=self, window=blank, width=100%]
+
 . Observez le `desiredState`. Il décrit la configuration réseau qu'OpenShift appliquera sur les nœuds. Il ressemblera à ceci :
+
+
 
 [source,yaml]
 ----
