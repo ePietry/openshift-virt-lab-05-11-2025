@@ -61,7 +61,7 @@ image::2025_spring/module-01-intro/16_Fedora_Running.png[link=self, window=blank
 . Une fois la machine virtuelle passé en status *running*, nous pouvons explorer davantage la page *Overview*.
 +
 * *Details* : Cette tuile nous montre des informations sur notre VM, y compris son nom, son statut, l'heure de création, l'OS, les ressources virtuelles, et le *template* à partir duquel elle a été créée. Elle contient aussi un terminal *VNC* miniature, et la possibilité de lancer une console web en plein écran.
-* *General* : Cette tuile nous montre des informations spécifiques à OpenShift, y compris le *Namespace* (*Project*), le nom de l'instance, et le *pod* Kubernetes où le *guest* (l'invité) s'exécute.
+* *General* : Cette tuile nous montre des informations spécifiques à OpenShift, y compris le *Namespace* (*Project*), le nom de l'instance, et le *pod* Kubernetes où le *guest OS* s'exécute.
 * *Snapshots* : Cette tuile nous donne des informations sur les *snapshots* existants, et dispose aussi du bouton pour créer rapidement un *snapshot*.
 * *Network* : Cette tuile nous donne l'adresse IP de la machine virtuelle sur le *software-defined network (SDN)* et son *hostname* interne. Si aucun réseau supplémentaire n'est défini, les VMs sont automatiquement attachées au *pod network*. Plus tard dans ce *lab*, nous explorerons les options de réseau avancées, et comment personnaliser la connectivité pour les VMs.
 * *Utilization* : Cette tuile nous donne un aperçu des ressources actuellement utilisées par cette machine virtuelle, y compris le CPU, la Mémoire, le Stockage, et le débit Réseau.
