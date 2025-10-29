@@ -52,7 +52,7 @@ image::2025_spring/module-07-tempinst/06_Edit_CPU_Mem.png[link=self, window=blan
 +
 image::2025_spring/module-07-tempinst/09_Scripts_CloudInit.png[link=self, window=blank, width=100%]
 
-. Lorsque le dialogue *Cloud-init* s'ouvre, cliquez sur le bouton radio *Configure via: Script* puis *remplacez* le YAML par le *snippet* YAML suivant.
+. Lorsque le dialogue *Cloud-init* s'ouvre, cliquez sur le bouton radio *Configure via: Script* puis *remplacez* le YAML par le *snippet* YAML fourni. Cliquez sur *save* et *apply*.
 +
 [source,yaml,role=execute]
 ----
