@@ -10,13 +10,13 @@ Ce module explique comment OpenShift Virtualization comble le fossé entre Kuber
 
 Avant de créer un réseau pour notre VM, les *nœuds* du cluster doivent être préparés physiquement via la **NodeNetworkConfigurationPolicy (NNCP)**.
 
-Pensez à la NNCP comme à la **plomberie de bas niveau**. C'est une tâche d'administration qui indique aux nœuds workers comment configurer leurs interfaces réseau. Pour notre scénario, un administrateur a déjà créé une NNCP qui :
+Un NNCP, autrement dit un NodeNetworkConfigurationPolicy, permet de configurer de maniere declarative les interfaces physique des noeuds de notre cluster. Pour notre scénario, un administrateur a déjà créé une NNCP qui :
 
 1.  Sélectionne les nœuds workers.
 2.  Prend une interface réseau physique (par ex., `ens2`).
-3.  Crée un nouveau **pont Linux** (par ex., `br1`) et y attache cette interface physique.
+3.  Crée un nouveau **Bridge Linux** (ici nommé `br-flat`) et y attache cette interface physique.
 
-Ce pont `br1` est maintenant connecté au réseau d'entreprise. Tout le trafic des VM destiné à ce réseau passera par ce pont. Observons cette configuration existante.
+Ce pont `br-flat` est maintenant connecté au réseau d'entreprise. Tout le trafic des VM destiné à ce réseau passera par ce pont. Observons cette configuration existante.
 
 . Dans la console OpenShift, changez votre perspective en *Administrator* (si ce n'est pas déjà fait).
 . Dans le menu de navigation de gauche, cliquez sur *Administration* -> *CustomResourceDefinitions*.
@@ -37,7 +37,7 @@ image::module-02-vlan/03-nncp-yaml-view.png[title="Vue YAML de la NNCP", link=se
 spec:
   desiredState:
     interfaces:
-      - name: br1 <1>
+      - name: br-flat <1>
         description: Linux bridge for enterprise traffic
         type: linux-bridge
         state: up
@@ -50,8 +50,8 @@ spec:
   nodeSelector:
     node-role.kubernetes.io/worker: "" <3>
 ----
-<1> Définit le nouveau pont Linux nommé `br1`. C'est le nom dont nous aurons besoin pour la prochaine étape.
-<2> Attache la carte réseau physique (NIC) `ens2` du nœud au pont `br1`.
+<1> Définit le nouveau pont Linux nommé `br-flat`. C'est le nom dont nous aurons besoin pour la prochaine étape.
+<2> Attache la carte réseau physique (NIC) `ens2` du nœud au pont `br-flat`.
 <3> Cette politique est appliquée à tous les nœuds ayant le rôle "worker".
 
 Maintenant que nous avons confirmé que la "plomberie" est en place sur les nœuds, nous pouvons créer un réseau qui l' *utilise*.
@@ -61,7 +61,7 @@ Maintenant que nous avons confirmé que la "plomberie" est en place sur les nœu
 
 La NNCP a préparé les *nœuds*, mais elle n'a pas créé de *réseau* que nos pods ou VM peuvent utiliser. Pour cela, nous avons besoin d'une **NetworkAttachmentDefinition (NAD)**.
 
-Pensez à la NAD comme à l'**"invitation réseau"**. C'est une ressource limitée à un espace de noms (namespace-scoped) qui définit un réseau spécifique. Notre NAD dira : "Je crée un réseau appelé 'corp-network' qui utilise le type `cnv-bridge` et se connecte au pont `br1` (défini dans la NNCP)."
+Pensez à la NAD comme à l'**"invitation réseau"**. C'est une ressource limitée à un espace de noms (namespace-scoped) qui définit un réseau spécifique. Notre NAD dira : "Je crée un réseau appelé 'corp-network' qui utilise le type `cnv-bridge` et se connecte au pont `br-flat` (défini dans la NNCP)."
 
 . Dans le menu de navigation de gauche, cliquez sur *Networking* -> *NetworkAttachmentDefinitions*.
 . Dans la liste déroulante *Project* en haut, sélectionnez un projet où vous souhaitez que votre VM réside. Pour ce laboratoire, utilisons le projet *default*, ou créez-en un nommé `backend-vms`.
@@ -75,7 +75,7 @@ image::module-02-vlan/04-create-nad-button.png[title="Bouton Create NAD", link=s
     * *Network Type:* Sélectionnez `CNV Linux bridge` dans la liste déroulante. C'est le type utilisé par OpenShift Virtualization.
 +
 . Une fois le type sélectionné, le formulaire se mettra à jour. Remplissez le nouveau champ :
-    * *Bridge Name:* `br1` (Cela *doit* correspondre au nom du pont de la NNCP que nous avons observée).
+    * *Bridge Name:* `br-flat` (Cela *doit* correspondre au nom du pont de la NNCP que nous avons observée).
 +
 NOTE: C'est également ici que vous pourriez spécifier un *VLAN Tag Number* si votre réseau l'exigeait. Pour cet exercice, nous n'en avons pas besoin et laissons ce champ vide.
 
@@ -99,7 +99,7 @@ spec:
     "cniVersion": "0.3.1",
     "name": "corp-network",
     "type": "cnv-bridge", <1>
-    "bridge": "br1", <2>
+    "bridge": "br-flat", <2>
     "ipam": {} <3>
   }'
 ----
@@ -181,5 +181,5 @@ $ ip a
 
 Dans ce module, vous avez mis en place une connectivité réseau hybride pour une Machine Virtuelle. Vous avez appris la différence critique entre les deux composants qui rendent cela possible :
 
-* **NodeNetworkConfigurationPolicy (NNCP):** La ressource de bas niveau, gérée par l'administrateur du cluster, qui configure le matériel physique du *nœud*, en créant un pont Linux (`br1`) sur une NIC physique.
-* **NetworkAttachmentDefinition (NAD):** La ressource de haut niveau, limitée à un espace de noms, qui définit un *réseau utilisable* en pointant vers le pont de la NNCP (`br1`).
+* **NodeNetworkConfigurationPolicy (NNCP):** La ressource de bas niveau, gérée par l'administrateur du cluster, qui configure le matériel physique du *nœud*, en créant un pont Linux (`br-flat`) sur une NIC physique.
+* **NetworkAttachmentDefinition (NAD):** La ressource de haut niveau, limitée à un espace de noms, qui définit un *réseau utilisable* en pointant vers le pont de la NNCP (`br-flat`).
