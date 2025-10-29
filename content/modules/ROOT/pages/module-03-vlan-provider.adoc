@@ -117,7 +117,7 @@ spec:
 [[vm-create]]
 == Créer des VMs relier au Bridge
 
-Pour valider notre configuration, nous allons créer deux nouvelles VMs, `fedora-bridged-1` et `fedora-bridged-2`. Contrairement aux VMs précédentes, nous allons les connecter *uniquement* au réseau d'entreprise.
+Pour valider notre configuration, nous allons créer deux nouvelles VMs, `fedora-bridged-1` et `fedora-bridged-2`. Contrairement aux VMs précédentes, nous allons les connecter au réseau d'entreprise en plus du pod network d'OpenShift.
 
 . Dans le menu de navigation de gauche, basculez vers la perspective *Virtualization*.
 . Cliquez sur *Virtualization* -> *VirtualMachines*.
@@ -130,7 +130,8 @@ Pour valider notre configuration, nous allons créer deux nouvelles VMs, `fedora
 +
 image::module-02-vlan/06-vm-wizard-networking.png[title="Onglet Networking de l'assistant VM", link=self, window=blank, width=100%]
 +
-. L'interface par défaut *Pod Networking* est présente. Cliquez sur le menu à trois points à droite de cette interface et sélectionnez *Delete* pour la supprimer.
+. L'interface par défaut *Pod Networking* est présente. Cette interface est créé par defaut et permet a nos machines de communiquer a travers le SDN d'OpenShift.
+. Nous allons rajouter une interface basé sur le NAD que nous avons créé pour permettre a notre VM de nous connecter au réseau d'entreprise en plus du SDN OpenShift.
 
 . Cliquez sur le bouton *Add Network Interface*.
 . Une nouvelle fenêtre modale apparaîtra. Configurez la seconde interface :
@@ -141,7 +142,7 @@ image::module-02-vlan/06-vm-wizard-networking.png[title="Onglet Networking de l'
 image::module-02-vlan/07-vm-add-nic-modal-no-vlan.png[title="Modale d'ajout d'interface réseau", link=self, window=blank, width=100%]
 +
 . Cliquez sur le bouton *Add* dans la modale.
-. Vérifiez que *seule* l'interface `corp-network` est listée pour votre VM.
+. Vérifiez que l'interface `corp-network` est listée pour votre VM en plus du pod network.
 +
 image::module-02-vlan/08-vm-two-nics-no-vlan.png[title="VM avec deux NICs", link=self, window=blank, width=100%]
 +
@@ -153,13 +154,14 @@ image::module-02-vlan/08-vm-two-nics-no-vlan.png[title="VM avec deux NICs", link
 Confirmons que notre VM dispose des deux connexions réseau.
 
 . Cliquez sur la VM `fedora-bridged-1` que vous venez de créer.
-. Allez à l'onglet *Overview* et observer la partie *Network*.
-. Vous verrez une seul interface listée :
+. Allez à l'onglet *Overview* et observer la partie *Network*. 
+. Vous verrez les deux interfaces listées :
+    * L'interface `Pod Networking` affichera une adresse IP attribuée par le cluster (par ex., `10.131.x.x`).
     * L'interface `corp-network` qui affiche une ip dans le subnet 192.168.127.0/24. Cette IP à été attribué par le DHCP de notre réseau d'entreprise.
 
 +
 image::module-02-vlan/09-vm-details-nic-tab-no-vlan.png[title="NICs dans les détails de la VM", link=self, window=blank, width=100%]
-+
+
 
 Maintenant, nous allons effectuez un clique droit sur la machine `fedora-bridged-1`et cliquer sur clone. Nous lui donnerons le nom de fedora-bridged-2
 
