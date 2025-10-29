@@ -164,9 +164,9 @@ Confirmons que notre VM dispose des deux connexions réseau.
 image::2025_spring/module-09-networking/28.png[link=self, window=blank, width=100%]
 
 
-Maintenant, nous allons effectuez un clique droit sur la machine `fedora-bridged-1`et cliquer sur clone. Nous lui donnerons le nom de fedora-bridged-2
+. Maintenant, nous allons effectuez un clique droit sur la machine `fedora-bridged-1`et cliquer sur clone. Nous lui donnerons le nom de fedora-bridged-2
 
-Maintenant que nos deux VMs sont créées et ne sont connectées qu'au réseau de l'entreprise, vérifions qu'elles peuvent communiquer entre elles.
+. Nos deux VMs sont créées et ne sont connectées qu'au réseau de l'entreprise, vérifions qu'elles peuvent communiquer entre elles.
 
 . Notez l'adresse IP de la VM `fedora-bridged-2`.
 . Cliquez sur la VM `fedora-bridged-1` pour ouvrir sa page de détails.
