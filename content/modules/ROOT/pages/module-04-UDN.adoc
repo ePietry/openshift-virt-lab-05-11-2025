@@ -3,13 +3,32 @@
 
 Avec les versions récentes d'OpenShift, une nouvelle fonctionnalité puissante est disponible : les **User-Defined Networks (UDN)**.
 
-Alors que la méthode NAD (NetworkAttachmentDefinition) de la section précédente nous a permis de nous connecter à un pont (`br-flat`), elle laissait l'**IPAM** (IP Address Management) vide (`"ipam": {}`). La VM dépendait d'un DHCP externe ou d'une configuration statique manuelle.
+Dans la section précédente, nous avons utilisé une `NetworkAttachmentDefinition` (NAD) pour nous connecter à un réseau d'entreprise externe (`corp-network`). Cela nous a permis de maintenir une adresse IP stable lors d'une migration à chaud (Live Migration), car l'IP était gérée par un DHCP externe.
 
-Les UDN vont plus loin :
+Les UDN permettent également de conserver une IP unique et persistante pour nos VMs, mais avec une approche différente : ils utilisent le **SDN (Software-Defined Network) d'OpenShift** lui-même, au lieu de dépendre d'un réseau physique externe.
 
-1.  **IPAM Géré par le Cluster :** L'UDN gère un pool d'adresses IP. Il attribue une IP à la VM.
-2.  **IP Persistante :** Cette adresse IP est *persistante*. Elle est liée à la VM, et non au pod. Si vous redémarrez, arrêtez ou effectuez une *Live Migration* de la VM, elle conservera la *même adresse IP*.
-3.  **Intégration des NetworkPolicy :** Les UDN sont pleinement intégrés avec les **`NetworkPolicy`** standard de Kubernetes, vous permettant d'appliquer une micro-segmentation de niveau 4 directement à vos VMs.
+Un UDN crée un **réseau L2 à plat** qui s'exécute par-dessus l'overlay OpenShift. Il agit comme une "bulle réseau" dédiée pour un ensemble spécifique de VMs (ou de Pods).
+
+Les caractéristiques clés d'un UDN sont :
+* **Isolation des flux :** Par défaut, le trafic au sein d'un UDN est complètement isolé. Les ressources connectées à cet UDN ne peuvent communiquer qu'entre elles.
+* **IPAM intégré :** L'UDN gère son propre plan d'adressage IP (IPAM). Il distribue des adresses IP persistantes aux VMs, garantissant qu'une VM conservera la même adresse IP même après une migration ou un redémarrage.
+
+---
+
+=== Objectif du Laboratoire
+
+Durant cette partie du laboratoire, nous n'allons pas seulement créer un UDN. Nous allons également mettre en place des **Network Policies** (politiques réseau) pour aller plus loin dans la segmentation de notre réseau.
+
+[IMPORTANT]
+====
+Il est crucial de comprendre que les **Network Policies ne sont pas spécifiques aux UDN**.
+
+Ce sont des ressources Kubernetes standard qui peuvent être utilisées pour contrôler les flux sur n'importe quel réseau géré par OpenShift, y compris :
+
+.   Le SDN OpenShift par défaut (le réseau des Pods).
+.   Les bridges OVS créés par une `NodeNetworkConfigurationPolicy` (NNCP)
+.   Et, bien sûr, les UDN que nous nous apprêtons à créer.
+====
 
 Voyons comment mettre cela en place.
 
