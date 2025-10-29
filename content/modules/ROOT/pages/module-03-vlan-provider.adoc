@@ -122,17 +122,17 @@ Pour valider notre configuration, nous allons créer deux nouvelles VMs, `fedora
 . Dans le menu de navigation de gauche, basculez vers la perspective *Virtualization*.
 . Cliquez sur *Virtualization* -> *VirtualMachines*.
 . Assurez-vous d'être dans le même projet où vous avez créé la NAD (projet-X).
-
++
 image::2025_spring/module-09-networking/31.png[link=self, window=blank, width=100%]
-
++
 . Cliquez sur *Create* -> *From Template*.
 . Cliquez sur la tuille *Fedora VM*.
 . Dans l'assistant, remplissez la section *General* :
     * *Name:* `fedora-bridged-1`
 . Cliquez sur *Customise Machine*.
-
++
 image::2025_spring/module-09-networking/32.png[link=self, window=blank, width=100%]
-
++
 . Selectionnez l'onglet *Network Interfaces*
 +
 image::2025_spring/module-09-networking/33.png[link=self, window=blank, width=100%]
@@ -165,19 +165,17 @@ Confirmons que notre VM dispose des deux connexions réseau.
 . Vous verrez les deux interfaces listées :
     * L'interface `Pod Networking` affichera une adresse IP attribuée par le cluster (par ex., `10.133.x.x`).
     * L'interface `corp-network` affichera une adresse IP attribuée par le DHCP de notre réseau d'entreprise (par ex., `192.168.x.x`).
-
 +
 image::2025_spring/module-09-networking/28.png[link=self, window=blank, width=100%]
-
-
++
 . Maintenant nous allons effectuez un clique droit sur la machine `fedora-bridged-1`et cliquer sur clone.
-
++
 image::2025_spring/module-09-networking/29.png[link=self, window=blank, width=50%]
-
++
 . Nous lui donnerons le nom de `fedora-bridged-2` et la crée :
-
++
 image::2025_spring/module-09-networking/30.png[link=self, window=blank, width=100%]
-
++
 . Nos deux VMs sont créées et  sont connectées qu'au réseau de l'entreprise en plus du SDN OpenShift, vérifions qu'elles peuvent communiquer entre elles à travers ce réseau.
 
 . Notez l'adresse IP de la VM `fedora-bridged-2`.
