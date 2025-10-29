@@ -194,7 +194,7 @@ ping -c 3 #ip adress de fedora-bridged-2
 ----
 +
 
-Vous obtiendrez un résulat similaire, les VM communiquent entre elle avec le réseau d'entreprise.
+Vous obtiendrez un résulat similaire à cet exemple, les VM communiquent entre elle avec le réseau d'entreprise.
 
 [source,sh]
 ----
