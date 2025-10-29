@@ -127,6 +127,7 @@ Pour valider notre configuration, nous allons créer deux nouvelles VMs, `fedora
 . Dans l'assistant, remplissez la section *General* :
     * *Name:* `fedora-bridged-1`
 . Cliquez sur *Customise Machine*.
+. Selectionnez l'onglet *Network Interfaces*
 +
 image::module-02-vlan/06-vm-wizard-networking.png[title="Onglet Networking de l'assistant VM", link=self, window=blank, width=100%]
 +
