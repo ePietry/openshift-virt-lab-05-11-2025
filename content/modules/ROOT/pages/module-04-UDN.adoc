@@ -1,6 +1,3 @@
-Voici la section mise à jour, conservant le jargon technique en anglais comme demandé :
-
-```adoc
 [[udn-create]]
 == User-Defined Networks (UDN) : IP Persistantes et Micro-segmentation
 
