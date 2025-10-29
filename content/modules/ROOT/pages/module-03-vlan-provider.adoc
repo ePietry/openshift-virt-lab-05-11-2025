@@ -89,7 +89,6 @@ NOTE: C'est également ici que vous pourriez spécifier un *VLAN Tag Number* si 
 +
 image::2025_spring/module-09-networking/27.png[link=self, window=blank, width=100%]
 +
-NOTE: Nous laissons *IP Address Management* (Gestion des adresses IP) vide. La VM obtiendra une IP soit du serveur DHCP de l'entreprise sur ce réseau, soit nous configurerons une IP statique *depuis l'intérieur* du système d'exploitation invité.
 
 . Cliquez sur le bouton *Create*.
 . Vous verrez votre nouvelle NAD `corp-network` dans la liste. Si vous cliquez dessus et allez dans l'onglet *YAML*, vous verrez la configuration résultante :
@@ -109,12 +108,11 @@ spec:
     "bridge": "br-flat", <2>
     "macspoofchk": true,
     "preserveDefaultVlan": false,
-    "ipam": {} <3>
+    "ipam": {}
   }'
 ----
 <1> Le type de plugin réseau.
 <2> Le bridge Linux sur le nœud à utiliser.
-<3> Le bloc IPAM vide, confirmant qu'aucune attribution d'IP n'est faite côté cluster.
 
 [[vm-create]]
 == Créer une VM avec Plusieurs Interfaces Réseau
