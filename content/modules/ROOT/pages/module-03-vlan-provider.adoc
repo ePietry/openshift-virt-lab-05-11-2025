@@ -20,12 +20,12 @@ Ce bridge `br-flat` est maintenant connecté au réseau d'entreprise. Tout le tr
 
 . Dans le menu de navigation de gauche, cliquez sur *Networking* -> *NodeNetworkConfigurationPolicy*.
 +
-image::2025_spring/module-09-networking/23.png[link=self, window=blank, width=100%]
+image::2025_spring/module-09-networking/23.png[link=self, window=blank, width=100%, height=50%]
 
 . Vous devriez voir une politique nommée br-flat. Cliquez dessus.
 . Cliquez sur l'onglet *YAML* pour voir la définition de la politique
 +
-image::2025_spring/module-09-networking/24.png[link=self, window=blank, width=100%]
+image::2025_spring/module-09-networking/24.png[link=self, window=blank, width=75%]
 
 . Observez le `desiredState`. Il décrit la configuration réseau qu'OpenShift appliquera sur les nœuds. Il ressemblera à ceci :
 
