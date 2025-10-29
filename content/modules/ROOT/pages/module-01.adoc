@@ -13,15 +13,15 @@ image::2025_spring/module-01-intro/00_Dev_Perspective.png[link=self, window=blan
 image::2025_spring/module-01-intro/01_Virt_Perspective.png[link=self, window=blank, width=60%]
 
 [[create_project]]
-== Créer un nouveau Project 
+== Séléctionner un nouveau Project 
 
-. Avant de créer une VM, nous devons créer un nouveau *project*. Les machines virtuelles sont déployées dans un *project* spécifique où, par défaut, les utilisateurs sans permission sur le *projet* ne peuvent pas y accéder, les gérer ou les contrôler. Les administrateurs peuvent accéder à tous les *projects*, et donc voir toutes les machines virtuelles, cependant les utilisateurs réguliers doivent recevoir l'accès aux *projects* selon leurs besoins.
+. Avant de créer une VM, nous devons séléctionner un *project*. Les machines virtuelles sont déployées dans un *project* spécifique où, par défaut, les utilisateurs sans permission sur le *projet* ne peuvent pas y accéder, les gérer ou les contrôler. Les administrateurs peuvent accéder à tous les *projects*, et donc voir toutes les machines virtuelles, cependant les utilisateurs réguliers doivent recevoir l'accès aux *projects* selon leurs besoins.
 +
-. Cliquez sur *Create Project* en haut à droite de la console.
+. Cliquez sur *Show only projects with VirtualMachines* en haut à droite de la console.
 +
 image::2025_spring/module-01-intro/10_Column_Create.png[link=self, window=blank, width=100%]
 
-. Dans le champ *Name*, tapez *vmexamples-userX*, en remplaçant le X avec votre numéro d'utilisateur, pour nommer le *project*, puis cliquez sur *Create*.
+. Dans le champ *Projects*, Séléctionnez *projet-X*, en remplaçant le X avec votre numéro d'utilisateur. Ce projet vous est dédié durant le Lab.
 +
 image::2025_spring/module-01-intro/11_Create_Project.png[link=self, window=blank, width=50%]
 
