@@ -64,9 +64,11 @@ Maintenant que nous avons confirmé que configuration réseau est en place sur l
 [[nad-create]]
 == Créer la Network Attachment Definition (NAD)
 
-La NNCP a préparé les *nœuds*, mais elle n'a pas créé de *réseau* que nos pods ou VM peuvent utiliser. Pour cela, nous avons besoin d'une **NetworkAttachmentDefinition (NAD)**.
+La NNCP a préparé les *nœuds*, mais elle n'a pas créé de *d'attachement* que nos VM peuvent utiliser. Pour cela, nous avons besoin d'une **NetworkAttachmentDefinition (NAD)**.
 
-Pensez à la NAD comme à l'**"invitation réseau"**. C'est une ressource limitée à un espace de Projet qui définit un réseau spécifique. Notre NAD dira : "Je crée un réseau appelé 'corp-network' qui utilise le type `cnv-bridge` et se connecte au bridge `br-flat` (défini dans la NNCP)."
+Pensez à la NAD comme un NIC virtuel. C'est une ressource limitée à un espace de Projet qui définit un type de NIC pourant etre consomé par nos VMs. Il servira de lien entre nos VMs et notre Bridge br-flat.
+
+
 
 . Dans le menu de navigation de gauche, cliquez sur *Networking* -> *NetworkAttachmentDefinitions*.
 . Dans la liste déroulante *Project* en haut, sélectionnez un projet où vous souhaitez que votre VM réside. Pour ce laboratoire, utilisons le projet *default*, ou créez-en un nommé `backend-vms`.
