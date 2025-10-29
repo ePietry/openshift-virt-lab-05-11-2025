@@ -121,15 +121,11 @@ Pour valider notre configuration, nous allons créer deux nouvelles VMs, `fedora
 
 . Dans le menu de navigation de gauche, basculez vers la perspective *Virtualization*.
 . Cliquez sur *Virtualization* -> *VirtualMachines*.
-. Assurez-vous d'être dans le même projet où vous avez créé la *NAD*, *projet-X*.
+. Assurez-vous d'être dans le même projet où vous avez créé la *NAD*, *projet-X* et cliquez sur Create → From Template
 +
 image::2025_spring/module-09-networking/31.png[link=self, window=blank, width=100%]
 +
-. Cliquez sur *Create* -> *From Template*.
-. Cliquez sur la tuille *Fedora VM*.
-. Dans l'assistant, remplissez la section *General* :
-    * *Name:* `fedora-bridged-1`
-. Cliquez sur *Customise Machine*.
+. Cliquez sur la tuille *Fedora VM*. Et attribuer le nom *Name:* `fedora-bridged-1`. Cliquez ensuite sur *Customise Machine*.:
 +
 image::2025_spring/module-09-networking/32.png[link=self, window=blank, width=100%]
 +
