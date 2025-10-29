@@ -2,7 +2,7 @@
 
 == Introduction
 
-Nous déplaçons une application existante vers OpenShift Virtualization. Le front-end web peut utiliser le réseau des pods, mais la **base de données backend** doit résider sur le **réseau d'entreprise** existant pour des raisons de sécurité et de conformité.
+Bien qu'OpenShift offre un SDN (Software Defined Network) qui permet la communication entre nos VM en utilisant le réseau interne du cluster, certaines VM nécessitent un accès direct à notre *réseau d'entreprise*.
 
 Ce module explique comment OpenShift Virtualization comble le fossé entre Kubernetes et les réseaux traditionnels. Vous observerez la **NodeNetworkConfigurationPolicy (NNCP)** qui prépare les nœuds, créerez une **NetworkAttachmentDefinition (NAD)** pour définir le réseau, et enfin, vous lancerez une VM connectée à la fois au réseau des pods et au réseau d'entreprise.
 
