@@ -225,6 +225,6 @@ Dans ce module, vous avez mis en place une connectivité réseau hybride pour un
 
 * **NodeNetworkConfigurationPolicy (NNCP):** La ressource de bas niveau, gérée par l'administrateur du cluster, qui configure le matériel physique du *nœud*, en créant un bridge Linux (`br-flat`) sur une NIC physique.
 * **NetworkAttachmentDefinition (NAD):** La ressource de haut niveau, limitée à un espace de noms, qui définit un *réseau utilisable* en pointant vers le bridge de la NNCP (`br-flat`).
-* Les VMs obtiennent leurs adresses IP d'un service externe (le serveur DHCP du réseau d'entreprise).
-* Les VMs peuvent communiquer directement entre elles en utilisant ce réseau externe.
-* Ces VMs agissent comme de véritables membres de ce sous-réseau et pourraient également joindre d'autres serveurs, imprimantes ou services physiques présents sur ce même segment réseau, en contournant la pile réseau du cluster.
+* Les VMs obtiennent leurs adresses IP d'un *service externe* (le serveur DHCP du réseau d'entreprise).
+* Les VMs peuvent communiquer directement entre elles en *utilisant ce réseau externe*.
+* Ces VMs agissent comme de véritables membres de ce réseau et pourraient également *joindre d'autres devices présents sur ce même segment réseau*, en contournant le SDN du cluster.
