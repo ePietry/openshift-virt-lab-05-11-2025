@@ -251,7 +251,7 @@ image::2025_spring/module-09-networking/36.png[link=self, window=blank, width=10
 
 Cette étape démontre un concept fondamental : la migration à chaud a déplacé la VM d'un nœud physique à un autre. Le réseau de Pods, étant intimement lié à l'infrastructure du cluster et du nœud, a dû réattribuer une nouvelle adresse IP à la VM.
 
-Cependant, la connexion au `corp-network`, définie par la NAD, est une connexion directe au bridge Linux (`br-flat`) qui existe sur *tous* les nœuds workers. L'IP de la VM est attribuée par un mechanisme externe au cluster.
+Cependant, la connexion au `corp-network`, définie par la NAD, est une connexion directe au bridge Linux (`br-flat`) qui existe sur *tous* les nœuds workers. L'IP de la VM est attribuée par un mécanisme externe au cluster.
 
 Cela prouve que la connectivité au réseau d'entreprise est stable, persistante et totalement indépendante des déplacements de la charge de travail (VM) à l'intérieur du cluster.
 

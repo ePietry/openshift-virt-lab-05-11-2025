@@ -7,7 +7,7 @@ Dans la section précédente, nous avons utilisé une `NetworkAttachmentDefiniti
 
 Les UDN permettent également de conserver une IP unique et persistante pour nos VMs, mais avec une approche différente : ils utilisent le **SDN (Software-Defined Network) d'OpenShift** lui-même, au lieu de dépendre d'un réseau physique externe.
 
-Un UDN crée un **réseau L2 à plat** qui s'exécute par-dessus l'overlay OpenShift. Il agit comme une "bulle réseau" dédiée pour un ensemble spécifique de VMs (ou de Pods).
+Un UDN crée un **réseau L2 à plat** qui s'exécute par-dessus l'overlay OpenShift. Il agit comme une "bulle réseau" dédiée pour un ensemble spécifique de VMs.
 
 Les caractéristiques clés d'un UDN sont :
 * **Isolation des flux :** Par défaut, le trafic au sein d'un UDN est complètement isolé. Les ressources connectées à cet UDN ne peuvent communiquer qu'entre elles.
