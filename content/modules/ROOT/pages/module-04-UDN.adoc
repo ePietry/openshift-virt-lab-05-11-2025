@@ -3,7 +3,7 @@
 
 Avec les versions récentes d'OpenShift, une nouvelle fonctionnalité puissante est disponible : les **User-Defined Networks (UDN)**.
 
-Alors que la méthode NAD (NetworkAttachmentDefinition) de la section précédente nous a permis de nous connecter à un pont (`br1`), elle laissait l'**IPAM** (IP Address Management) vide (`"ipam": {}`). La VM dépendait d'un DHCP externe ou d'une configuration statique manuelle.
+Alors que la méthode NAD (NetworkAttachmentDefinition) de la section précédente nous a permis de nous connecter à un pont (`br-flat`), elle laissait l'**IPAM** (IP Address Management) vide (`"ipam": {}`). La VM dépendait d'un DHCP externe ou d'une configuration statique manuelle.
 
 Les UDN vont plus loin :
 

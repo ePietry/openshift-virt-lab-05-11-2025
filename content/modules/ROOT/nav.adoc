@@ -17,7 +17,7 @@
 ** xref:module-03-vlan-provider.adoc#NNCP[Configuration Réseau des Nœuds]
 ** xref:module-03-vlan-provider.adoc#nad-create[Network Attachment Definition]
 ** xref:module-03-vlan-provider.adoc#vm-create[Créer des VMs relier au Bridge]
-
+** xref:module-03-vlan-provider.adoc#vm-migration-test[Persistance IP]
 
 * xref:module-04-UDN.adoc[UDN & Microsegmentation]
 
