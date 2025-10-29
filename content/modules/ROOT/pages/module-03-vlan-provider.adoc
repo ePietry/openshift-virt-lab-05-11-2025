@@ -74,7 +74,7 @@ Créeons maintenant un NAD et connectons nos VM a travers notre réseau d'entrep
 . Dans la liste déroulante *Project* en haut, sélectionnez un projet où vous souhaitez que votre VM réside. Nous utiliserons le projet *projet-X*.
 . Cliquez sur le bouton *Create Network Attachment Definition*.
 +
-image::2025_spring/module-09-networking/26.png[link=self, window=blank, width=75%]
+image::2025_spring/module-09-networking/26.png[link=self, window=blank, width=100%]
 +
 . Remplissez le formulaire avec les détails suivants :
     * *Name:* `corp-network`
@@ -87,7 +87,7 @@ image::2025_spring/module-09-networking/26.png[link=self, window=blank, width=75
 NOTE: C'est également ici que vous pourriez spécifier un *VLAN Tag Number* si votre réseau l'exigeait. Pour cet exercice, nous n'en avons pas besoin et laissons ce champ vide.
 
 +
-image::2025_spring/module-09-networking/27.png[link=self, window=blank, width=75%]
+image::2025_spring/module-09-networking/27.png[link=self, window=blank, width=100%]
 +
 NOTE: Nous laissons *IP Address Management* (Gestion des adresses IP) vide. La VM obtiendra une IP soit du serveur DHCP de l'entreprise sur ce réseau, soit nous configurerons une IP statique *depuis l'intérieur* du système d'exploitation invité.
 
