@@ -218,7 +218,7 @@ Pour économiser des ressources pour le prochain *lab*, veuillez arrêter toutes
 
 Toutes les VMs devraient maintenant être à l'état *Stopped*.
 
-
+[[Résumé]]
 == Résumé
 
 Dans ce module, vous avez mis en place une connectivité réseau hybride pour une Machine Virtuelle. Vous avez appris la différence critique entre les deux composants qui rendent cela possible :
