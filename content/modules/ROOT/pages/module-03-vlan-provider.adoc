@@ -115,37 +115,33 @@ spec:
 <2> Le bridge Linux sur le nœud à utiliser.
 
 [[vm-create]]
-== Créer une VM avec Plusieurs Interfaces Réseau
+== Créer des VMs relier au Bridge
 
-Nous sommes prêts à créer notre VM de base de données. Nous l'attacherons à *deux* réseaux :
-1.  Le **Réseau des Pods** (Pod Network) par défaut (pour la connectivité de base au cluster, SSH, etc.).
-2.  Notre nouveau réseau **corp-network** (pour le trafic sécurisé de la base de données).
+Pour valider notre configuration, nous allons créer deux nouvelles VMs, `fedora1` et `fedora2`. Contrairement aux VMs précédentes, nous allons les connecter *uniquement* au réseau d'entreprise pour simuler des machines qui ne doivent pas être exposées au réseau d'entreprise.
 
 . Dans le menu de navigation de gauche, basculez vers la perspective *Virtualization*.
 . Cliquez sur *Virtualization* -> *VirtualMachines*.
-. Assurez-vous d'être dans le même projet où vous avez créé la NAD (par ex., *default*).
-. Cliquez sur *Create* -> *VirtualMachine*.
+. Assurez-vous d'être dans le même projet où vous avez créé la NAD (projet-X).
+. Cliquez sur *Create* -> *From Template*.
+. Cliquez sur la tuille *Fedora VM*.
 . Dans l'assistant, remplissez la section *General* :
-    * *Name:* `finance-db-01`
-    * *Operating System:* Sélectionnez une image RHEL ou Fedora.
-    * *Flavor:* Sélectionnez `small` ou `medium`.
-. Cliquez sur l'onglet *Networking*.
+    * *Name:* `fedora-bridged-1`
+. Cliquez sur *Customise Machine*.
 +
 image::module-02-vlan/06-vm-wizard-networking.png[title="Onglet Networking de l'assistant VM", link=self, window=blank, width=100%]
 +
-. Vous verrez une interface déjà présente, connectée au *Pod Networking*. C'est la valeur par défaut.
+. L'interface par défaut *Pod Networking* est présente. Cliquez sur le menu à trois points à droite de cette interface et sélectionnez *Delete* pour la supprimer.
+
 . Cliquez sur le bouton *Add Network Interface*.
 . Une nouvelle fenêtre modale apparaîtra. Configurez la seconde interface :
-    * *Name:* `nic-1-corpnet` (C'est juste un nom convivial).
-    * *Model:* `virtio` (C'est la valeur par défaut et recommandée).
+    * *Name:* `nic-1-corpnet`
+    * *Model:* `virtio`
     * *Network:* Cliquez sur la liste déroulante et sélectionnez notre NAD **corp-network**.
-    * *Type:* `Bridge`
-    * *MAC Address:* (Laissez vide pour une génération automatique).
 +
 image::module-02-vlan/07-vm-add-nic-modal-no-vlan.png[title="Modale d'ajout d'interface réseau", link=self, window=blank, width=100%]
 +
 . Cliquez sur le bouton *Add* dans la modale.
-. Vous devriez maintenant voir *deux* interfaces réseau listées pour votre VM.
+. Vérifiez que *seule* l'interface `corp-network` est listée pour votre VM.
 +
 image::module-02-vlan/08-vm-two-nics-no-vlan.png[title="VM avec deux NICs", link=self, window=blank, width=100%]
 +
@@ -156,37 +152,45 @@ image::module-02-vlan/08-vm-two-nics-no-vlan.png[title="VM avec deux NICs", link
 
 Confirmons que notre VM dispose des deux connexions réseau.
 
-. Cliquez sur la VM `finance-db-01` que vous venez de créer.
-. Allez à l'onglet *Network Interfaces*.
-. Vous verrez les deux interfaces listées :
-    * L'interface `Pod Networking` affichera une adresse IP attribuée par le cluster (par ex., `10.131.x.x`).
-    * L'interface `corp-network` n'affichera *pas* d'adresse IP. C'est normal, car OpenShift ne gère pas son IP.
+. Cliquez sur la VM `fedora-bridged-1` que vous venez de créer.
+. Allez à l'onglet *Overview* et observer la partie *Network*.
+. Vous verrez une seul interface listée :
+    * L'interface `corp-network` qui affiche une ip dans le subnet 192.168.127.0/24. Cette IP à été attribué par le DHCP de notre réseau d'entreprise.
+
 +
 image::module-02-vlan/09-vm-details-nic-tab-no-vlan.png[title="NICs dans les détails de la VM", link=self, window=blank, width=100%]
 +
-. Maintenant, vérifions à l'intérieur du système d'exploitation invité (guest OS).
-. Cliquez sur l'onglet *Console* et connectez-vous à la VM.
-. Une fois connecté, lancez la commande `ip a` pour lister toutes les interfaces réseau.
-. Vous verrez (au moins) deux interfaces, probablement `eth0` et `eth1` :
-    * `eth0`: Ce sera la première NIC, connectée au réseau Pod. Elle aura l'adresse IP du cluster (par ex., `10.131.5.20`).
-    * `eth1`: Ce sera la seconde NIC, connectée à notre réseau d'entreprise. Elle n'aura pas d'IP *ou* aura une IP provenant de votre serveur DHCP d'entreprise.
-+
+
+Maintenant, nous allons effectuez un clique droit sur la machine fedora-bridged-1 et cliquer sur clone. Nous lui donnerons le nom de fedora-bridged-2
+
+Maintenant que nos deux VMs sont créées et ne sont connectées qu'au réseau de l'entreprise, vérifions qu'elles peuvent communiquer entre elles.
+
+. Notez l'adresse IP de la VM `fedora-bridged-2`.
+. Cliquez sur la VM `fedora-bridged-1` pour ouvrir sa page de détails.
+. Allez à l'onglet *Console* et connectez-vous à la VM.
+. Une fois connecté, utilisez la commande `ping` pour joindre `fedora-bridged-2` en utilisant l'adresse IP que vous avez notée à l'étape 3.
+
+
 [source,sh]
 ----
-$ ip a
-...
-2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> ...
-    inet 10.131.5.20/23 ...
-...
-3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> ...
-    <pas d'adresse IP, ou une venant du DHCP de l'entreprise>
-----
-+
-. Cela confirme que la VM est connectée avec succès au réseau d'entreprise. À partir de là, vous pouvez vous connecter à la VM et configurer une IP statique sur l'interface `eth1` (par ex., `192.168.100.50`) pour communiquer de manière sécurisée avec d'autres services sur ce réseau.
+$ ping -c 3 192.168.127.51   # <-- Remplacez par l'IP réelle de fedora2
+PING 192.168.127.51 (192.168.127.51) 56(84) bytes of data.
+64 bytes from 192.168.127.51: icmp_seq=1 ttl=64 time=0.852 ms
+64 bytes from 192.168.127.51: icmp_seq=2 ttl=64 time=0.730 ms
+64 bytes from 192.168.127.51: icmp_seq=3 ttl=64 time=0.915 ms
 
+--- 192.168.127.51 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2003ms
+rtt min/avg/max/mdev = 0.730/0.832/0.915/0.079 ms
+----
+
+. Dans la liste principale *VirtualMachines*, regardez l'onglet *Overview*. Vous devriez voir les adresses IP attribuées à chaque VM.
 == Résumé
 
 Dans ce module, vous avez mis en place une connectivité réseau hybride pour une Machine Virtuelle. Vous avez appris la différence critique entre les deux composants qui rendent cela possible :
 
 * **NodeNetworkConfigurationPolicy (NNCP):** La ressource de bas niveau, gérée par l'administrateur du cluster, qui configure le matériel physique du *nœud*, en créant un bridge Linux (`br-flat`) sur une NIC physique.
 * **NetworkAttachmentDefinition (NAD):** La ressource de haut niveau, limitée à un espace de noms, qui définit un *réseau utilisable* en pointant vers le bridge de la NNCP (`br-flat`).
+* Les VMs obtiennent leurs adresses IP d'un service externe (le serveur DHCP du réseau d'entreprise).
+* Les VMs peuvent communiquer directement entre elles en utilisant ce réseau externe.
+* Ces VMs agissent comme de véritables membres de ce sous-réseau et pourraient également joindre d'autres serveurs, imprimantes ou services physiques présents sur ce même segment réseau, en contournant la pile réseau du cluster.
