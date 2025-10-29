@@ -175,14 +175,29 @@ image::2025_spring/module-09-networking/30.png[link=self, window=blank, width=10
 . Nos deux VMs sont créées et  sont connectées qu'au réseau de l'entreprise en plus du SDN OpenShift, vérifions qu'elles peuvent communiquer entre elles à travers ce réseau.
 
 . Notez l'adresse IP de la VM `fedora-bridged-2`.
++
+image::2025_spring/module-09-networking/36.png[link=self, window=blank, width=100%]
++
 . Cliquez sur la VM `fedora-bridged-1` pour ouvrir sa page de détails.
++
+image::2025_spring/module-09-networking/37.png[link=self, window=blank, width=70%]
++
 . Allez à l'onglet *Console* et connectez-vous à la VM.
 . Une fois connecté, utilisez la commande `ping` pour joindre `fedora-bridged-2` en utilisant l'adresse IP que vous avez notée à l'étape 3.
 
 
+
++
+[source,yaml,role=execute]
+----
+ping -c 3 #ip adress de fedora-bridged-2
+----
++
+
+
 [source,sh]
 ----
-$ ping -c 3 192.168.127.51   # <-- Remplacez par l'IP réelle de fedora2
+$ ping -c 3 192.168.127.51
 PING 192.168.127.51 (192.168.127.51) 56(84) bytes of data.
 64 bytes from 192.168.127.51: icmp_seq=1 ttl=64 time=0.852 ms
 64 bytes from 192.168.127.51: icmp_seq=2 ttl=64 time=0.730 ms
@@ -193,7 +208,17 @@ PING 192.168.127.51 (192.168.127.51) 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.730/0.832/0.915/0.079 ms
 ----
 
-. Dans la liste principale *VirtualMachines*, regardez l'onglet *Overview*. Vous devriez voir les adresses IP attribuées à chaque VM.
+[[cleanup]]
+== Cleanup
+
+Pour économiser des ressources pour le prochain *lab*, veuillez arrêter toutes les VMs que vous avez créées dans ce module.
+
+. Naviguez vers la *persona* *Virtualization* dans le menu de gauche, puis cliquez sur *Virtual Machines*.
+. Si des VMs affichent le statut *Running*, mettez en surbrillance la VM dans la colonne centrale arborescente, et sélectionnez le bouton *Stop* ou l'option dans le menu *dropdown* *Actions*.
+
+Toutes les VMs devraient maintenant être à l'état *Stopped*.
+
+
 == Résumé
 
 Dans ce module, vous avez mis en place une connectivité réseau hybride pour une Machine Virtuelle. Vous avez appris la différence critique entre les deux composants qui rendent cela possible :
