@@ -179,10 +179,10 @@ image::2025_spring/module-09-networking/30.png[link=self, window=blank, width=10
 image::2025_spring/module-09-networking/36.png[link=self, window=blank, width=100%]
 +
 . Cliquez sur la VM `fedora-bridged-1` pour ouvrir sa page de détails.
+. Allez à l'onglet *Console* et connectez-vous à la VM.
 +
 image::2025_spring/module-09-networking/37.png[link=self, window=blank, width=70%]
 +
-. Allez à l'onglet *Console* et connectez-vous à la VM.
 . Une fois connecté, utilisez la commande `ping` pour joindre `fedora-bridged-2` en utilisant l'adresse IP que vous avez notée à l'étape 3.
 
 
@@ -194,6 +194,7 @@ ping -c 3 #ip adress de fedora-bridged-2
 ----
 +
 
+Vous obtiendrez un résulat similaire, les VM communiquent entre elle avec le réseau d'entreprise.
 
 [source,sh]
 ----
