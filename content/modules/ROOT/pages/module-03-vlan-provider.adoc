@@ -68,18 +68,18 @@ La NNCP a préparé les *nœuds*, mais elle n'a pas créé de *d'attachement* qu
 
 Pensez à la NAD comme un *NIC virtuel*. C'est une ressource créé dans un *Projet* qui définit un type de NIC pourant etre *consomé par nos VMs*. Il servira de lien entre nos *VMs* et notre *Bridge br-flat*.
 
-
+Créeons maintenant un NAD et connectons nos VM a travers notre réseau d'entreprise.
 
 . Dans le menu de navigation de gauche, cliquez sur *Networking* -> *NetworkAttachmentDefinitions*.
-. Dans la liste déroulante *Project* en haut, sélectionnez un projet où vous souhaitez que votre VM réside. Pour ce laboratoire, utilisons le projet *default*, ou créez-en un nommé `backend-vms`.
+. Dans la liste déroulante *Project* en haut, sélectionnez un projet où vous souhaitez que votre VM réside. Nous utiliserons le projet *projet-X*.
 . Cliquez sur le bouton *Create Network Attachment Definition*.
 +
-image::module-02-vlan/04-create-nad-button.png[title="Bouton Create NAD", link=self, window=blank, width=100%]
+image::2025_spring/module-09-networking/26.png[link=self, window=blank, width=75%]
 +
 . Remplissez le formulaire avec les détails suivants :
     * *Name:* `corp-network`
-    * *Description:* `Réseau d'entreprise pour les VM backend`
-    * *Network Type:* Sélectionnez `CNV Linux bridge` dans la liste déroulante. C'est le type utilisé par OpenShift Virtualization.
+    * *Description:* `Réseau d'entreprise pour les VM`
+    * *Network Type:* Sélectionnez `Linux bridge` dans la liste déroulante. C'est le type utilisé par OpenShift Virtualization.
 +
 . Une fois le type sélectionné, le formulaire se mettra à jour. Remplissez le nouveau champ :
     * *Bridge Name:* `br-flat` (Cela *doit* correspondre au nom du bridge de la NNCP que nous avons observée).
@@ -87,7 +87,7 @@ image::module-02-vlan/04-create-nad-button.png[title="Bouton Create NAD", link=s
 NOTE: C'est également ici que vous pourriez spécifier un *VLAN Tag Number* si votre réseau l'exigeait. Pour cet exercice, nous n'en avons pas besoin et laissons ce champ vide.
 
 +
-image::module-02-vlan/05-nad-form-fill-no-vlan.png[title="Remplir le formulaire NAD sans VLAN", link=self, window=blank, width=100%]
+image::2025_spring/module-09-networking/27.png[link=self, window=blank, width=75%]
 +
 NOTE: Nous laissons *IP Address Management* (Gestion des adresses IP) vide. La VM obtiendra une IP soit du serveur DHCP de l'entreprise sur ce réseau, soit nous configurerons une IP statique *depuis l'intérieur* du système d'exploitation invité.
 
@@ -100,13 +100,15 @@ apiVersion: k8s.cni.cncf.io/v1
 kind: NetworkAttachmentDefinition
 metadata:
   name: corp-network
-  namespace: default
+  namespace: project-X
 spec:
   config: '{
     "cniVersion": "0.3.1",
     "name": "corp-network",
-    "type": "cnv-bridge", <1>
+    "type": "bridge", <1>
     "bridge": "br-flat", <2>
+    "macspoofchk": true,
+    "preserveDefaultVlan": false,
     "ipam": {} <3>
   }'
 ----
