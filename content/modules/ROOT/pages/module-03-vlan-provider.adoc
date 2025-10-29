@@ -157,11 +157,11 @@ Confirmons que notre VM dispose des deux connexions réseau.
 . Cliquez sur la VM `fedora-bridged-1` que vous venez de créer.
 . Allez à l'onglet *Overview* et observer la partie *Network*. 
 . Vous verrez les deux interfaces listées :
-    * L'interface `Pod Networking` affichera une adresse IP attribuée par le cluster (par ex., `10.131.x.x`).
-    * L'interface `corp-network` qui affiche une ip dans le subnet 192.168.127.0/24. Cette IP à été attribué par le DHCP de notre réseau d'entreprise.
+    * L'interface `Pod Networking` affichera une adresse IP attribuée par le cluster (par ex., `10.133.x.x`).
+    * L'interface `corp-network` affichera une adresse IP attribuée par le DHCP de notre réseau d'entreprise (par ex., `192.168.x.x`).
 
 +
-image::module-02-vlan/09-vm-details-nic-tab-no-vlan.png[title="NICs dans les détails de la VM", link=self, window=blank, width=100%]
+image::2025_spring/module-09-networking/28.png[link=self, window=blank, width=100%]
 
 
 Maintenant, nous allons effectuez un clique droit sur la machine `fedora-bridged-1`et cliquer sur clone. Nous lui donnerons le nom de fedora-bridged-2
