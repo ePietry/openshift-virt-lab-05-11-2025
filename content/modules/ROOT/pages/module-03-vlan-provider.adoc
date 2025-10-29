@@ -6,6 +6,7 @@ Bien qu'OpenShift offre un SDN (Software Defined Network) qui permet la communic
 
 Ce module explique comment OpenShift Virtualization comble le fossé entre Kubernetes et les réseaux traditionnels. Vous observerez la **NodeNetworkConfigurationPolicy (NNCP)** qui prépare les nœuds, créerez une **NetworkAttachmentDefinition (NAD)** pour définir le réseau, et enfin, vous lancerez une VM connectée à la fois au réseau des pods et au réseau d'entreprise.
 
+[[NNCP]]
 == Comprendre et Observer la Configuration Réseau des Nœuds (NNCP)
 
 Avant de créer un réseau pour notre VM, les *nœuds* du cluster doivent être préparés physiquement via la **NodeNetworkConfigurationPolicy (NNCP)**.

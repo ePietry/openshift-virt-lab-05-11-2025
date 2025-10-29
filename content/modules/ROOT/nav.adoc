@@ -9,11 +9,15 @@
 ** xref:module-01.adoc#live_migrate[Effectuer une live migration]
 
 * xref:module-02-tempinst.adoc[Gestion des Templates]
-** xref:module-02-tempinst.adoc#clone_customize_template[Clone and Customize a Template]
-** xref:module-02-tempinst.adoc#create_win[Create a Windows VM Template]
-** xref:module-02-tempinst.adoc#instance_types[Introduction to Instance Types]
+** xref:module-02-tempinst.adoc#clone_customize_template[Cloner et Personnaliser un Template]
+** xref:module-02-tempinst.adoc#create_win[Créer un Template de VM Windows]
+** xref:module-02-tempinst.adoc#instance_types[Introduction aux Instance Types]
 
 * xref:module-03-vlan-provider.adoc[Attach external network]
+** xref:module-02-tempinst.adoc#NNCP[Configuration Réseau des Nœuds]
+** xref:module-02-tempinst.adoc#nad-create[Network Attachment Definition]
+** xref:module-02-tempinst.adoc#vm-create[Créer des VMs relier au Bridge]
+
 
 * xref:module-04-UDN.adoc[UDN & Microsegmentation]
 
