@@ -13,7 +13,7 @@
 ** xref:module-02-tempinst.adoc#create_win[Créer un Template de VM Windows]
 ** xref:module-02-tempinst.adoc#instance_types[Introduction aux Instance Types]
 
-* xref:module-03-vlan-provider.adoc[Attach external network]
+* xref:module-03-vlan-provider.adoc[Connecter un réseau externe]
 ** xref:module-02-tempinst.adoc#NNCP[Configuration Réseau des Nœuds]
 ** xref:module-02-tempinst.adoc#nad-create[Network Attachment Definition]
 ** xref:module-02-tempinst.adoc#vm-create[Créer des VMs relier au Bridge]
