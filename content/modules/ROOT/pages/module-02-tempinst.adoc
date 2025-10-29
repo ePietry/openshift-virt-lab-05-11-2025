@@ -112,7 +112,7 @@ NOTE: Le processus spécifique de préparation du système d'exploitation invit�
 
 . Tapez le mot *win* dans la barre de recherche, ou faites défiler vers le bas jusqu'à ce que vous trouviez la tuile *Microsoft Windows Server 2019 VM*.
 +
-image::2025\_spring/module-07-tempinst/16_Windows_2k19_Tile.png[link=self, window=blank, width=100%]
+image::2025_spring/module-07-tempinst/16_Windows_2k19_Tile.png[link=self, window=blank, width=100%]
 
 . Un dialogue apparaîtra montrant la configuration par défaut liée au *template*.
 +
