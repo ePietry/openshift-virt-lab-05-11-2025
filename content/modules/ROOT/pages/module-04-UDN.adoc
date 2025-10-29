@@ -15,9 +15,9 @@ Un UDN crée un **réseau L2 à plat** qui s'exécute par-dessus l'overlay OpenS
 
 ---
 
-=== Objectif du Laboratoire
+=== Objectif du Lab
 
-Durant cette partie du laboratoire, nous n'allons pas seulement créer un UDN. Nous allons également mettre en place des **Network Policies** (politiques réseau) pour aller plus loin dans la segmentation de notre réseau.
+Durant cette partie du lab, nous n'allons pas seulement créer un UDN. Nous allons également mettre en place des **Network Policies** pour aller plus loin dans la segmentation de notre réseau.
 
 [IMPORTANT]
 ====
@@ -25,7 +25,7 @@ Il est crucial de comprendre que les **Network Policies ne sont pas spécifiques
 
 Ce sont des ressources Kubernetes standard qui peuvent être utilisées pour contrôler les flux sur n'importe quel réseau géré par OpenShift, y compris :
 
-.   Le SDN OpenShift par défaut (le réseau des Pods).
+.   Le SDN OpenShift par défaut (le Pod Network).
 .   Les bridges OVS créés par une `NodeNetworkConfigurationPolicy` (NNCP)
 .   Et, bien sûr, les UDN que nous nous apprêtons à créer.
 ====
@@ -33,32 +33,69 @@ Ce sont des ressources Kubernetes standard qui peuvent être utilisées pour con
 Voyons comment mettre cela en place.
 
 === 1. Création d'un User-Defined Network (UDN)
+=== 1. Création d'un User-Defined Network (UDN)
 
-La création d'un UDN ne se fait pas via une NAD, mais via une nouvelle **CustomResourceDefinition (CRD)** appelée `Network.v1alpha1.kubevirt.io`. Cette ressource, gérée par l'administrateur, définit le réseau, son pool d'IP (subnet), et à quel pont de nœud (de notre NNCP) il doit se connecter.
+Dans cette approche, nous utilisons les **User-Defined Networks (UDN) natifs d'OVN-Kubernetes**. La création d'un UDN ne se fait pas via une `NetworkAttachmentDefinition` (NAD), mais en combinant deux concepts :
 
-. En tant qu'administrateur, dans le menu *Administration* -> *CustomResourceDefinitions*, recherchez `Network` (de l'API group `network.v1alpha1.kubevirt.io`).
-. Créez une nouvelle instance avec le YAML suivant :
+1.  Un objet `UserDefinedNetwork` (CRD) qui définit le réseau L2 lui-même.
+2.  Un **label** sur un Namespace, qui désigne cet UDN comme réseau *primaire* pour ce Namespace.
 
+---
+
+==== 1 : Définir l'objet UserDefinedNetwork
+
+D'abord, l'administrateur crée un objet `UserDefinedNetwork` dans le namespace où il sera utilisé. Cet objet définit le nom du réseau, sa topologie (L2) et la gestion des adresses IP (IPAM).
+
+.Exemple de YAML pour un UDN
 [source,yaml]
 ----
-apiVersion: network.v1alpha1.kubevirt.io/v1alpha1
-kind: Network
+apiVersion: k8s.ovn.org/v1
+kind: UserDefinedNetwork
 metadata:
-  name: udn-backend <1>
+  name: udn-project-40 <1>
+  namespace: udn-project-40 <2>
 spec:
-  networkName: udn-backend
-  bridgeName: br1 <2>
-  subnets:
-    - name: subnet-1
-      ipv4: 192.168.200.0/24 <3>
-      gateway: 192.168.200.1 <4>
+  topology: Layer2 <3>
+  layer2:
+    role: Primary <4>
+    subnets:
+      - 192.168.1.0/24
+  ipam:
+    lifecycle: Persistent <5>
 ----
-<1> Le nom de notre nouveau réseau UDN.
-<2> Le nom du pont Linux sur les nœuds (défini dans la NNCP `br-flat`).
-<3> Le bloc CIDR que l'UDN va gérer.
-<4> La **Gateway** (optionnelle) pour ce sous-réseau.
+<1> Le nom de cet objet UDN.
+<2> L'UDN doit être créé dans le Namespace qui va l'utiliser.
+<3> Définit une topologie L2 à plat (un simple switch).
+<4> Indique que ce réseau est conçu pour être un réseau "primaire" (par opposition à un réseau secondaire).
+<5> Garantit que les adresses IP des VMs/Pods seront persistantes.
 
-Une fois créé, ce réseau `udn-backend` est disponible pour les VMs.
+---
+
+==== 2 : Lier le Namespace à l'UDN
+
+Une fois l'objet UDN créé, il faut dire au Namespace de l'utiliser comme réseau primaire par défaut. Cela se fait en appliquant un label spécifique au Namespace.
+
+[source,sh]
+----
+# L'administrateur applique ce label sur le projet
+$ oc label namespace udn-project-40 \
+    "k8s.ovn.org/primary-user-defined-network=udn-project-40"
+----
+
+<1> Le label `k8s.ovn.org/primary-user-defined-network`...
+<2> ...doit pointer vers le `name` de l'objet UDN créé à l'étape 1.
+
+---
+
+[IMPORTANT]
+.Configuration Spécifique au Laboratoire
+====
+Pour cet exercice, **un namespace lié à un UDN a été créé pour chaque participant.**
+
+* Votre namespace de travail est `udn-project-X` (où `X` est votre numéro de participant).
+* Ce namespace est déjà pré-configuré avec le label et l'objet UDN (similaires aux exemples ci-dessus).
+* Par conséquent, toutes les VMs que vous créerez dans `udn-project-X` seront **automatiquement connectées à cet UDN** par défaut (en plus du réseau de Pods).
+====
 
 === 2. Création de VMs sur l'UDN
 
