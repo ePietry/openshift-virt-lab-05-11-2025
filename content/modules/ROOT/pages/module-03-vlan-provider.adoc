@@ -215,31 +215,37 @@ rtt min/avg/max/mdev = 0.730/0.832/0.915/0.079 ms
 
 Un avantage clé de l'utilisation d'une NetworkAttachmentDefinition (NAD) est que la connectivité réseau est gérée indépendamment du réseau de pods sous-jacent. Nous allons le prouver en effectuant une live migration d'une VM.
 
-Nous nous attendons à ce que :
+.Nous nous attendons à ce que :
 * L'IP du **Pod Network** (gérée par OpenShift) **change**, car la VM atterrit sur un nouveau nœud.
 * L'IP du **corp-network** (gérée par notre DHCP externe) **ne change pas**.
 
-=== 1. Vérifier l'état initial
+=== Vérifier l'état initial
 
 . Dans la liste *Virtualization* -> *VirtualMachines*, localisez votre VM `fedora-bridged-1`
 . Notez les addresses IP affichée dans la partie Network de l'Overview.
 
-=== 2. Lancer la Migration à Chaud
++
+image::2025_spring/module-09-networking/36.png[link=self, window=blank, width=100%]
++
+
+
+=== Lancer la Migration à Chaud
 
 . Cliquez sur le menu action en haut à droite et sélectionnez *Migration* -> *Compute*.
 +
-image::module-xx/10-vm-migrate-menu.png[title="Lancement d'une migration de VM", link=self, window=blank, width=80%]
+image::2025_spring/module-09-networking/38.png[link=self, window=blank, width=70%]
 +
 . Observez le statut de la VM. Il passera à *Migrating*, puis reviendra à *Running*. Cela peut prendre une minute.
 
-=== 3. Vérifier l'état post-migration
+=== Vérifier l'état post-migration
 
 . Une fois la VM revenue à l'état *Running*, vérifiez à nouveau les addresses IP affichée dans la partie Network de l'Overview.
 . Constatez que l'adresse IP du pod network a changé. C'est la nouvelle IP du Pod Network sur le nouveau nœud.
 . IP attribuée pour le réseau externe, elle, n'a pas changé.
 +
-image::module-xx/11-vm-migrated-new-ip.png[title="La VM migrée avec une nouvelle IP de pod", link=self, window=blank, width=100%]
+image::2025_spring/module-09-networking/36.png[link=self, window=blank, width=100%]
 +
+
 
 == Conclusion de la Migration
 
