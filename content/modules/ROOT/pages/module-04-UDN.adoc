@@ -33,7 +33,6 @@ Ce sont des ressources Kubernetes standard qui peuvent être utilisées pour con
 Voyons comment mettre cela en place.
 
 === 1. Création d'un User-Defined Network (UDN)
-=== 1. Création d'un User-Defined Network (UDN)
 
 Dans cette approche, nous utilisons les **User-Defined Networks (UDN) natifs d'OVN-Kubernetes**. La création d'un UDN ne se fait pas via une `NetworkAttachmentDefinition` (NAD), mais en combinant deux concepts :
 
@@ -97,11 +96,11 @@ Pour cet exercice, **un namespace lié à un UDN a été créé pour chaque part
 * Par conséquent, toutes les VMs que vous créerez dans `udn-project-X` seront **automatiquement connectées à cet UDN** par défaut (en plus du réseau de Pods).
 ====
 
-=== 2. Création de VMs sur l'UDN
+=== 3. Création de VMs sur l'UDN
 
 Créons maintenant deux VMs, `vm-web` et `vm-db`, et attachons-les à cet UDN. Nous leur ajoutons également des **labels** (`app: web` et `app: db`) que nous utiliserons plus tard pour les politiques réseau.
 
-. Basculez sur la perspective *Virtualization* et assurez-vous d'être dans le bon projet.
+. Basculez sur la perspective *Virtualization* et assurez-vous d'être dans le bon projet (udn-project-X)
 . Créez une nouvelle `VirtualMachine` (par ex. `vm-web`).
 . Dans l'onglet *Networking* de l'assistant, cliquez sur *Add Network Interface*.
 . Dans la modale, pour le champ *Network*, vous verrez maintenant votre UDN `udn-backend` listé sous la section "User-Defined Networks". Sélectionnez-le.
