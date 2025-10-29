@@ -14,9 +14,9 @@
 ** xref:module-02-tempinst.adoc#instance_types[Introduction aux Instance Types]
 
 * xref:module-03-vlan-provider.adoc[Connecter un réseau externe]
-** xref:module-03-tempinst.adoc#NNCP[Configuration Réseau des Nœuds]
-** xref:module-03-tempinst.adoc#nad-create[Network Attachment Definition]
-** xref:module-03-tempinst.adoc#vm-create[Créer des VMs relier au Bridge]
+** xref:module-03-vlan-provider.adoc#NNCP[Configuration Réseau des Nœuds]
+** xref:module-03-vlan-provider.adoc#nad-create[Network Attachment Definition]
+** xref:module-03-vlan-provider.adoc#vm-create[Créer des VMs relier au Bridge]
 
 
 * xref:module-04-UDN.adoc[UDN & Microsegmentation]
