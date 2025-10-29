@@ -8,3 +8,4 @@ strict-nncp-console-viewer-binding.yaml
 strict-nncp-console-viewer-role.yaml
 test.bash
 userrole.yaml
+oauth*
