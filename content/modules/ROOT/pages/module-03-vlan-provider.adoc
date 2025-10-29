@@ -22,7 +22,7 @@ Ce bridge `br-flat` est maintenant connecté au réseau d'entreprise. Tout le tr
 +
 image::2025_spring/module-09-networking/23.png[link=self, window=blank, width=100%, height=50%]
 
-. Vous devriez voir une politique nommée br-flat. Cliquez dessus.
+. Vous devriez voir une politique nommée *br-flat*. Cliquez dessus.
 +
 image::2025_spring/module-09-networking/25.png[link=self, window=blank, width=100%, height=50%]
 
