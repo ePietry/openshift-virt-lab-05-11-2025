@@ -135,7 +135,7 @@ image::2025_spring/module-09-networking/32.png[link=self, window=blank, width=10
 
 . Selectionnez l'onglet *Network Interfaces*
 +
-image::module-02-vlan/06-vm-wizard-networking.png[title="Onglet Networking de l'assistant VM", link=self, window=blank, width=100%]
+image::2025_spring/module-09-networking/33.png[link=self, window=blank, width=100%]
 +
 . L'interface par défaut *Pod Networking* est présente. Cette interface est créé par defaut et permet a nos machines de communiquer a travers le SDN d'OpenShift.
 . Nous allons rajouter une interface basé sur le NAD que nous avons créé pour permettre a notre VM de nous connecter au réseau d'entreprise en plus du SDN OpenShift.
@@ -146,14 +146,14 @@ image::module-02-vlan/06-vm-wizard-networking.png[title="Onglet Networking de l'
     * *Model:* `virtio`
     * *Network:* Cliquez sur la liste déroulante et sélectionnez notre NAD **corp-network**.
 +
-image::module-02-vlan/07-vm-add-nic-modal-no-vlan.png[title="Modale d'ajout d'interface réseau", link=self, window=blank, width=100%]
+image::2025_spring/module-09-networking/34.png[link=self, window=blank, width=100%]
 +
 . Cliquez sur le bouton *Add* dans la modale.
 . Vérifiez que l'interface `corp-network` est listée pour votre VM en plus du pod network.
-+
-image::module-02-vlan/08-vm-two-nics-no-vlan.png[title="VM avec deux NICs", link=self, window=blank, width=100%]
-+
 . Cliquez sur le bouton *Create VirtualMachine* en bas et attendez que la VM démarre.
+
+image::2025_spring/module-09-networking/35.png[link=self, window=blank, width=100%]
+
 
 [[vm-verify]]
 == Vérifier la Configuration Réseau de la VM
