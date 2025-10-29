@@ -10,7 +10,7 @@ Ce module explique comment OpenShift Virtualization comble le fossé entre Kuber
 
 Avant de créer un réseau pour notre VM, les *nœuds* du cluster doivent être préparés physiquement via la **NodeNetworkConfigurationPolicy (NNCP)**.
 
-Un *NNCP*,, permet de configurer de maniere *declarative* les interfaces physique des noeuds de notre cluster. Pour notre scénario, un administrateur a déjà créé une NNCP qui :
+Une *NNCP* permet de configurer de maniere *declarative* les interfaces physique des noeuds de notre cluster. Pour notre scénario, un administrateur a déjà créé une NNCP qui :
 
 1.  Sélectionne les nœuds workers.
 2.  Prend une interface réseau physique (par ex., `enp3s0`).
@@ -59,7 +59,7 @@ spec:
 <2> Crée le bridge `br-flat` sur la carte réseau physique (NIC) `enp3s0` du noeud.
 <3> Cette politique est appliquée à tous les nœuds ayant le rôle "worker".
 
-Maintenant que nous avons confirmé que configuration réseau est en place sur les nœuds, nous pouvons créer des VMs qui l' *utilise*.
+Maintenant que nous avons confirmé que configuration réseau est en place sur les nœuds, nous pouvons créer des VMs qui l'*utilise*.
 
 [[nad-create]]
 == Créer la Network Attachment Definition (NAD)
