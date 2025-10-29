@@ -1,4 +1,4 @@
-= Connexion de Machines Virtuelles aux Réseaux d'Entreprise dans OpenShift Virtualization
+= Connexion des VMs au réseau d'entreprise
 
 == Introduction
 
