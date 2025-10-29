@@ -18,18 +18,11 @@ Un *NNCP*,, permet de configurer de maniere *declarative* les interfaces physiqu
 
 Ce bridge `br-flat` est maintenant connecté au réseau d'entreprise. Tout le trafic des VM destiné à ce réseau passera par ce bridge. Observons cette configuration existante.
 
-. Dans la console OpenShift, changez votre perspective en *Administrator* (si ce n'est pas déjà fait).
-. Dans le menu de navigation de gauche, cliquez sur *Administration* -> *CustomResourceDefinitions*.
-. Dans la boîte *Filtrer par nom* (Filter by name), tapez `NodeNetworkConfigurationPolicy` et cliquez sur le nom résultant.
-+
-image::module-02-vlan/02-search-nncp.png[title="Rechercher la NNCP", link=self, window=blank, width=100%]
-+
-. Cliquez sur l'onglet *Instances* pour voir toutes les politiques actuellement définies.
-. Vous devriez voir une politique nommée `br-flat`. Cliquez dessus.
-. Cliquez sur l'onglet *YAML* pour voir la définition de la politique.
-+
-image::module-02-vlan/03-nncp-yaml-view.png[title="Vue YAML de la NNCP", link=self, window=blank, width=100%]
-+
+. Dans le menu de navigation de gauche, cliquez sur *Networking* -> *NodeNetworkConfigurationPolicy*.
+image::2025_spring/module-09-networking/23.png[link=self, window=blank, width=100%]
+. Vous devriez voir une politique nommée br-flat. Cliquez dessus.
+. Cliquez sur l'onglet *YAML* pour voir la définition de la politique
+image::module-02-vlan/02-search-nncp.png[link=self, window=blank, width=100%]
 . Observez le `desiredState`. Il décrit la configuration réseau qu'OpenShift appliquera sur les nœuds. Il ressemblera à ceci :
 
 [source,yaml]
@@ -37,31 +30,34 @@ image::module-02-vlan/03-nncp-yaml-view.png[title="Vue YAML de la NNCP", link=se
 spec:
   desiredState:
     interfaces:
-      - name: br-flat <1>
-        description: Linux bridge for enterprise traffic
-        type: linux-bridge
-        state: up
-        bridge:
+      - bridge:
           options:
             stp:
               enabled: false
           port:
-            - name: enp3s0 <2>
+            - name: enp3s0 <1>
+        description: Linux bridge with enp3s0 as a port
+        ipv4:
+          dhcp: false
+          enabled: false
+        name: br-flat <2>
+        state: up
+        type: linux-bridge
   nodeSelector:
-    node-role.kubernetes.io/worker: "" <3>
+    node-role.kubernetes.io/worker: '' <3>
 ----
-<1> Définit le nouveau bridge Linux nommé `br-flat`. C'est le nom dont nous aurons besoin pour la prochaine étape.
-<2> Attache la carte réseau physique (NIC) `enp3s0` du nœud au bridge `br-flat`.
+<1> Définit le port utilisé pour le bridge Linux.
+<2> Crée le bridge `br-flat` sur la carte réseau physique (NIC) `enp3s0` du noeud.
 <3> Cette politique est appliquée à tous les nœuds ayant le rôle "worker".
 
-Maintenant que nous avons confirmé que la "plomberie" est en place sur les nœuds, nous pouvons créer un réseau qui l' *utilise*.
+Maintenant que nous avons confirmé que configuration réseau est en place sur les nœuds, nous pouvons créer des VMs qui l' *utilise*.
 
 [[nad-create]]
 == Créer la Network Attachment Definition (NAD)
 
 La NNCP a préparé les *nœuds*, mais elle n'a pas créé de *réseau* que nos pods ou VM peuvent utiliser. Pour cela, nous avons besoin d'une **NetworkAttachmentDefinition (NAD)**.
 
-Pensez à la NAD comme à l'**"invitation réseau"**. C'est une ressource limitée à un espace de noms (namespace-scoped) qui définit un réseau spécifique. Notre NAD dira : "Je crée un réseau appelé 'corp-network' qui utilise le type `cnv-bridge` et se connecte au bridge `br-flat` (défini dans la NNCP)."
+Pensez à la NAD comme à l'**"invitation réseau"**. C'est une ressource limitée à un espace de Projet qui définit un réseau spécifique. Notre NAD dira : "Je crée un réseau appelé 'corp-network' qui utilise le type `cnv-bridge` et se connecte au bridge `br-flat` (défini dans la NNCP)."
 
 . Dans le menu de navigation de gauche, cliquez sur *Networking* -> *NetworkAttachmentDefinitions*.
 . Dans la liste déroulante *Project* en haut, sélectionnez un projet où vous souhaitez que votre VM réside. Pour ce laboratoire, utilisons le projet *default*, ou créez-en un nommé `backend-vms`.
