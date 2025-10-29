@@ -9,7 +9,7 @@ Les UDN permettent également de conserver une IP unique et persistante pour nos
 
 Un UDN crée un **réseau L2 à plat** qui s'exécute par-dessus l'overlay OpenShift. Il agit comme une "bulle réseau" dédiée pour un ensemble spécifique de VMs.
 
-Les caractéristiques clés d'un UDN sont :
+.Les caractéristiques clés d'un UDN sont :
 * **Isolation des flux :** Par défaut, le trafic au sein d'un UDN est complètement isolé. Les ressources connectées à cet UDN ne peuvent communiquer qu'entre elles.
 * **IPAM intégré :** L'UDN gère son propre plan d'adressage IP (IPAM). Il distribue des adresses IP persistantes aux VMs, garantissant qu'une VM conservera la même adresse IP même après une migration ou un redémarrage.
 
