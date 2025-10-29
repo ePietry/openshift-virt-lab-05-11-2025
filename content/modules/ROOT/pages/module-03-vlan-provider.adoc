@@ -125,7 +125,7 @@ Pour valider notre configuration, nous allons créer deux nouvelles VMs, `fedora
 +
 image::2025_spring/module-09-networking/31.png[link=self, window=blank, width=100%]
 +
-. Cliquez sur la tuille *Fedora VM*. Et attribuer le nom *Name:* `fedora-bridged-1`. Cliquez ensuite sur *Customise Machine*.:
+. Cliquez sur la tuille *Fedora VM* et attribuer le nom *Name:* `fedora-bridged-1`. Cliquez ensuite sur *Customise Machine*:
 +
 image::2025_spring/module-09-networking/32.png[link=self, window=blank, width=100%]
 +
@@ -142,13 +142,13 @@ image::2025_spring/module-09-networking/33.png[link=self, window=blank, width=10
     * *Model:* `virtio`
     * *Network:* Cliquez sur la liste déroulante et sélectionnez notre NAD **corp-network**.
 +
-image::2025_spring/module-09-networking/34.png[link=self, window=blank, width=100%]
+image::2025_spring/module-09-networking/34.png[link=self, window=blank, width=75%]
 +
-. Cliquez sur le bouton *Add* dans la modale.
+. Cliquez sur le bouton *Save* dans la modale.
 . Vérifiez que l'interface `corp-network` est listée pour votre VM en plus du pod network.
 . Cliquez sur le bouton *Create VirtualMachine* en bas et attendez que la VM démarre.
 
-image::2025_spring/module-09-networking/35.png[link=self, window=blank, width=100%]
+image::2025_spring/module-09-networking/35.png[link=self, window=blank, width=70%]
 
 
 [[vm-verify]]
