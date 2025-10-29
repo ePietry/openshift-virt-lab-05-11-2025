@@ -164,7 +164,7 @@ Confirmons que notre VM dispose des deux connexions réseau.
 image::2025_spring/module-09-networking/28.png[link=self, window=blank, width=100%]
 
 
-. Maintenant, nous allons effectuez un clique droit sur la machine `fedora-bridged-1`et cliquer sur clone.
+. Maintenant nous allons effectuez un clique droit sur la machine `fedora-bridged-1`et cliquer sur clone.
 
 image::2025_spring/module-09-networking/29.png[link=self, window=blank, width=100%]
 
