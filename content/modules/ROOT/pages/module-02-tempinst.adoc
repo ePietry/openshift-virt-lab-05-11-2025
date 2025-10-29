@@ -315,7 +315,7 @@ image::2025_spring/module-07-tempinst/27_Stop_Button.png[link=self, window=blank
 
 . Une fois la machine éteinte, nous voulons faire un *clone* du root volume que nous pourrons utiliser pour de futures installations basées sur des *templates* Windows, sans avoir à repasser par le processus de personnalisation à chaque fois.
 
-. Dans le menu de gauche, cliquez sur *Storage* puis *PersistentVolumeClaims* pour voir une liste des *PVCs* disponibles dans le *namespace* *vmexamples-userX*.
+. Dans le menu de gauche, cliquez sur *Storage* puis *PersistentVolumeClaims* pour voir une liste des *PVCs* disponibles dans le *namespace* *projet-X*.
 
 . Trouvez le *PVC* *win-sysprep* créé avec notre installation, et en utilisant le menu à trois points sur la droite, sélectionnez *Clone PVC*.
 +
@@ -324,7 +324,7 @@ image::2025_spring/module-07-tempinst/28_Storage_PVC.png[link=self, window=blank
 . Dans le menu qui apparaît, remplissez les options suivantes, puis cliquez sur le bouton *Clone* :
 * *Name*: windows-2k19-sysprep-template
 * *Access mode*:  Shared access (RWX) 
-* *StorageClass*: ocs-external-storagecluster-ceph-rbd-virtualization 
+* *StorageClass*: ocs-external-storagecluster-ceph-rbd 
 +
 image::2025_spring/module-07-tempinst/29_Clone_Menu.png[link=self, window=blank, width=100%]
 
