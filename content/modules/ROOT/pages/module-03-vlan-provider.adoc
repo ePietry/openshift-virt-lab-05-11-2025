@@ -117,7 +117,7 @@ spec:
 [[vm-create]]
 == Créer des VMs relier au Bridge
 
-Pour valider notre configuration, nous allons créer deux nouvelles VMs, `fedora1` et `fedora2`. Contrairement aux VMs précédentes, nous allons les connecter *uniquement* au réseau d'entreprise pour simuler des machines qui ne doivent pas être exposées au réseau d'entreprise.
+Pour valider notre configuration, nous allons créer deux nouvelles VMs, `fedora-bridged-1` et `fedora-bridged-2`. Contrairement aux VMs précédentes, nous allons les connecter *uniquement* au réseau d'entreprise pour simuler des machines qui ne doivent pas être exposées au réseau d'entreprise.
 
 . Dans le menu de navigation de gauche, basculez vers la perspective *Virtualization*.
 . Cliquez sur *Virtualization* -> *VirtualMachines*.
