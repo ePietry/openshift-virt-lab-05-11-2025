@@ -299,15 +299,15 @@ image::2025_spring/module-07-tempinst/23_Create_VirtualMachine.png[link=self, wi
 
 . La Machine Virtuelle démarrera le processus de *provisioning* en téléchargeant l'image ISO, en configurant et en démarrant l'instance.
 +
-image::2025_spring/module-07-tempinst/24_Windows_2k19_Provisioning[link=self, window=blank, width=100%]
+image::2025_spring/module-07-tempinst/24_Windows_2k19_Provisioning.png[link=self, window=blank, width=100%]
 
 . Ce processus peut prendre quelques minutes car il doit télécharger l'image ISO de *boot*. Vous pouvez vérifier la progression du téléchargement en cliquant sur l'onglet *Diagnostics*.
 +
-image::2025_spring/module-07-tempinst/25_CD_Import[link=self, window=blank, width=100%]
+image::2025_spring/module-07-tempinst/25_CD_Import.png[link=self, window=blank, width=100%]
 
 . Après quelques instants, la machine virtuelle démarrera, et le statut passera à *Running*. Cliquez sur l'onglet *Console* pour voir le processus d'installation *autoattend* :
 +
-image::2025_spring/module-07-tempinst/26_Windows_2k19_Console[link=self, window=blank, width=100%]
+image::2025_spring/module-07-tempinst/26_Windows_2k19_Console.png[link=self, window=blank, width=100%]
 
 . Une fois le processus d'installation de la VM terminé (le *provisioning* prendra 3-5 minutes, le démarrage et la configuration prendront environ 10 minutes), éteignez-la avec le bouton *Stop*.
 +
