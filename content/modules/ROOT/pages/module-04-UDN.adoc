@@ -17,9 +17,8 @@ Un UDN crée un **réseau L2 à plat** qui s'exécute par-dessus l'overlay OpenS
 image::2025_spring/module-09-networking/39.png[link=self, window=blank, width=75%]
 
 == Création d'un User-Defined Network (UDN)
-La création d'un UDN ne se fait pas via une `NetworkAttachmentDefinition` (NAD), mais en combinant deux concepts via la creation d'un objet `UserDefinedNetwork` qui définit le réseau L2 lui-même.
+La création d'un UDN ne se fait pas via une `NetworkAttachmentDefinition` (NAD), mais via la creation d'un objet `UserDefinedNetwork` qui définit le réseau L2 lui-même.
 
-=== Définir l'objet UserDefinedNetwork
 Pour cet exercice, **un namespace lié à un UDN a été créé pour chaque participant.**
 Observons néanmoins les caractéristique de votre UDN.
 
