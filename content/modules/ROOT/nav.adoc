@@ -21,8 +21,6 @@
 
 * xref:module-04-UDN.adoc[UDN & Microsegmentation]
 
-* xref:module-05-descheduler.adoc[Load Aware Cluster Rebalancing]
-
 * xref:module-07-veeam.adoc[Backup restore avec Veeam Kasten]
 
 * xref:conclusion.adoc[Conclusion]
