@@ -57,7 +57,7 @@ Créons maintenant deux VMs, `vm-web` et `vm-db`, et attachons-les à cet UDN. N
 . Cliquez sur *Virtualization* -> *VirtualMachines*.
 . Assurez-vous d'être dans le projet *udn-projet-X* et cliquez sur Create → From Template
 +
-image::2025_spring/module-09-networking/31.png[link=self, window=blank, width=100%]
+image::2025_spring/module-09-networking/44.png[link=self, window=blank, width=100%]
 +
 . Créez une nouvelle `VirtualMachine` (par ex. `vm-web`).
 . Dans l'onglet *Networking* de l'assistant, cliquez sur *Add Network Interface*.
