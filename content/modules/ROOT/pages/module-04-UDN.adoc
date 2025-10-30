@@ -27,7 +27,7 @@ Observons maintenant les caractéristique de votre UDN.
 +
 image::2025_spring/module-09-networking/40.png[link=self, window=blank, width=40%]
 +
-. Dans la liste déroulante *Project* en haut, sélectionnez le projet *udn-project-X*
+. Dans la liste déroulante *Project* en haut, sélectionnez le projext *udn-project-X*
 +
 image::2025_spring/module-09-networking/41.png[link=self, window=blank, width=40%]
 +
@@ -53,7 +53,12 @@ image::2025_spring/module-09-networking/43.png[link=self, window=blank, width=80
 
 Créons maintenant deux VMs, `vm-web` et `vm-db`, et attachons-les à cet UDN. Nous leur ajoutons également des **labels** (`app: web` et `app: db`) que nous utiliserons plus tard pour les politiques réseau.
 
-. Basculez sur la perspective *Virtualization* et assurez-vous d'être dans le bon projet (udn-project-X)
+. Dans le menu de navigation de gauche, basculez vers la perspective *Virtualization*.
+. Cliquez sur *Virtualization* -> *VirtualMachines*.
+. Assurez-vous d'être dans le projet *udn-projet-X* et cliquez sur Create → From Template
++
+image::2025_spring/module-09-networking/31.png[link=self, window=blank, width=100%]
++
 . Créez une nouvelle `VirtualMachine` (par ex. `vm-web`).
 . Dans l'onglet *Networking* de l'assistant, cliquez sur *Add Network Interface*.
 . Dans la modale, pour le champ *Network*, vous verrez maintenant votre UDN `udn-backend` listé sous la section "User-Defined Networks". Sélectionnez-le.
