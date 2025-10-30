@@ -91,7 +91,7 @@ image::2025_spring/module-09-networking/48.png[link=self, window=blank, width=10
 
 . Cliquez sur le menu action en haut à droite et sélectionnez *Migration* -> *Compute*.
 +
-image::2025_spring/module-09-networking/49.png[link=self, window=blank, width=100%]
+image::2025_spring/module-09-networking/49.png[link=self, window=blank, width=50%]
 +
 . Observez le statut de la VM. Il passera à *Migrating*, puis reviendra à *Running*. Cela peut prendre une minute.
 
@@ -110,9 +110,9 @@ Vous constaterez que l'adresse IP est **exactement la même**. L'UDN garantit la
 == Micro-segmentation avec les NetworkPolicies
 
 Maintenant, sécurisons nos VMs. Notre objectif :
-1.  Bloquer *tout* le trafic entrant vers `vm-db` par défaut
-2.  Autoriser *uniquement* `vm-web` à se connecter à `vm-db` sur le port `3306` (MySQL).
-3.  Bloquer tous les autres flux (comme SSH ou ICMP/ping) depuis `vm-web`
+. Bloquer *tout* le trafic entrant vers `vm-db` par défaut
+. Autoriser *uniquement* `vm-web` à se connecter à `vm-db` sur le port `3306` (MySQL).
+. Bloquer tous les autres flux (comme SSH ou ICMP/ping) depuis `vm-web`
 
 Nous faisons cela en utilisant des ressources **`NetworkPolicy`** standard de Kubernetes
 
@@ -130,7 +130,7 @@ Ce sont des ressources Kubernetes standard qui peuvent être utilisées pour con
 
 
 . Dans le menu de gauche, cliquez sur *Networking* -> *NetworkPolicies*
-. Assurez-vous d'être dans le bon projet (où se trouvent vos VMs)
+. Assurez-vous d'être dans le bon projet (udn-project-X)
 . Cliquez sur *Create Network Policy*
 
 . **Politique 1 : Deny All**
