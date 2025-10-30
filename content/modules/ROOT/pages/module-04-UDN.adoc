@@ -13,17 +13,22 @@ Un UDN crée un **réseau L2 à plat** qui s'exécute par-dessus l'overlay OpenS
 * **Isolation des flux :** Par défaut, le trafic au sein d'un UDN est complètement isolé. Les ressources connectées à cet UDN ne peuvent communiquer qu'entre elles.
 * **IPAM intégré :** L'UDN gère son propre plan d'adressage IP (IPAM). Il distribue des adresses IP persistantes aux VMs, garantissant qu'une VM conservera la même adresse IP même après une migration ou un redémarrage.
 
-.Illustration du Pod Network et d'un UDN sur le réseau OpenShift
+.Illustration du Pod Network et d'un UDN sur le réseau d'OpenShift
 image::2025_spring/module-09-networking/39.png[link=self, window=blank, width=75%]
 
 == Création d'un User-Defined Network (UDN)
+La création d'un UDN ne se fait pas via une `NetworkAttachmentDefinition` (NAD), mais en combinant deux concepts :
 
-Dans cette approche, nous utilisons les **User-Defined Networks (UDN) natifs d'OVN-Kubernetes**. La création d'un UDN ne se fait pas via une `NetworkAttachmentDefinition` (NAD), mais en combinant deux concepts :
+1.  Un objet `UserDefinedNetwork` qui définit le réseau L2 lui-même.
+2.  Un **label** sur un Namespace (Projet), qui désigne cet UDN comme réseau *primaire* pour ce Namespace.
 
-1.  Un objet `UserDefinedNetwork` (CRD) qui définit le réseau L2 lui-même.
-2.  Un **label** sur un Namespace, qui désigne cet UDN comme réseau *primaire* pour ce Namespace.
+Pour cet exercice, **un namespace lié à un UDN a été créé pour chaque participant.**
 
----
+* Votre namespace de travail est `udn-project-X` (où `X` est votre numéro de participant).
+* Ce namespace est déjà pré-configuré avec le label et l'objet UDN (similaires aux exemples ci-dessous).
+* Par conséquent, toutes les VMs que vous créerez dans `udn-project-X` seront **automatiquement connectées à cet UDN** par défaut (en plus du réseau de Pods).
+
+Observons néanmoins les étape de création d'un UDN.
 
 === Définir l'objet UserDefinedNetwork
 
@@ -68,15 +73,6 @@ $ oc label namespace udn-project-40 \
 <1> Le label `k8s.ovn.org/primary-user-defined-network`...
 <2> ...doit pointer vers le `name` de l'objet UDN créé à l'étape 1.
 
-[IMPORTANT]
-.Configuration Spécifique au Lab
-====
-Pour cet exercice, **un namespace lié à un UDN a été créé pour chaque participant.**
-
-* Votre namespace de travail est `udn-project-X` (où `X` est votre numéro de participant).
-* Ce namespace est déjà pré-configuré avec le label et l'objet UDN (similaires aux exemples ci-dessus).
-* Par conséquent, toutes les VMs que vous créerez dans `udn-project-X` seront **automatiquement connectées à cet UDN** par défaut (en plus du réseau de Pods).
-====
 
 == Création de VMs sur l'UDN
 
