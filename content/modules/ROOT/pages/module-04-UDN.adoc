@@ -51,7 +51,7 @@ image::2025_spring/module-09-networking/43.png[link=self, window=blank, width=80
 [[vm-create]]
 == Création de VMs sur l'UDN
 
-Créons maintenant deux VMs, `vm-web` et `vm-db`, et attachons-les à cet UDN. Nous leur ajoutons également des **labels** (`app: web` et `app: db`) que nous utiliserons plus tard pour les politiques réseau.
+Créons maintenant deux VMs, `vm-web` et `vm-db`, et attachons-les à cet UDN. Nous leur ajoutons également des **labels** (`app: web` et `app: db`) que nous utiliserons plus tard pour les *Network Policies*.
 
 . Dans le menu de navigation de gauche, basculez vers la perspective *Virtualization*.
 . Cliquez sur *Virtualization* -> *VirtualMachines*.
@@ -60,10 +60,12 @@ Créons maintenant deux VMs, `vm-web` et `vm-db`, et attachons-les à cet UDN. N
 image::2025_spring/module-09-networking/44.png[link=self, window=blank, width=100%]
 +
 +
-. Cliquez sur la tuile *Fedora VM* et attribuez le nom *Name:* `fedora-bridged-1`. Cliquez ensuite sur *Customise Machine*:
+. Cliquez sur la tuile *Fedora VM* et attribuez le nom *Name:* `vm-web`. Cliquez ensuite sur *Customise Machine*:
 +
-image::2025_spring/module-09-networking/32.png[link=self, window=blank, width=100%]
+image::2025_spring/module-09-networking/45.png[link=self, window=blank, width=100%]
 +
+
+
 
 
 . Répétez ce processus pour une seconde VM nommée `vm-db`, en utilisant le **label** `app: db`.
