@@ -20,6 +20,9 @@
 ** xref:module-03-vlan-provider.adoc#vm-migration-test[Persistance IP]
 
 * xref:module-04-UDN.adoc[UDN & Microsegmentation]
+** xref:module-04-UDN.adoc#udn-create[Création d'un UDN]
+** xref:module-04-UDN.adoc#vm-create[Créer des VMs relier a l'UDN]
+** xref:module-04-UDN.adoc#np-create[Network Policies]
 
 * xref:module-07-veeam.adoc[Backup restore avec Veeam Kasten]
 

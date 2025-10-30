@@ -16,6 +16,7 @@ Un UDN crée un **réseau L2 à plat** qui s'exécute par-dessus l'overlay OpenS
 .Illustration du Pod Network et d'un UDN sur le réseau d'OpenShift
 image::2025_spring/module-09-networking/39.png[link=self, window=blank, width=75%]
 
+[[udn-create]]
 == Création d'un User-Defined Network (UDN)
 La création d'un UDN ne se fait pas via une `NetworkAttachmentDefinition` (NAD), mais via la creation d'un objet `UserDefinedNetwork` qui définit le réseau L2 lui-même.
 
@@ -47,7 +48,7 @@ image::2025_spring/module-09-networking/43.png[link=self, window=blank, width=80
     * L'utilisation de l'IMPAM, qui garantit que les adresses IP des VMs seront persistantes
 ---
 
-
+[[vm-create]]
 == Création de VMs sur l'UDN
 
 Créons maintenant deux VMs, `vm-web` et `vm-db`, et attachons-les à cet UDN. Nous leur ajoutons également des **labels** (`app: web` et `app: db`) que nous utiliserons plus tard pour les politiques réseau.
@@ -130,6 +131,8 @@ $ oc get vmi vm-db -o jsonpath='{.status.interfaces[?(@.name=="udn-backend")].ip
 +
 Vous constaterez que l'adresse IP est **exactement la même**. L'UDN garantit la persistance de l'IP, ce qui est essentiel pour les services de base de données ou les applications qui dépendent d'IP stables.
 
+
+[[np-create]]
 == Micro-segmentation avec les NetworkPolicies
 
 Maintenant, sécurisons nos VMs. Notre objectif :
