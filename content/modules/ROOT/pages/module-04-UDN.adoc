@@ -79,11 +79,11 @@ image::2025_spring/module-09-networking/47.png[link=self, window=blank, width=10
 Nous avons désomait deux VMs dans notre namespace *udn-project-X*, `vm-web` et `vm-db`, que nous allons utilisez pour verifier la *persistance des IP* sur un UDN puis pour tester les *Network Policies*.
 Démarrons par la vérifions de la persistance des IP.
 
-. Dans la liste *Virtualization* -> *VirtualMachines*, localisez votre VM `vm-db1`
-. Notez les addresses IP affichée dans la partie Network de l'Overview.
+. Dans la liste *Virtualization* -> *VirtualMachines*, localisez votre VM `vm-db`
+. Notez l'addresses IP affichée dans la partie Network de l'Overview. C'est une IP qui à été dédiée a cette machine par l'IPAM de notre UDN.
 
 +
-image::2025_spring/module-09-networking/36.png[link=self, window=blank, width=100%]
+image::2025_spring/module-09-networking/48.png[link=self, window=blank, width=100%]
 +
 
 
@@ -91,7 +91,7 @@ image::2025_spring/module-09-networking/36.png[link=self, window=blank, width=10
 
 . Cliquez sur le menu action en haut à droite et sélectionnez *Migration* -> *Compute*.
 +
-image::2025_spring/module-09-networking/38.png[link=self, window=blank, width=100%]
+image::2025_spring/module-09-networking/49.png[link=self, window=blank, width=100%]
 +
 . Observez le statut de la VM. Il passera à *Migrating*, puis reviendra à *Running*. Cela peut prendre une minute.
 
@@ -101,7 +101,7 @@ image::2025_spring/module-09-networking/38.png[link=self, window=blank, width=10
 . Constatez que l'adresse IP du pod network a changé. C'est la nouvelle IP du Pod Network sur le nouveau nœud.
 . IP attribuée pour le réseau externe, elle, n'a pas changé.
 +
-image::2025_spring/module-09-networking/36.png[link=self, window=blank, width=100%]
+image::2025_spring/module-09-networking/48.png[link=self, window=blank, width=100%]
 +
 
 Vous constaterez que l'adresse IP est **exactement la même**. L'UDN garantit la persistance de l'IP, ce qui est essentiel pour les services de base de données ou les applications qui dépendent d'IP stables.
