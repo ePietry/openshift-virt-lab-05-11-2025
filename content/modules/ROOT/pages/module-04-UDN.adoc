@@ -40,11 +40,11 @@ image::2025_spring/module-09-networking/43.png[link=self, window=blank, width=80
 +
 
 . Nous pouvons notamment observer :
-    * Le nom de cet objet UDN.
+    * Le nom de l'UDN
     * Le Namespace où l'UDN va être l'utilisé
-    * La topologie Définit : L2 à plat (un simple switch).
-    * L'indication que ce réseau est conçu pour être un réseau "primaire" (par opposition à un réseau secondaire).
-    * L'utilisation de l'IMPAM, qui garantit que les adresses IP des VMs/Pods seront persistantes.
+    * La topologie définit : L2 à plat (un simple switch)
+    * L'indication que ce réseau est conçu pour être un réseau "primaire" (il vient donc remplacer le Pod Network)
+    * L'utilisation de l'IMPAM, qui garantit que les adresses IP des VMs seront persistantes
 ---
 
 
