@@ -64,48 +64,46 @@ image::2025_spring/module-09-networking/44.png[link=self, window=blank, width=10
 +
 image::2025_spring/module-09-networking/45.png[link=self, window=blank, width=100%]
 +
-. Sélectionnez l'onglet *Meta Data*
+. Sélectionnez l'onglet *MetaData*
 +
 image::2025_spring/module-09-networking/46.png[link=self, window=blank, width=100%]
 +
-. Et ajoutez le label `app=web`
+. Et ajoutez le label `app=web` puis lancez la création de la machine
 +
 image::2025_spring/module-09-networking/47.png[link=self, window=blank, width=100%]
 +
 
-
 . Répétez ce processus pour une seconde VM nommée `vm-db`, en utilisant le **label** `app=db`
 
 == Vérification de la Persistance d'IP (Live Migration)
+Nous avons désomait deux VMs dans notre namespace *udn-project-X*, `vm-web` et `vm-db`, que nous allons utilisez pour verifier la *persistance des IP* sur un UDN puis pour tester les *Network Policies*.
+Démarrons par la vérifions de la persistance des IP.
 
-Démarrons `vm-db` et vérifions son IP. Ensuite, effectuons une **Live Migration** pour prouver que l'IP ne change pas.
+. Dans la liste *Virtualization* -> *VirtualMachines*, localisez votre VM `vm-db1`
+. Notez les addresses IP affichée dans la partie Network de l'Overview.
 
-. Démarrez la VM `vm-db`.
-. Une fois démarrée, vérifiez l'IP qui lui a été attribuée par l'UDN depuis la CLI :
 +
-[source,bash]
-----
-$ oc get vmi vm-db -o jsonpath='{.status.interfaces[?(@.name=="udn-backend")].ipAddress}'
-192.168.200.12 <1>
-----
-<1> Notez cette IP (par ex. `192.168.200.12`).
+image::2025_spring/module-09-networking/36.png[link=self, window=blank, width=100%]
 +
-. Maintenant, lancez une **Live Migration** de la VM :
+
+
+=== Lancer la Migration à Chaud
+
+. Cliquez sur le menu action en haut à droite et sélectionnez *Migration* -> *Compute*.
 +
-[source,bash]
-----
-$ virtctl migrate vm-db
-----
+image::2025_spring/module-09-networking/38.png[link=self, window=blank, width=100%]
 +
-. Vous pouvez observer la migration dans l'onglet *Events* de la VM. Une fois terminée, la VM s'exécute sur un nœud worker différent.
-. Vérifions à nouveau son adresse IP :
+. Observez le statut de la VM. Il passera à *Migrating*, puis reviendra à *Running*. Cela peut prendre une minute.
+
+=== Vérifier l'état post-migration
+
+. Une fois la VM revenue à l'état *Running*, vérifiez à nouveau les addresses IP affichée dans la partie Network de l'Overview.
+. Constatez que l'adresse IP du pod network a changé. C'est la nouvelle IP du Pod Network sur le nouveau nœud.
+. IP attribuée pour le réseau externe, elle, n'a pas changé.
 +
-[source,bash]
-----
-$ oc get vmi vm-db -o jsonpath='{.status.interfaces[?(@.name=="udn-backend")].ipAddress}'
-192.168.200.12
-----
+image::2025_spring/module-09-networking/36.png[link=self, window=blank, width=100%]
 +
+
 Vous constaterez que l'adresse IP est **exactement la même**. L'UDN garantit la persistance de l'IP, ce qui est essentiel pour les services de base de données ou les applications qui dépendent d'IP stables.
 
 
@@ -113,11 +111,11 @@ Vous constaterez que l'adresse IP est **exactement la même**. L'UDN garantit la
 == Micro-segmentation avec les NetworkPolicies
 
 Maintenant, sécurisons nos VMs. Notre objectif :
-1.  Bloquer *tout* le trafic entrant vers `vm-db` par défaut.
+1.  Bloquer *tout* le trafic entrant vers `vm-db` par défaut
 2.  Autoriser *uniquement* `vm-web` à se connecter à `vm-db` sur le port `3306` (MySQL).
-3.  Bloquer tous les autres flux (comme SSH ou ICMP/ping) depuis `vm-web`.
+3.  Bloquer tous les autres flux (comme SSH ou ICMP/ping) depuis `vm-web`
 
-Nous faisons cela en utilisant des ressources **`NetworkPolicy`** standard de Kubernetes.
+Nous faisons cela en utilisant des ressources **`NetworkPolicy`** standard de Kubernetes
 
 [IMPORTANT]
 ====
@@ -132,9 +130,9 @@ Ce sont des ressources Kubernetes standard qui peuvent être utilisées pour con
 
 
 
-. Dans le menu de gauche, cliquez sur *Networking* -> *NetworkPolicies*.
-. Assurez-vous d'être dans le bon projet (où se trouvent vos VMs).
-. Cliquez sur *Create Network Policy*.
+. Dans le menu de gauche, cliquez sur *Networking* -> *NetworkPolicies*
+. Assurez-vous d'être dans le bon projet (où se trouvent vos VMs)
+. Cliquez sur *Create Network Policy*
 
 . **Politique 1 : Deny All**
 +
