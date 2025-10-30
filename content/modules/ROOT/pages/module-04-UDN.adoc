@@ -55,52 +55,16 @@ Créons maintenant deux VMs, `vm-web` et `vm-db`, et attachons-les à cet UDN. N
 
 . Dans le menu de navigation de gauche, basculez vers la perspective *Virtualization*.
 . Cliquez sur *Virtualization* -> *VirtualMachines*.
-. Assurez-vous d'être dans le projet *udn-projet-X* et cliquez sur Create → From Template
+. Assurez-vous d'être dans le projet *udn-projet-X* et cliquez sur *Create → From Template*
 +
 image::2025_spring/module-09-networking/44.png[link=self, window=blank, width=100%]
 +
-. Créez une nouvelle `VirtualMachine` (par ex. `vm-web`).
-. Dans l'onglet *Networking* de l'assistant, cliquez sur *Add Network Interface*.
-. Dans la modale, pour le champ *Network*, vous verrez maintenant votre UDN `udn-backend` listé sous la section "User-Defined Networks". Sélectionnez-le.
 +
-image::module-03-udn/01-vm-select-udn.png[title="Sélection d'un UDN lors de la création de la VM", link=self, window=blank, width=100%]
+. Cliquez sur la tuile *Fedora VM* et attribuez le nom *Name:* `fedora-bridged-1`. Cliquez ensuite sur *Customise Machine*:
 +
-. Cliquez sur *Add*.
-. Dans l'onglet *YAML*, ajoutez les **labels** `app: web` au pod de la VM, sous `spec.template.metadata.labels`:
+image::2025_spring/module-09-networking/32.png[link=self, window=blank, width=100%]
++
 
-[source,yaml]
-----
-apiVersion: kubevirt.io/v1
-kind: VirtualMachine
-metadata:
-  name: vm-web
-  labels:
-    app: web <1>
-spec:
-  template:
-    metadata:
-      labels:
-        app: web <1>
-...
-    spec:
-      domain:
-...
-      networks:
-        - name: default
-          pod: {}
-        - name: udn-backend
-          network:
-            kind: Network
-            name: udn-backend <2>
-      interfaces:
-        - name: default
-          masquerade: {}
-        - name: udn-backend
-          bridge: {}
-          model: virtio
-----
-<1> Ces **labels** sont cruciaux pour la micro-segmentation.
-<2> Notez que nous lions au `kind: Network` (l'UDN) et non à une NAD.
 
 . Répétez ce processus pour une seconde VM nommée `vm-db`, en utilisant le **label** `app: db`.
 
