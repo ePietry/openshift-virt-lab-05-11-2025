@@ -51,7 +51,7 @@ image::2025_spring/module-09-networking/43.png[link=self, window=blank, width=80
 [[vm-create]]
 == Création de VMs sur l'UDN
 
-Créons maintenant deux VMs, `vm-web` et `vm-db`, et attachons-les à cet UDN. Nous leur ajoutons également des **labels** (`app: web` et `app: db`) que nous utiliserons plus tard pour les *Network Policies*.
+Créons maintenant deux VMs, `vm-web` et `vm-db`, et attachons-les à cet UDN. Nous leur ajoutons également des **labels** (`app=web` et `app=db`) que nous utiliserons plus tard pour les *Network Policies*.
 
 . Dans le menu de navigation de gauche, basculez vers la perspective *Virtualization*.
 . Cliquez sur *Virtualization* -> *VirtualMachines*.
@@ -74,7 +74,7 @@ image::2025_spring/module-09-networking/47.png[link=self, window=blank, width=10
 +
 
 
-. Répétez ce processus pour une seconde VM nommée `vm-db`, en utilisant le **label** `app: db`.
+. Répétez ce processus pour une seconde VM nommée `vm-db`, en utilisant le **label** `app=db`
 
 == Vérification de la Persistance d'IP (Live Migration)
 
