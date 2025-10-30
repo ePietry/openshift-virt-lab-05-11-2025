@@ -19,7 +19,7 @@ Un UDN crée un **réseau L2 à plat** qui s'exécute par-dessus l'overlay OpenS
 
 Durant cette partie du lab, nous n'allons pas seulement créer un UDN. Nous allons également mettre en place des **Network Policies** pour aller plus loin dans la segmentation de notre réseau.
 
-[IMPORTANT]
+[Note]
 ====
 Il est crucial de comprendre que les **Network Policies ne sont pas spécifiques aux UDN**.
 
