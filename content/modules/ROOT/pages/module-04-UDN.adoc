@@ -13,26 +13,7 @@ Un UDN crée un **réseau L2 à plat** qui s'exécute par-dessus l'overlay OpenS
 * **Isolation des flux :** Par défaut, le trafic au sein d'un UDN est complètement isolé. Les ressources connectées à cet UDN ne peuvent communiquer qu'entre elles.
 * **IPAM intégré :** L'UDN gère son propre plan d'adressage IP (IPAM). Il distribue des adresses IP persistantes aux VMs, garantissant qu'une VM conservera la même adresse IP même après une migration ou un redémarrage.
 
----
-
-=== Objectif du Lab
-
-Durant cette partie du lab, nous n'allons pas seulement créer un UDN. Nous allons également mettre en place des **Network Policies** pour aller plus loin dans la segmentation de notre réseau.
-
-[Note]
-====
-Il est crucial de comprendre que les **Network Policies ne sont pas spécifiques aux UDN**.
-
-Ce sont des ressources Kubernetes standard qui peuvent être utilisées pour contrôler les flux sur n'importe quel réseau géré par OpenShift, y compris :
-
-.   Le SDN OpenShift par défaut (le Pod Network).
-.   Les bridges OVS créés par une `NodeNetworkConfigurationPolicy` (NNCP)
-.   Et, bien sûr, les UDN que nous nous apprêtons à créer.
-====
-
-Voyons comment mettre cela en place.
-
-=== 1. Création d'un User-Defined Network (UDN)
+=== Création d'un User-Defined Network (UDN)
 
 Dans cette approche, nous utilisons les **User-Defined Networks (UDN) natifs d'OVN-Kubernetes**. La création d'un UDN ne se fait pas via une `NetworkAttachmentDefinition` (NAD), mais en combinant deux concepts :
 
@@ -41,11 +22,11 @@ Dans cette approche, nous utilisons les **User-Defined Networks (UDN) natifs d'O
 
 ---
 
-==== 1 : Définir l'objet UserDefinedNetwork
+==== Définir l'objet UserDefinedNetwork
 
 D'abord, l'administrateur crée un objet `UserDefinedNetwork` dans le namespace où il sera utilisé. Cet objet définit le nom du réseau, sa topologie (L2) et la gestion des adresses IP (IPAM).
 
-.Exemple de YAML pour un UDN
+.Exemple de Configuration pour un UDN
 [source,yaml]
 ----
 apiVersion: k8s.ovn.org/v1
@@ -69,8 +50,8 @@ spec:
 <5> Garantit que les adresses IP des VMs/Pods seront persistantes.
 
 ---
-
-==== 2 : Lier le Namespace à l'UDN
++
+==== Lier le Namespace à l'UDN
 
 Une fois l'objet UDN créé, il faut dire au Namespace de l'utiliser comme réseau primaire par défaut. Cela se fait en appliquant un label spécifique au Namespace.
 
@@ -87,7 +68,7 @@ $ oc label namespace udn-project-40 \
 ---
 
 [IMPORTANT]
-.Configuration Spécifique au Laboratoire
+.Configuration Spécifique au Lab
 ====
 Pour cet exercice, **un namespace lié à un UDN a été créé pour chaque participant.**
 
@@ -96,7 +77,7 @@ Pour cet exercice, **un namespace lié à un UDN a été créé pour chaque part
 * Par conséquent, toutes les VMs que vous créerez dans `udn-project-X` seront **automatiquement connectées à cet UDN** par défaut (en plus du réseau de Pods).
 ====
 
-=== 3. Création de VMs sur l'UDN
+=== Création de VMs sur l'UDN
 
 Créons maintenant deux VMs, `vm-web` et `vm-db`, et attachons-les à cet UDN. Nous leur ajoutons également des **labels** (`app: web` et `app: db`) que nous utiliserons plus tard pour les politiques réseau.
 
@@ -178,7 +159,7 @@ $ oc get vmi vm-db -o jsonpath='{.status.interfaces[?(@.name=="udn-backend")].ip
 +
 Vous constaterez que l'adresse IP est **exactement la même**. L'UDN garantit la persistance de l'IP, ce qui est essentiel pour les services de base de données ou les applications qui dépendent d'IP stables.
 
-=== 4. Micro-segmentation avec les NetworkPolicies
+=== Micro-segmentation avec les NetworkPolicies
 
 Maintenant, sécurisons nos VMs. Notre objectif :
 1.  Bloquer *tout* le trafic entrant vers `vm-db` par défaut.
@@ -186,6 +167,19 @@ Maintenant, sécurisons nos VMs. Notre objectif :
 3.  Bloquer tous les autres flux (comme SSH ou ICMP/ping) depuis `vm-web`.
 
 Nous faisons cela en utilisant des ressources **`NetworkPolicy`** standard de Kubernetes.
+
+[IMPORTANT]
+====
+Il est crucial de comprendre que les **Network Policies ne sont pas spécifiques aux UDN**.
+
+Ce sont des ressources Kubernetes standard qui peuvent être utilisées pour contrôler les flux sur n'importe quel réseau géré par OpenShift, y compris :
+
+.   Le SDN OpenShift par défaut (le Pod Network).
+.   Les bridges OVS créés par une `NodeNetworkConfigurationPolicy` (NNCP)
+.   Et, bien sûr, les UDN que nous nous apprêtons à créer.
+====
+
+
 
 . Dans le menu de gauche, cliquez sur *Networking* -> *NetworkPolicies*.
 . Assurez-vous d'être dans le bon projet (où se trouvent vos VMs).
@@ -274,4 +268,3 @@ Connection to 192.168.200.12 3306 port [tcp/mysql] succeeded!
 *Résultat :* Succès. La connexion est établie car elle correspond parfaitement à notre **`NetworkPolicy`** `allow-web-to-db`.
 
 Vous avez maintenant mis en place une micro-segmentation granulaire entre vos VMs, en plus de leur fournir des adresses IP persistantes gérées par le cluster, le tout grâce aux UDN.
-```
