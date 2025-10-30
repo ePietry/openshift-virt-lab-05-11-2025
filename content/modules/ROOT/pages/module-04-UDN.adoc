@@ -97,9 +97,8 @@ image::2025_spring/module-09-networking/49.png[link=self, window=blank, width=10
 
 === Vérifier l'état post-migration
 
-. Une fois la VM revenue à l'état *Running*, vérifiez à nouveau les addresses IP affichée dans la partie Network de l'Overview.
-. Constatez que l'adresse IP du pod network a changé. C'est la nouvelle IP du Pod Network sur le nouveau nœud.
-. IP attribuée pour le réseau externe, elle, n'a pas changé.
+. Une fois la VM revenue à l'état *Running*, vérifiez à nouveau l'addresse IP affichée dans la partie Network de l'Overview.
+. L'adresse IP de la VM n'a pas changé. C'est IP est lié à cette VM et ne chagera pas malgré les lives migrations ou les redémarrages.
 +
 image::2025_spring/module-09-networking/48.png[link=self, window=blank, width=100%]
 +
