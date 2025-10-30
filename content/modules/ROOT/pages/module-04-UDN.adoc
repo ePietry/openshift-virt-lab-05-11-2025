@@ -22,11 +22,14 @@ La création d'un UDN ne se fait pas via une `NetworkAttachmentDefinition` (NAD)
 1.  Un objet `UserDefinedNetwork` qui définit le réseau L2 lui-même.
 2.  Un **label** sur un Namespace (Projet), qui désigne cet UDN comme réseau *primaire* pour ce Namespace.
 
+[IMPORTANT]
+====
 Pour cet exercice, **un namespace lié à un UDN a été créé pour chaque participant.**
 
 * Votre namespace de travail est `udn-project-X` (où `X` est votre numéro de participant).
 * Ce namespace est déjà pré-configuré avec le label et l'objet UDN (similaires aux exemples ci-dessous).
 * Par conséquent, toutes les VMs que vous créerez dans `udn-project-X` seront **automatiquement connectées à cet UDN** par défaut (en plus du réseau de Pods).
+====
 
 Observons néanmoins les étape de création d'un UDN.
 
