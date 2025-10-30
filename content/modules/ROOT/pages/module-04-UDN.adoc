@@ -13,6 +13,8 @@ Un UDN crée un **réseau L2 à plat** qui s'exécute par-dessus l'overlay OpenS
 * **Isolation des flux :** Par défaut, le trafic au sein d'un UDN est complètement isolé. Les ressources connectées à cet UDN ne peuvent communiquer qu'entre elles.
 * **IPAM intégré :** L'UDN gère son propre plan d'adressage IP (IPAM). Il distribue des adresses IP persistantes aux VMs, garantissant qu'une VM conservera la même adresse IP même après une migration ou un redémarrage.
 
+image::2025_spring/module-09-networking/39.png[link=self, window=blank, width=100%]
+
 == Création d'un User-Defined Network (UDN)
 
 Dans cette approche, nous utilisons les **User-Defined Networks (UDN) natifs d'OVN-Kubernetes**. La création d'un UDN ne se fait pas via une `NetworkAttachmentDefinition` (NAD), mais en combinant deux concepts :
@@ -22,7 +24,7 @@ Dans cette approche, nous utilisons les **User-Defined Networks (UDN) natifs d'O
 
 ---
 
-== Définir l'objet UserDefinedNetwork
+=== Définir l'objet UserDefinedNetwork
 
 D'abord, l'administrateur crée un objet `UserDefinedNetwork` dans le namespace où il sera utilisé. Cet objet définit le nom du réseau, sa topologie (L2) et la gestion des adresses IP (IPAM).
 
@@ -51,7 +53,7 @@ spec:
 
 ---
 
-== Lier le Namespace à l'UDN
+=== Lier le Namespace à l'UDN
 
 Une fois l'objet UDN créé, il faut dire au Namespace de l'utiliser comme réseau primaire par défaut. Cela se fait en appliquant un label spécifique au Namespace.
 
@@ -64,8 +66,6 @@ $ oc label namespace udn-project-40 \
 
 <1> Le label `k8s.ovn.org/primary-user-defined-network`...
 <2> ...doit pointer vers le `name` de l'objet UDN créé à l'étape 1.
-
----
 
 [IMPORTANT]
 .Configuration Spécifique au Lab
