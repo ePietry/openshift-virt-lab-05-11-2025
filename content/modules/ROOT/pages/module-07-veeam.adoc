@@ -1,197 +1,181 @@
-= Disaster Recovery for Virtual Machines with Kasten K10
+Voici une proposition pour la nouvelle partie de l'atelier, rédigée en format `.adoc` en suivant le style de votre document existant.
+
+```asciidoc
+= Sauvegarde et Restauration de VM avec Veeam Kasten
 
 == Introduction
 
-In this workshop, we've explored performance, networking, and high availability. But *availability* (keeping the service online) is different from *data protection* (keeping the data safe). What happens if an administrator accidentally deletes the *entire project*? Or if data inside a VM becomes corrupted and you need to roll back to yesterday's copy?
+Dans un environnement de production, la capacité à sauvegarder et restaurer rapidement des machines virtuelles est cruciale. OpenShift Virtualization, étant *cloud-native*, s'intègre avec des solutions de protection de données modernes comme *Veeam Kasten K10*.
 
-This is where Disaster Recovery (DR) and backup solutions become critical. OpenShift Virtualization workloads are complex, consisting of a VirtualMachine definition, a DataVolume, a PersistentVolumeClaim (PVC), and the underlying data. We need a solution that understands and can back up all these components as a single, consistent application.
+Kasten traite les applications, y compris les VM, comme une unité atomique, sauvegardant non seulement les disques (PVCs) mais aussi la configuration (les objets Kubernetes/OpenShift qui définissent la VM).
 
-In this final module, you will learn how to use **Kasten K10 by Veeam**, a leading Kubernetes data protection platform, to back up and restore an entire Virtual Machine application. You will create a VM with unique data, back it up, simulate a total disaster by deleting the project, and then restore the VM and its data from scratch.
+Dans ce module, nous allons :
+* Créer une VM de test et y ajouter un fichier.
+* Sauvegarder cette VM à l'aide d'une politique Kasten.
+* Simuler un sinistre en supprimant la VM.
+* Restaurer la VM à partir de la sauvegarde.
+* Vérifier que la VM est revenue à son état précédent, y compris le fichier de test.
 
-== Credentials for the Red Hat OpenShift Console
+== Préparation de la Machine Virtuelle de Test
 
-Your OpenShift cluster console is available {openshift_cluster_console_url}[here^].
+Pour tester le cycle de vie de la sauvegarde et de la restauration, nous avons besoin d'une VM avec un état spécifique (un fichier de test).
 
-Your local admin login is available with the following credentials:
+. Naviguez vers la vue *Virtualization*. Assurez-vous d'être dans votre *project* (`projet-X`).
 
-* *User:* `{openshift_cluster_admin_username}`
-* *Password:* `{openshift_cluster_admin_password}`
+. Cliquez sur *Create VirtualMachine* et sélectionnez *From template*.
 
-You will first see a page that asks you to choose an authentication provider, click on *htpasswd_provider*.
-
-image::module-05-kasten/00-htpasswd_login.png[title="OpenShift Authentication", link=self, window=blank, width=100%]
-
-You will then be presented with a login screen where you can copy/paste your credentials.
-
-image::module-05-kasten/01-openshift_login.png[title="OpenShift Login", link=self, window=blank, width=100%]
-
-[[access-kasten]]
-== Accessing the Kasten K10 Dashboard
-
-First, let's log in to the Kasten K10 dashboard, which is running as an application on our OpenShift cluster.
-
-. In the *Administrator* perspective of the OpenShift console, use the *Project* dropdown to select the `kasten-io` project.
-. In the left navigation menu, click on *Networking* -> *Routes*.
-. You will see a Route named `k10-dashboard`. Click on the URL in the *Location* column.
+. Sélectionnez le *template* *Fedora VM* (comme dans le premier module).
 +
-image::module-05-kasten/02-kasten-route.png[title="Kasten Dashboard Route", link=self, window=blank, width=100%]
-+
-. A new tab will open. Kasten is integrated with OpenShift's authentication. Click the **Log in with OpenShift** button.
-+
-image::module-05-kasten/03-kasten-login.png[title="Kasten Login Screen", link=self, window=blank, width=100%]
-+
-. You will be asked to authorize the Kasten service account. Click *Allow selected permissions*.
-. You are now at the main Kasten K10 Dashboard. This is your command center for all backup and restore operations.
-+
-image::module-05-kasten/04-kasten-dashboard.png[title="Kasten K10 Dashboard", link=self, window=blank, width=100%]
+image::2025_spring/module-08-kasten/01_select_fedora.png[link=self, window=blank, width=100%]
 
-[[create-vm-dr]]
-== Create and Populate the Target VM
+. Changez le nom en **fedora-kasten-test** et cliquez sur *Quick create VirtualMachine*.
 
-We need a VM with some "critical data" to back up.
+. Attendez que la VM passe au statut *Running*.
 
-. Back in the OpenShift console, create a new project. Click *Projects* -> *Create Project*.
-. *Name:* `dr-test`
-. Click *Create*.
-. Switch to the *Virtualization* perspective.
-. Go to *Virtualization* -> *VirtualMachines* and make sure the `dr-test` project is selected.
-. Create a new VM:
-    * *Name:* `critical-db-vm`
-    * *Operating System:* Select a *Fedora* image.
-    * *Flavor:* `tiny`
-. Click *Create VirtualMachine* and wait for it to start and enter the *Running* state.
-. Once running, click on `critical-db-vm` and go to the *Console* tab.
-. Log in to the VM (e.g., user `fedora`, no password).
-. Now, let's create our "critical data" file. This file is our proof that the data itself is being backed up.
+. Sélectionnez la VM *fedora-kasten-test* et cliquez sur l'onglet *Console*.
+
+. Connectez-vous à la VM en utilisant les *Guest login credentials* fournis.
+
+. Une fois connecté, créez un fichier de test vide à la racine du répertoire personnel de l'utilisateur.
 +
 [source,sh,role=execute]
 ----
-echo "My Secret Database Password" > /home/fedora/secret-file.txt
+touch test.txt
 ----
-+
-. Verify the file was created.
+
+. Vérifiez que le fichier existe bien en listant le contenu du répertoire.
 +
 [source,sh,role=execute]
 ----
-cat /home/fedora/secret-file.txt
+ls
 ----
 +
-. You should see the output `My Secret Database Password`.
-. You can now log out of the console. Our VM is running and contains unique data.
-
-[[create-backup-policy]]
-== Create a Backup Policy in Kasten
-
-Now, let's instruct Kasten to back up our new `dr-test` application.
-
-. Switch back to your Kasten K10 Dashboard browser tab.
-. Click on *Applications* in the left menu. Kasten automatically discovers applications (namespaces).
-. You should see `dr-test` in the list. Click on it.
+Vous devriez voir `test.txt` apparaître dans la liste. Laissez cette VM en cours d'exécution.
 +
-image::module-05-kasten/05-kasten-apps-list.png[title="Kasten Applications", link=self, window=blank, width=100%]
+image::2025_spring/module-08-kasten/02_touch_file.png[link=self, window=blank, width=100%]
+
+== Accès à la Console Kasten K10
+
+La console Kasten est l'interface web où nous gérerons les politiques de sauvegarde et les actions de restauration.
+
+. Dans la console OpenShift, passez à la vue *Administrator*.
+
+. Dans le menu de gauche, naviguez vers *Networking* -> *Routes*.
+
+. Assurez-vous que le *Project* sélectionné est **kasten-io** (ou le projet où Kasten est installé dans votre lab).
+
+. Vous devriez voir une route nommée *k10-dashboard* (ou similaire). Cliquez sur l'URL dans la colonne *Location*.
 +
-. The dashboard will show all the resources in this namespace, including our VM and its DataVolume.
-. Click the *Create a Policy* button.
-. Fill out the form:
-    * *Name:* `dr-test-daily-backup`
-    * *Action:* `Backup` (this is the default).
-    * *Backup Frequency:* `Daily` (Kasten will automatically select a time).
-    * *Location Profile:* A backup location (e.g., `s3-storage-profile`) should already be configured for you.
-. Click *Create Policy*.
+image::2025_spring/module-08-kasten/03_kasten_route.png[link=self, window=blank, width=100%]
 
-[[run-backup]]
-== Run the Backup Manually
+. Une nouvelle fenêtre s'ouvrira avec le tableau de bord Kasten K10. Il se peut qu'on vous demande de vous authentifier (généralement via OpenShift).
 
-The policy is set to run daily, but we want a backup *now*.
+== Création et Exécution d'une Politique de Sauvegarde
 
-. You will be on the *Policies* page. Find your `dr-test-daily-backup` policy.
-. Click the *Run Once* button (the "play" icon) on the far right of its row.
-. A dialog will pop up. Click the *Run* button.
+Nous allons maintenant créer une "politique" (Policy) qui dit à Kasten quoi sauvegarder et comment.
+
+. Dans le tableau de bord Kasten, cliquez sur *Policies* dans la barre de navigation.
+
+. Cliquez sur le bouton *Create New Policy*.
+
+. Remplissez le formulaire pour notre politique de sauvegarde :
+    * *Name:* `backup-vm-projet-x`
+    * *Action:* Laissez à *Snapshot*.
+    * Laissez les autres options par défaut (Fréquence, etc.).
+    * Dans la section *Select Applications*, choisissez *By Name*.
+    * Dans le *dropdown* *Applications*, trouvez et sélectionnez **fedora-kasten-test**. (Kasten voit la VM comme une "Application").
 +
-image::module-05-kasten/06-kasten-run-policy.png[title="Run Kasten Policy", link=self, window=blank, width=100%]
-+
-. Go to the main *Dashboard* by clicking the Kasten logo in the top left.
-. You will see your backup job running in the *Activity* panel.
-. Wait for the `Backup` job to show the status *Succeeded*. This may take a few minutes as it copies the VM's disk data (a snapshot) to the S3 backup location.
-+
-image::module-05-kasten/07-kasten-backup-succeeded.png[title="Kasten Backup Succeeded", link=self, window=blank, width=100%]
-+
-. We now have a secure, application-consistent backup of our VM and its data, stored *externally* from the cluster.
+image::2025_spring/module-08-kasten/04_kasten_policy.png[link=self, window=blank, width=100%]
 
-[[simulate-disaster]]
-== Simulate a Total Disaster
+. Cliquez sur *Create Policy*.
 
-Now, let's perform the ultimate "oops" and delete the *entire project*.
-
-. Return to the *OpenShift Console* tab.
-. Switch to the *Administrator* perspective.
-. Go to *Home* -> *Projects*.
-. Find the `dr-test` project.
-. Click the *Kebab menu (⋮)* on the far right of its row, and select *Delete Project*.
+. La politique est maintenant créée, mais elle n'a pas encore été exécutée. Sur la ligne de votre nouvelle politique (`backup-vm-projet-x`), cliquez sur l'icône *Run Once* (l'icône "play").
 +
-image::module-05-kasten/08-openshift-delete-project.png[title="Delete Project", link=self, window=blank, width=100%]
+image::2025_spring/module-08-kasten/05_kasten_run_once.png[link=self, window=blank, width=100%]
+
+. Confirmez en cliquant sur *Run Policy* dans la fenêtre contextuelle.
+
+. Cliquez sur *Dashboard* dans le menu principal de Kasten. Vous verrez un job de sauvegarde en cours (*Running*). Attendez quelques instants jusqu'à ce que le statut du job passe à *Succeeded*.
 +
-. A confirmation box will appear. Type `dr-test` to confirm.
-. Click *Delete*.
-. The project will change to `Terminating` and then disappear from the list.
-. Our VM, its disk (PVC), its console, and our "secret file" are all *gone*.
+image::2025_spring/module-08-kasten/06_kasten_backup_success.png[link=self, window=blank, width=100%]
 
-[[restore-vm]]
-== Restore the Application from Backup
+. Notre VM est maintenant sauvegardée.
 
-Time to see if Kasten can save the day.
+== Simulation d'un Sinistre (Suppression de la VM)
 
-. Go back to the *Kasten K10 Dashboard*.
-. Click on *Applications* in the left menu.
-. The `dr-test` application will still be listed, but will have a *Removed* status.
-. Click on `dr-test`.
-. You will see a list of *Restore Points*. We have the one we just created.
-. Click the *Restore* icon on the right of that restore point.
+Il est temps de simuler une suppression accidentelle de notre machine virtuelle.
+
+. Retournez à la console OpenShift et à la vue *Virtualization*.
+
+. Assurez-vous d'être dans votre *project* (`projet-X`).
+
+. Sélectionnez la VM *fedora-kasten-test*.
+
+. Cliquez sur le menu *Actions* (dans le coin supérieur droit) et sélectionnez *Delete VirtualMachine*.
 +
-image::module-05-kasten/09-kasten-restore-point.png[title="Kasten Restore Point", link=self, window=blank, width=100%]
-+
-. The *Restore Application* dialog will appear.
-. We want to restore everything to its original place. Kasten is smart enough to know it needs to re-create the `dr-test` namespace.
-. Leave all defaults and click the *Restore* button at the bottom.
-+
-image::module-05-kasten/10-kasten-restore-dialog.png[title="Kasten Restore Dialog", link=self, window=blank, width=100%]
-+
-. You will be taken to the *Dashboard*, where you can see the `Restore` job in the *Activity* panel.
-. Wait for the job to show the status *Succeeded*.
+image::2025_spring/module-08-kasten/07_delete_vm.png[link=self, window=blank, width=100%]
 
-[[verify-restore]]
-== Verify the VM and its Data
+. Confirmez la suppression en tapant le nom de la VM et en cliquant sur *Delete*.
 
-The Kasten dashboard says the restore is complete. Let's verify.
+. Attendez que la VM disparaisse de la liste. Notre VM et son fichier `test.txt` ont disparu.
 
-. Go back to the *OpenShift Console*.
-. Go to *Home* -> *Projects*.
-. Look! The `dr-test` project has reappeared!
-. Click on the `dr-test` project.
-. Switch to the *Virtualization* perspective.
-. Go to *Virtualization* -> *VirtualMachines*.
-. You will see `critical-db-vm` is back and in the *Running* state.
-. But is the *data* there? This is the most important test.
-. Click on `critical-db-vm` and open the *Console* tab.
-. Log in to the VM (`fedora`).
-. Run the `cat` command again to check for our file:
+== Restauration de la Machine Virtuelle
+
+Utilisons maintenant Kasten pour restaurer notre VM à partir du point de sauvegarde (snapshot).
+
+. Retournez au tableau de bord Kasten K10.
+
+. Cliquez sur *Applications* dans le menu. Vous devriez toujours voir *fedora-kasten-test* dans la liste (marquée comme "Removed" ou avec un point rouge), car elle a des points de restauration.
+
+. Cliquez sur le nom de l'application *fedora-kasten-test*.
+
+. Vous verrez une liste de *Restore Points*. Localisez le point de restauration valide que nous avons créé à l'étape précédente (il devrait être marqué *Snapshot*).
++
+image::2025_spring/module-08-kasten/08_kasten_restore_point.png[link=self, window=blank, width=100%]
+
+. Cliquez sur l'icône *Restore* sur la même ligne que ce point de restauration.
+
+. Une fenêtre *Restore Application* s'ouvrira. Nous voulons restaurer tout à son état d'origine. Laissez toutes les options par défaut et cliquez sur le bouton *Restore*.
+
+. Vous serez redirigé vers le *Dashboard* où vous pourrez suivre le statut du job de restauration. Attendez que le job passe à *Succeeded*.
++
+image::2025_spring/module-08-kasten/09_kasten_restore_success.png[link=self, window=blank, width=100%]
+
+== Vérification de la Restauration
+
+Vérifions si notre VM est revenue et, plus important encore, si son état (le fichier `test.txt`) a été restauré.
+
+. Retournez à la console OpenShift et à la vue *Virtualization*.
+
+. Dans votre *project-X*, vous devriez maintenant voir la VM *fedora-kasten-test* réapparaître. Attendez qu'elle atteigne le statut *Running*.
+
+. Cliquez sur la VM, puis sur l'onglet *Console*.
+
+. Connectez-vous à nouveau à la machine virtuelle (les identifiants devraient être les mêmes).
+
+. Une fois connecté, listez le contenu du répertoire personnel.
 +
 [source,sh,role=execute]
 ----
-cat /home/fedora/secret-file.txt
+ls
 ----
 +
-. The console will output:
+**Vous devriez voir le fichier `test.txt` !**
 +
-[source,sh]
-----
-My Secret Database Password
-----
-+
-Our VM, its disk, and its critical data have all been fully restored from backup.
+image::2025_spring/module-08-kasten/10_verify_file_restored.png[link=self, window=blank, width=100%]
 
-== Workshop Summary
+. (Optionnel) Vous pouvez maintenant vous déconnecter de la console (Ctrl-D).
 
-In this module, you learned how to provide true data protection and disaster recovery for your OpenShift Virtualization workloads. You used Kasten K10 to create an application-aware backup of a Virtual Machine, including its persistent data. You then simulated a catastrophic project deletion and successfully restored the *entire application*—the project, the VM, and its data—from an external backup, proving the system's resilience.
+== Cleanup
 
-Congratulations! You have completed the OpenShift Virtualization workshop. You have journeyed from basic VM creation to advanced networking with VLANs, high availability with load balancers, automated node-failure remediation, and finally, complete disaster recovery. You are now well-equipped to run modern and traditional workloads side-by-side on the OpenShift platform.
+Pour économiser les ressources, veuillez arrêter la VM que nous venons de restaurer.
+
+. Dans la vue *Virtualization*, sélectionnez la VM *fedora-kasten-test*.
+. Cliquez sur le bouton *Stop*.
+
+== Conclusion
+
+Félicitations ! Vous avez terminé le cycle complet de protection des données pour une machine virtuelle *cloud-native*.
+
+Nous avons démontré comment Veeam Kasten s'intègre à OpenShift Virtualization pour sauvegarder non seulement le disque d'une VM, mais aussi son état et sa configuration. Nous avons simulé un sinistre en supprimant la VM, puis nous l'avons restaurée avec succès à son état exact, y compris le fichier de test que nous avions créé. Cela montre la puissance de la gestion des applications *stateful* (qui ont un état) dans OpenShift.
+```
