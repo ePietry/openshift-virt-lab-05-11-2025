@@ -72,6 +72,7 @@ image::2025_spring/module-09-networking/45.png[link=self, window=blank, width=10
 image::2025_spring/module-09-networking/50.png[link=self, window=blank, width=100%]
 +
 
+
 == Vérification de la Persistance d'IP (Live Migration)
 Nous avons désomait deux VMs dans notre namespace *udn-project-X*, `vm-web` et `vm-db`, que nous allons utilisez pour verifier la *persistance des IP* sur un UDN puis pour tester les *Network Policies*.
 Démarrons par la vérifions de la persistance des IP.
