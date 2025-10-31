@@ -59,14 +59,18 @@ Créons maintenant deux VMs, `vm-web` et `vm-db`, et attachons-les à cet UDN. N
 +
 image::2025_spring/module-09-networking/44.png[link=self, window=blank, width=100%]
 +
-+
 . Cliquez sur la tuile *Fedora VM* et attribuez le nom *Name:* `vm-web`.
 +
 image::2025_spring/module-09-networking/45.png[link=self, window=blank, width=100%]
 +
 . Et créez la *Machine Virtuelle*
 
-. Répétez ce processus pour une seconde VM nommée `vm-db`,
+. Répétez ce processus pour une seconde VM nommée `vm-db`, et cliquez sur *Create → From Template*
+
+. Cliquez sur *User Template*, puis la tuile *centos-stream9-server-db-small* et attribuez le nom *Name:* `vm-db`.
++
+image::2025_spring/module-09-networking/50.png[link=self, window=blank, width=100%]
++
 
 == Vérification de la Persistance d'IP (Live Migration)
 Nous avons désomait deux VMs dans notre namespace *udn-project-X*, `vm-web` et `vm-db`, que nous allons utilisez pour verifier la *persistance des IP* sur un UDN puis pour tester les *Network Policies*.
