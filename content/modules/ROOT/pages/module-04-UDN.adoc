@@ -144,7 +144,7 @@ metadata:
 spec:
   podSelector: <1>
     matchLabels:
-      kubevirt.io/domain: vm-db
+      vm.kubevirt.io/name: vm-db
   policyTypes:
     - Ingress
   ingress: [] <2>
@@ -165,14 +165,14 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      kubevirt.io/domain: vm-db <1>
+      vm.kubevirt.io/name: vm-db <1>
   policyTypes:
     - Ingress
   ingress:
     - from:
         - podSelector:
             matchLabels:
-              kubevirt.io/domain: vm-web <2>
+              vm.kubevirt.io/name: vm-web <2>
       ports:
         - protocol: TCP
           port: 3306 <3>
