@@ -1,6 +1,3 @@
-Voici une proposition pour la nouvelle partie de l'atelier, rédigée en format `.adoc` en suivant le style de votre document existant.
-
-```asciidoc
 = Sauvegarde et Restauration de VM avec Veeam Kasten
 
 == Introduction
