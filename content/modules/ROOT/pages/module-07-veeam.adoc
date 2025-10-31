@@ -6,7 +6,7 @@ Dans un environnement de production, la capacité à sauvegarder et restaurer ra
 
 Kasten traite les applications, y compris les VM, comme une unité atomique, sauvegardant non seulement les disques (PVCs) mais aussi la configuration (les objets Kubernetes/OpenShift qui définissent la VM).
 
-Dans ce module, nous allons :
+. Dans ce module, nous allons :
 * Créer une VM de test et y ajouter un fichier.
 * Sauvegarder cette VM à l'aide d'une politique Kasten.
 * Simuler un sinistre en supprimant la VM.

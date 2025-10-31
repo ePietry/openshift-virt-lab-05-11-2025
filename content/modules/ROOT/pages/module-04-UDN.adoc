@@ -214,3 +214,13 @@ Connection to 192.168.200.12 3306 port [tcp/mysql] succeeded!
 *Résultat :* Succès. La connexion est établie car elle correspond parfaitement à notre **`NetworkPolicy`** `allow-web-to-db`.
 
 Vous avez maintenant mis en place une micro-segmentation granulaire entre vos VMs, en plus de leur fournir des adresses IP persistantes gérées par le cluster, le tout grâce aux UDN.
+
+[[cleanup]]
+== Cleanup
+
+Pour économiser des ressources pour le prochain *lab*, veuillez arrêter toutes les VMs que vous avez créées dans ce module.
+
+. Naviguez vers la *persona* *Virtualization* dans le menu de gauche, puis cliquez sur *Virtual Machines*.
+. Si des VMs affichent le statut *Running*, mettez en surbrillance la VM dans la colonne centrale arborescente, et sélectionnez le bouton *Stop* ou l'option dans le menu *dropdown* *Actions*.
+
+Toutes les VMs devraient maintenant être à l'état *Stopped*.
