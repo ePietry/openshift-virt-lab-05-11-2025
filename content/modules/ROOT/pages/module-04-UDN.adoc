@@ -60,20 +60,13 @@ Créons maintenant deux VMs, `vm-web` et `vm-db`, et attachons-les à cet UDN. N
 image::2025_spring/module-09-networking/44.png[link=self, window=blank, width=100%]
 +
 +
-. Cliquez sur la tuile *Fedora VM* et attribuez le nom *Name:* `vm-web`. Cliquez ensuite sur *Customise Machine*:
+. Cliquez sur la tuile *Fedora VM* et attribuez le nom *Name:* `vm-web`.
 +
 image::2025_spring/module-09-networking/45.png[link=self, window=blank, width=100%]
 +
-. Sélectionnez l'onglet *MetaData*
-+
-image::2025_spring/module-09-networking/46.png[link=self, window=blank, width=100%]
-+
-. Et ajoutez le label `app=web` puis lancez la création de la machine
-+
-image::2025_spring/module-09-networking/47.png[link=self, window=blank, width=100%]
-+
+. Et créez la *Machine Virtuelle*
 
-. Répétez ce processus pour une seconde VM nommée `vm-db`, en utilisant le **label** `app=db`
+. Répétez ce processus pour une seconde VM nommée `vm-db`,
 
 == Vérification de la Persistance d'IP (Live Migration)
 Nous avons désomait deux VMs dans notre namespace *udn-project-X*, `vm-web` et `vm-db`, que nous allons utilisez pour verifier la *persistance des IP* sur un UDN puis pour tester les *Network Policies*.
@@ -131,7 +124,7 @@ Ce sont des ressources Kubernetes standard qui peuvent être utilisées pour con
 
 . Dans le menu de gauche, cliquez sur *Networking* -> *NetworkPolicies*
 . Assurez-vous d'être dans le bon projet (udn-project-X)
-. Cliquez sur *Create Network Policy*
+. Cliquez sur *Create Network Policy*, puis *YAML View*
 
 . **Politique 1 : Deny All**
 +
@@ -146,7 +139,7 @@ metadata:
 spec:
   podSelector: <1>
     matchLabels:
-      app: db
+      kubevirt.io/domain: vm-db
   policyTypes:
     - Ingress
   ingress: [] <2>
@@ -167,14 +160,14 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: db <1>
+      kubevirt.io/domain: vm-db <1>
   policyTypes:
     - Ingress
   ingress:
     - from:
         - podSelector:
             matchLabels:
-              app: web <2>
+              kubevirt.io/domain: vm-web <2>
       ports:
         - protocol: TCP
           port: 3306 <3>
