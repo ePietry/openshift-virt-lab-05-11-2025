@@ -70,12 +70,17 @@ image::2025_spring/kasten/3.png[link=self, window=blank, width=100%]
 image::2025_spring/kasten/4.png[link=self, window=blank, width=100%]
 
 == Création et Exécution d'une Politique de Sauvegarde
+Nous avons maintenant accès à la console Veeam Kasten.
 
-Nous allons maintenant créer une "politique" (Policy) qui dit à Kasten quoi sauvegarder et comment.
+Nous allons maintenant créer une Policy qui dit à Kasten quoi sauvegarder et comment.
+Commençons par cliquer sur la tuile *Unmanaged* dans la partie application du dashboard 
++
+image::2025_spring/kasten/5.png[link=self, window=blank, width=100%]
 
-. Dans le tableau de bord Kasten, cliquez sur *Policies* dans la barre de navigation.
 
-. Cliquez sur le bouton *Create New Policy*.
+. Dans le tableau de bord selectionez le menu à trois points de notre *projet-X* et cliquez sur *Create a policy*
++
+image::2025_spring/kasten/6.png[link=self, window=blank, width=100%]
 
 . Remplissez le formulaire pour notre politique de sauvegarde :
     * *Name:* `backup-vm-projet-x`
@@ -84,7 +89,7 @@ Nous allons maintenant créer une "politique" (Policy) qui dit à Kasten quoi sa
     * Dans la section *Select Applications*, choisissez *By Name*.
     * Dans le *dropdown* *Applications*, trouvez et sélectionnez **fedora-kasten-test**. (Kasten voit la VM comme une "Application").
 +
-image::2025_spring/module-08-kasten/04_kasten_policy.png[link=self, window=blank, width=40%]
+image::2025_spring/kasten/5.png[link=self, window=blank, width=100%]
 
 . Cliquez sur *Create Policy*.
 
