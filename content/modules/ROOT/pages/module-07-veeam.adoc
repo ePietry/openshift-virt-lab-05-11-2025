@@ -21,9 +21,9 @@ Pour tester le cycle de vie de la sauvegarde et de la restauration, nous avons b
 
 . Cliquez sur *Create VirtualMachine* et sélectionnez *From template*.
 
-. Sélectionnez le *template* *Fedora VM* (comme dans le premier module).
+. Sélectionnez le *template* *Fedora VM*.
 +
-image::2025_spring/module-08-kasten/01_select_fedora.png[link=self, window=blank, width=100%]
+image::2025_spring/kasten/1.png[link=self, window=blank, width=100%]
 
 . Changez le nom en **fedora-kasten-test** et cliquez sur *Quick create VirtualMachine*.
 
