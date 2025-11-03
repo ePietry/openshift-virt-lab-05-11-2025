@@ -49,7 +49,7 @@ ls
 +
 Vous devriez voir `test.txt` apparaître dans la liste. Laissez cette VM en cours d'exécution.
 +
-image::2025_spring/module-08-kasten/02_touch_file.png[link=self, window=blank, width=100%]
+image::2025_spring/kasten/2.png[link=self, window=blank, width=100%]
 
 == Accès à la Console Kasten K10
 
