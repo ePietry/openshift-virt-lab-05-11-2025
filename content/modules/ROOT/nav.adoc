@@ -26,4 +26,8 @@
 
 * xref:module-07-veeam.adoc[Backup restore avec Veeam Kasten]
 
+* xref:kasten-module-01-install.adoc[Kasten 1]
+* xref:kasten-module-02-location-profile.adoc[Kasten 2]
+* xref:kasten-module-03-backup-restore.adoc[Kasten 3]
+
 * xref:conclusion.adoc[Conclusion]
