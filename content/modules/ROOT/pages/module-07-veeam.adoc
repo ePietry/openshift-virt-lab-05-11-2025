@@ -66,6 +66,8 @@ La console Kasten est l'interface web où nous gérerons les politiques de sauve
 image::2025_spring/kasten/3.png[link=self, window=blank, width=100%]
 
 . Une nouvelle fenêtre s'ouvrira avec le tableau de bord Kasten K10. Vous pouvez desormais vous identifiez avec vos logins OpenShift.
++
+image::2025_spring/kasten/4.png[link=self, window=blank, width=100%]
 
 == Création et Exécution d'une Politique de Sauvegarde
 
