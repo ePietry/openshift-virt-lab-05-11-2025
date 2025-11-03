@@ -84,7 +84,7 @@ Nous allons maintenant créer une "politique" (Policy) qui dit à Kasten quoi sa
     * Dans la section *Select Applications*, choisissez *By Name*.
     * Dans le *dropdown* *Applications*, trouvez et sélectionnez **fedora-kasten-test**. (Kasten voit la VM comme une "Application").
 +
-image::2025_spring/module-08-kasten/04_kasten_policy.png[link=self, window=blank, width=100%]
+image::2025_spring/module-08-kasten/04_kasten_policy.png[link=self, window=blank, width=40%]
 
 . Cliquez sur *Create Policy*.
 
