@@ -61,11 +61,11 @@ La console Kasten est l'interface web où nous gérerons les politiques de sauve
 
 . Assurez-vous que le *Project* sélectionné est **kasten-io** (ou le projet où Kasten est installé dans votre lab).
 
-. Vous devriez voir une route nommée *k10-dashboard* (ou similaire). Cliquez sur l'URL dans la colonne *Location*.
+. Vous devriez voir une route nommée *k10-route*. Cliquez sur l'URL dans la colonne *Location*.
 +
-image::2025_spring/module-08-kasten/03_kasten_route.png[link=self, window=blank, width=100%]
+image::2025_spring/kasten/3.png[link=self, window=blank, width=100%]
 
-. Une nouvelle fenêtre s'ouvrira avec le tableau de bord Kasten K10. Il se peut qu'on vous demande de vous authentifier (généralement via OpenShift).
+. Une nouvelle fenêtre s'ouvrira avec le tableau de bord Kasten K10. Vous pouvez desormais vous identifiez avec vos logins OpenShift.
 
 == Création et Exécution d'une Politique de Sauvegarde
 
