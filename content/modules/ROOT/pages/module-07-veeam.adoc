@@ -73,7 +73,7 @@ image::2025_spring/kasten/4.png[link=self, window=blank, width=100%]
 Nous avons maintenant accès à la console Veeam Kasten.
 
 Nous allons maintenant créer une Policy qui dit à Kasten quoi sauvegarder et comment.
-Commençons par cliquer sur la tuile *Unmanaged* dans la partie application du dashboard 
+. Commençons par cliquer sur la tuile *Unmanaged* dans la partie application du dashboard 
 +
 image::2025_spring/kasten/5.png[link=self, window=blank, width=100%]
 
