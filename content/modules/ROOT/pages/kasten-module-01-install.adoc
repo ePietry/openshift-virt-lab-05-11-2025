@@ -2,86 +2,177 @@
 
 == 1. Introduction
 
-Ce guide de labo complémentaire vise à familiariser les praticiens avec la protection des workloads OpenShift Virtualization à l'aide de Veeam Kasten for Kubernetes. Il suppose que l'apprenant a terminé les autres exercices de labo de l'OpenShift Virtualization Roadshow et qu'il est familier avec le provisionnement et la gestion des machines virtuelles dans OpenShift.
+Ce guide de laboratoire complémentaire est destiné à familiariser les praticiens avec la protection des *_workloads_* *_OpenShift Virtualization_* à l'aide de *_Veeam Kasten for Kubernetes_*.
+Il suppose que l'apprenant a terminé d'autres exercices de laboratoire du *_OpenShift Virtualization Roadshow_* et qu'il est familier avec le *_provisioning_* et le *_management_* de *_virtual machine_* dans OpenShift.
 
 === Qu'est-ce que Veeam Kasten ?
 
-Veeam Kasten for Kubernetes est une solution de protection des données spécialement conçue pour Kubernetes qui permet aux organisations d'effectuer des opérations de backup & restore, de disaster recovery et de cross-cluster mobility de leurs applications.
+*_Veeam Kasten for Kubernetes_* est une solution de protection des données spécialement conçue pour Kubernetes qui permet aux organisations d'effectuer le *_backup & restore_*, le *_disaster recovery_* et la *_cross-cluster mobility_* de leurs applications.
 
 === Comment Kasten fonctionne-t-il ?
 
 image::module-01-install/00.png[]
 
-. Kasten est déployé sur le cluster qu'il protège. Au sein du cluster, Kasten communique avec le Kubernetes API server pour découvrir les applications et leurs ressources. . Kasten orchestre des snapshots point-in-time d'applications complètes, incluant à la fois les données de manifest de l'application et les données de storage volume. . Kasten exporte des copies portables du snapshot point-in-time vers un repository externe de type objet, NFS ou Veeam.
+. Kasten est déployé sur le *_cluster_* qu'il protège.
+Au sein du *_cluster_*, Kasten communique avec le *_Kubernetes API server_* pour découvrir les applications et leurs ressources.
+. Kasten orchestre des *_point-in-time snapshots_* d'applications complètes, incluant à la fois les données de *_manifest_* de l'application et les données de *_storage volume_*.
+. Kasten exporte des copies portables du *_point-in-time snapshot_* vers un *_object repository_*, *_NFS_*, ou *_Veeam repository_* externe.
 
-==== [IMPORTANT]
-
-Nous avons pré-provisionné le labo avec une installation de Veeam Kasten, il n'est donc pas nécessaire de suivre les étapes de la Section 2. Cette section montre simplement comment vous procéderiez pour installer Kasten s'il n'était pas déjà installé sur le cluster OpenShift.
-
-Assurez-vous cependant de suivre les instructions pour accéder au Kasten K10 Dashboard dans la section 3 de ce labo !
-== 2. Installation de Kasten
-
-==== [WARNING]
-
-Bien que vous ayez accès au namespace kasten-io, VEUILLEZ NE RIEN MODIFIER DANS CE NAMESPACE. Ce namespace est partagé par tous les participants du labo et toute modification pourrait casser le labo pour TOUT LE MONDE !
-. Dans l'OpenShift Console, recherchez Kasten dans l'OperatorHub et sélectionnez Kasten K10 (Free) : + image::module-01-install/02.png[] +
-[NOTE]
-
-Des versions alternatives de l'opérateur Kasten sont disponibles si vous obtenez vos licences Kasten via le Red Hat Marketplace.
-
-Si vous le souhaitez, Kasten peut également être https://docs.kasten.io/latest/install/openshift/helm.html#helm-based-installation[installé sur OpenShift via une charte Helm (Helm chart)].
-. Sous Version, sélectionnez 7.0.12 dans le menu déroulant, et cliquez sur Install. + image::module-01-install/02b.png[] +
+====
 [IMPORTANT]
 
-Il est recommandé de toujours exécuter la dernière version disponible de Kasten. Sélectionner explicitement la version 7.0.12 permet de garantir la cohérence des instructions et des captures d'écran correspondantes dans ce guide de labo.
-. Sous Update approval, sélectionnez Manual puis cliquez sur Install pour lancer l'installation de l'opérateur. + image::module-01-install/03.png[]
+Nous avons pré-préparé le laboratoire avec une installation de Veeam Kasten, il n'est donc pas nécessaire de suivre les étapes de la Section 2.
+Cette section montre simplement comment vous procéderiez pour installer Kasten s'il n'était pas déjà installé sur le *_cluster OpenShift_*.
 
-. Lorsque vous y êtes invité, cliquez sur Approve pour poursuivre l'installation de l'opérateur. + image::module-01-install/03b.png[]
+Assurez-vous cependant de suivre les instructions pour accéder au *_Kasten K10 Dashboard_* dans la section 3 de ce laboratoire !
+====
 
-. Une fois l'installation de l'opérateur terminée, cliquez sur View Operator (ou sélectionnez Operators → Installed Operators → Kasten K10 (Free) dans la barre latérale). . Sous Provided APIs - K10, cliquez sur + Create instance. + image::module-01-install/04.png[]
+== 2. Installation de Kasten
 
-. Sélectionnez YAML view et remplacez les options par défaut par la configuration ci-dessous : + [source,yaml]
-apiVersion: apik10.kasten.io/v1alpha1 kind: K10 metadata:   name: k10   namespace: kasten-io   annotations:     helm.sdk.operatorframework.io/rollback-force: 'false' spec:   auth:     openshift:       enabled: true       dashboardURL: https://k10-route-kasten-io.apps.YOUR-WORKSHOP-ID.dynamic.redhatworkshops.io/k10       openshiftURL: https://apiserver.openshift-kube-apiserver.svc.cluster.local       insecureCA: true   route:     enabled: true     tls:       enabled: true
-. Remplacez YOUR-WORKSHOP-ID par l'identifiant à 5 caractères du DNS de votre environnement de labo, comme montré dans la capture d'écran ci-dessous : + image::module-01-install/05b.png[] + Cette configuration activera l'intégration avec le serveur OAuth OpenShift intégré et la création d'une Route pour un accès multi-utilisateurs sécurisé au dashboard Kasten. +
+====
+[WARNING]
+
+Bien que vous ayez accès au *_namespace_* `kasten-io` *VEUILLEZ NE RIEN MODIFIER DANS CE NAMESPACE*. Ce *_namespace_* est partagé par tous les participants au laboratoire et toute modification pourrait perturber le laboratoire pour *TOUT LE MONDE* !
+====
+
+. Dans l' *_OpenShift Console_*, recherchez `Kasten` dans l' *_OperatorHub_* et sélectionnez *_Kasten K10 (Free)_*:
++
+image::module-01-install/02.png[]
++
+====
+[NOTE]
+
+Des versions alternatives de l' *_operator_* Kasten sont disponibles si vous effectuez des transactions de licences Kasten via le *_Red Hat Marketplace_*.
+
+Si vous le souhaitez, Kasten peut également être https://docs.kasten.io/latest/install/openshift/helm.html#helm-based-installation[installé sur OpenShift via *_Helm chart_*].
+====
+
+. Sous *_Version_*, sélectionnez `7.0.12` dans le menu déroulant, et cliquez sur *_Install_*.
++
+image::module-01-install/02b.png[]
++
+====
+[IMPORTANT]
+
+Il est recommandé de toujours exécuter la dernière version disponible de Kasten.
+La sélection explicite de la version `7.0.12` vise à garantir la cohérence des instructions et des captures d'écran correspondantes dans ce guide de laboratoire.
+====
+
+. Sous *_Update approval_*, sélectionnez *_Manual_* puis cliquez sur *_Install_* pour initier l'installation de l' *_operator_*.
++
+image::module-01-install/03.png[]
+
+. Lorsque vous y êtes invité, cliquez sur *_Approve_* pour poursuivre l'installation de l' *_operator_*.
++
+image::module-01-install/03b.png[]
+
+. Une fois l'installation de l' *_operator_* terminée, cliquez sur *_View Operator_* (ou sélectionnez *_Operators → Installed Operators → Kasten K10 (Free)_* dans la barre latérale).
+. Sous *Provided APIs - K10*, cliquez sur *_+ Create instance_*.
++
+image::module-01-install/04.png[]
+
+. Sélectionnez *_YAML view_* et écrasez les options par défaut avec la configuration ci-dessous :
++
+[source,yaml]
+----
+---
+apiVersion: apik10.kasten.io/v1alpha1
+kind: K10
+metadata:
+  name: k10
+  namespace: kasten-io
+  annotations:
+    helm.sdk.operatorframework.io/rollback-force: 'false'
+spec:
+  auth:
+    openshift:
+      enabled: true
+      dashboardURL: https://k10-route-kasten-io.apps.YOUR-WORKSHOP-ID.dynamic.redhatworkshops.io/k10
+      openshiftURL: https://apiserver.openshift-kube-apiserver.svc.cluster.local
+      insecureCA: true
+  route:
+    enabled: true
+    tls:
+      enabled: true
+----
+
+. Remplacez `YOUR-WORKSHOP-ID` par l'identifiant à 5 caractères du DNS de votre environnement de laboratoire, comme le montre la capture d'écran ci-dessous :
++
+image::module-01-install/05b.png[]
++
+Cette configuration permettra l'intégration avec l' *_OAuth server_* intégré d'OpenShift et la création d'une `Route` pour un accès sécurisé et multi-utilisateurs au *_dashboard_* Kasten.
++
+====
 [NOTE]
 
 Une liste complète des paramètres de configuration est disponible sur https://docs.kasten.io/latest/install/advanced.html#complete-list-of-k10-helm-options[docs.kasten.io].
-. Cliquez sur Create. . Ouvrez le Web Terminal et cliquez sur Start pour initialiser le terminal (si demandé). + image::module-01-install/01.png[]
+====
 
-. Depuis le Web Terminal, exécutez la commande suivante pour suivre l'installation : + [,bash]
+. Cliquez sur *_Create_*.
+. Ouvrez le *_Web Terminal_* et cliquez sur *_Start_* pour initialiser le terminal (si vous y êtes invité).
++
+image::module-01-install/01.png[]
+
+. Depuis le *_Web Terminal_*, exécutez la commande suivante pour suivre l'installation :
++
+[,bash]
+----
 watch oc get pods -n kasten-io
-. Une fois que tous les Deployments sont READY, appuyez sur CTRL+C pour arrêter le watch. + image::module-01-install/06.png[]
+----
 
-. Comme étape finale de déploiement, annotez les VolumeSnapshotClasses disponibles pour Kasten : + [,bash]
-oc annotate volumesnapshotclass
+. Une fois que tous les *_Deployments_* sont `READY`, appuyez sur `CTRL+C` pour arrêter le `watch`.
++
+image::module-01-install/06.png[]
 
-  ocs-external-storagecluster-rbdplugin-snapclass 
-
+. Comme étape finale de déploiement, annotez les *_VolumeSnapshotClasses_* disponibles pour utilisation avec Kasten :
++
+[,bash]
+----
+oc annotate volumesnapshotclass \
+  ocs-external-storagecluster-rbdplugin-snapclass  \
   k10.kasten.io/is-snapshot-class=true
 
-oc annotate volumesnapshotclass
-  ocs-external-storagecluster-cephfsplugin-snapclass
-
+oc annotate volumesnapshotclass \
+  ocs-external-storagecluster-cephfsplugin-snapclass \
   k10.kasten.io/is-snapshot-class=true
+----
++
+====
+[IMPORTANT]
 
-==== [IMPORTANT]
+L'annotation `k10.kasten.io/is-snapshot-class` est utilisée par Kasten pour déterminer quelle *_VolumeSnapshotClass_* doit être utilisée par Kasten pour demander des *_CSI snapshots_* pour des *_PersistentVolumes_* provisionnés par un *_CSI provider_* donné.
+====
 
-L'annotation k10.kasten.io/is-snapshot-class est utilisée par Kasten pour déterminer quelle VolumeSnapshotClass Kasten doit utiliser pour demander des CSI snapshots pour les PersistentVolumes provisionnés par un CSI provider donné.
-. Fermez le Web Terminal.
+. Fermez le *_Web Terminal_*.
 
 == 3. Accéder au Kasten Dashboard
 
-. Dans un navigateur web, naviguez vers le {kasten_dashboard}[Kasten Dashboard^]. Vous devriez être redirigé vers l'invite de connexion OpenShift OAuth.
+. Dans un navigateur web, naviguez vers le {kasten_dashboard}[Kasten Dashboard^].
+Vous devriez être redirigé vers l'invite de connexion *_OpenShift OAuth_*.
 
-. Utilisez vos identifiants de l'OpenShift Console fournis avec votre environnement de labo et cliquez sur Log-in. .. User ID : {user} .. Password : {password} + image::module-01-install/08.png[]
+. Utilisez vos identifiants *_OpenShift Console_* fournis dans le cadre de votre environnement de laboratoire et cliquez sur *_Log-in_*.
+.. *User ID*: `{user}`
+.. *Password*: `{password}`
++
+image::module-01-install/08.png[]
 
-. Lorsque vous y êtes invité, sélectionnez Allow selected permissions pour autoriser Kasten à accéder en lecture seule (read-only) aux détails de votre nom d'utilisateur et de votre appartenance à un groupe depuis le serveur OpenShift OAuth. . Spécifiez vos valeurs Email Address et Company et cliquez sur Accept Terms. + image::module-01-install/09.png[]
+. Lorsque vous y êtes invité, sélectionnez *_Allow selected permissions_* pour autoriser Kasten à accéder en lecture seule aux détails du nom d'utilisateur et de l'appartenance au groupe depuis l' *_OpenShift OAuth server_*.
+. Spécifiez vos valeurs *_Email Address_* et *_Company_* et cliquez sur *_Accept Terms_*.
++
+image::module-01-install/09.png[]
 
-. Cliquez sur Skip Tour pour passer la visite guidée du Kasten dashboard pour le moment. . Vous devriez observer que vous accédez au Kasten Dashboard en tant que votre utilisateur individuel. + image::module-01-install/10.png[] +
+. Cliquez sur *_Skip Tour_* pour ignorer la visite du *_Kasten dashboard_* pour le moment.
+. Vous devriez observer que le *_Kasten Dashboard_* est en cours d'accès en tant qu'utilisateur individuel.
++
+image::module-01-install/10.png[]
++
+====
 [NOTE]
 
-Kasten est livré avec plusieurs rôles utilisateurs intégrés (built-in user roles), y compris k10-admin et k10-basic. Comme Kasten est construit sur des ressources natives de Kubernetes, des rôles personnalisés (custom roles) peuvent être créés et liés (bound) à des utilisateurs/groupes pour définir un accès granulaire (fine-grained access) au niveau de chaque namespace.
+Kasten est livré avec plusieurs *_user roles_* intégrés, y compris `k10-admin` et `k10-basic`.
+Comme Kasten est construit sur des ressources *_Kubernetes-native_*, des *_custom roles_* peuvent être créés et *_bound_* (liés) à des *_users/groups_* pour définir un *_fine-grained access_* au niveau de chaque *_namespace_*.
 
-Cela permet d'offrir un libre-service (self-service) sécurisé aux utilisateurs finaux qui peuvent avoir besoin de gérer leurs propres politiques ou restaurations sans dépendre d'un administrateur de la protection des données.
+Cela aide à permettre un *_self-service_* sécurisé pour les *_end users_* qui pourraient avoir besoin de gérer leurs propres *_policies_* ou *_restores_* sans dépendre d'un *_data protection administrator_*.
 
-Votre utilisateur s'est vu attribuer le rôle k10-admin.
+Votre utilisateur s'est vu attribuer le rôle `k10-admin`.
+====
