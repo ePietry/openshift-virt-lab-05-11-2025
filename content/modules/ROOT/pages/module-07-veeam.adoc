@@ -15,13 +15,6 @@ Kasten traite les applications, y compris les VM, comme une unité atomique, sau
 
 image::module-01-install/00.png[]
 
-====
-[IMPORTANT]
-
-Nous avons pré-préparé le laboratoire avec une installation de Veeam Kasten, il n'est donc pas nécessaire de suivre les étapes de la Section 2.
-Cette section montre simplement comment vous procéderiez pour installer Kasten s'il n'était pas déjà installé sur le *cluster OpenShift*.
-====
-
 == Préparation de la Machine Virtuelle de Test
 
 Pour tester le cycle de vie de la sauvegarde et de la restauration, nous avons besoin d'une VM avec un état spécifique (un fichier de test).
@@ -194,4 +187,3 @@ Pour économiser les ressources, veuillez arrêter la VM que nous venons de rest
 Félicitations ! Vous avez terminé le cycle complet de protection des données pour une machine virtuelle *cloud-native*.
 
 Nous avons démontré comment Veeam Kasten s'intègre à OpenShift Virtualization pour sauvegarder non seulement le disque d'une VM, mais aussi son état et sa configuration. Nous avons simulé un sinistre en supprimant la VM, puis nous l'avons restaurée avec succès à son état exact, y compris le fichier de test que nous avions créé. Cela montre la puissance de la gestion des applications *stateful* (qui ont un état) dans OpenShift.
-```
