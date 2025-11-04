@@ -77,6 +77,9 @@ image::2025_spring/kasten/3.png[link=self, window=blank, width=100%]
 . Une nouvelle fenêtre s'ouvrira avec le tableau de bord Kasten K10. Vous pouvez desormais vous identifiez avec vos logins OpenShift.
 +
 image::2025_spring/kasten/4.png[link=self, window=blank, width=100%]
+. Si nécessaire, autorisez l'access à Kasten à votre nom d'utilisateur
++
+image::2025_spring/kasten/9.png[link=self, window=blank, width=100%]
 
 == Création et Exécution d'une Politique de Sauvegarde
 Nous avons maintenant accès à la console Veeam Kasten.
