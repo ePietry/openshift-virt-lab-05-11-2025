@@ -106,7 +106,7 @@ image::2025_spring/kasten/11.png[link=self, window=blank, width=100%]
 
 . Cliquez sur *Dashboard* dans le menu principal de Kasten. Vous verrez un job de sauvegarde en cours (*Running*). Attendez quelques instants jusqu'à ce que le statut du job passe à *Succeeded*.
 +
-image::2025_spring/module-08-kasten/06_kasten_backup_success.png[link=self, window=blank, width=100%]
+image::2025_spring/kasten/12.png[link=self, window=blank, width=100%]
 
 . Notre VM est maintenant sauvegardée.
 
