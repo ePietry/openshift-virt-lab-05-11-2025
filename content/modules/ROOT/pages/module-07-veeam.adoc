@@ -90,7 +90,7 @@ image::2025_spring/kasten/6.png[link=self, window=blank, width=100%]
 
 . Remplissez le formulaire pour notre politique de sauvegarde :
     * *Name:* Nous pouvons le laissez par default
-    * *Backup Frequency:* On-demande
+    * *Backup Frequency:* *Daily*
     * Selectionnez *Enable Backups via Snapshot Exports* et selectionnez le stockage *s3-odf*
     * Laissez les autres options par défaut et cliquez sur *Submit*
 +
@@ -120,17 +120,15 @@ Il est temps de simuler une suppression accidentelle de notre machine virtuelle.
 
 . Sélectionnez la VM *fedora-kasten-test*.
 
-. Cliquez sur le menu *Actions* (dans le coin supérieur droit) et sélectionnez *Delete VirtualMachine*.
+. Cliquez sur le menu *Actions* (dans le coin supérieur droit) et sélectionnez *Stop*, puis *Delete*.
 +
-image::2025_spring/module-08-kasten/07_delete_vm.png[link=self, window=blank, width=100%]
-
-. Confirmez la suppression en tapant le nom de la VM et en cliquant sur *Delete*.
+image::2025_spring/kasten/13.png[link=self, window=blank, width=100%]
 
 . Attendez que la VM disparaisse de la liste. Notre VM et son fichier `test.txt` ont disparu.
 
 == Restauration de la Machine Virtuelle
 
-Utilisons maintenant Kasten pour restaurer notre VM à partir du point de sauvegarde (snapshot).
+Utilisons maintenant Kasten pour restaurer notre VM à partir du point de sauvegarde.
 
 . Retournez au tableau de bord Kasten K10.
 
