@@ -147,7 +147,7 @@ image::2025_spring/kasten/13.png[link=self, window=blank, width=100%]
 
 . Vous serez redirigé vers le *Dashboard* où vous pourrez suivre le statut du job de restauration. Attendez que le job passe à *Succeeded*.
 +
-image::2025_spring/kasten/16.png[link=self, window=blank, width=100%]
+image::2025_spring/kasten/15.png[link=self, window=blank, width=100%]
 
 == Vérification de la Restauration
 
