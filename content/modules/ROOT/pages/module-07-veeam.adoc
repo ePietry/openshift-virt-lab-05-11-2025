@@ -170,7 +170,7 @@ ls
 +
 **Vous devriez voir le fichier `test.txt` !**
 +
-image::2025_spring/module-08-kasten/10_verify_file_restored.png[link=self, window=blank, width=100%]
+image::2025_spring/kasten/14.png[link=self, window=blank, width=100%]
 
 . (Optionnel) Vous pouvez maintenant vous déconnecter de la console (Ctrl-D).
 
