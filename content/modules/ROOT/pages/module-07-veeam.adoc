@@ -100,9 +100,9 @@ image::2025_spring/kasten/10.png[link=self, window=blank, width=100%]
 
 . La politique est maintenant créée, mais elle n'a pas encore été exécutée. Sur la ligne de votre nouvelle politique (`backup-vm-projet-x`), cliquez sur l'icône *Run Once* (l'icône "play").
 +
-image::2025_spring/module-08-kasten/05_kasten_run_once.png[link=self, window=blank, width=100%]
+image::2025_spring/kasten/11.png[link=self, window=blank, width=100%]
 
-. Confirmez en cliquant sur *Run Policy* dans la fenêtre contextuelle.
+. Confirmez en cliquant sur *Yes, continue* dans la fenêtre contextuelle.
 
 . Cliquez sur *Dashboard* dans le menu principal de Kasten. Vous verrez un job de sauvegarde en cours (*Running*). Attendez quelques instants jusqu'à ce que le statut du job passe à *Succeeded*.
 +
