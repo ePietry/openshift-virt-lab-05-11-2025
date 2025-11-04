@@ -94,7 +94,7 @@ image::2025_spring/kasten/6.png[link=self, window=blank, width=100%]
     * Selectionnez *Enable Backups via Snapshot Exports* et selectionnez le stockage *s3-odf*
     * Laissez les autres options par défaut et cliquez sur *Submit*
 +
-image::2025_spring/kasten/7.png[link=self, window=blank, width=100%]
+image::2025_spring/kasten/10.png[link=self, window=blank, width=100%]
 
 . Cliquez sur *Create Policy*.
 
