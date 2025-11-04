@@ -13,20 +13,13 @@ Kasten traite les applications, y compris les VM, comme une unité atomique, sau
 * Restaurer la VM à partir de la sauvegarde.
 * Vérifier que la VM est revenue à son état précédent, y compris le fichier de test.
 
-=== Comment Kasten fonctionne-t-il ?
-
 image::module-01-install/00.png[]
-
-. Kasten est déployé sur le *_cluster_* qu'il protège.
-Au sein du *_cluster_*, Kasten communique avec le *_Kubernetes API server_* pour découvrir les applications et leurs ressources.
-. Kasten orchestre des *_point-in-time snapshots_* d'applications complètes, incluant à la fois les données de *_manifest_* de l'application et les données de *_storage volume_*.
-. Kasten exporte des copies portables du *_point-in-time snapshot_* vers un *_object repository_*, *_NFS_*, ou *_Veeam repository_* externe.
 
 ====
 [IMPORTANT]
 
 Nous avons pré-préparé le laboratoire avec une installation de Veeam Kasten, il n'est donc pas nécessaire de suivre les étapes de la Section 2.
-Cette section montre simplement comment vous procéderiez pour installer Kasten s'il n'était pas déjà installé sur le *_cluster OpenShift_*.
+Cette section montre simplement comment vous procéderiez pour installer Kasten s'il n'était pas déjà installé sur le *cluster OpenShift*.
 ====
 
 == Préparation de la Machine Virtuelle de Test
