@@ -97,12 +97,11 @@ image::2025_spring/kasten/6.png[link=self, window=blank, width=100%]
 
 . Remplissez le formulaire pour notre politique de sauvegarde :
     * *Name:* Nous pouvons le laissez par default
-    * *Action:* Laissez à *Snapshot*.
-    * Laissez les autres options par défaut (Fréquence, etc.).
-    * Dans la section *Select Applications*, choisissez *By Name*.
-    * Dans le *dropdown* *Applications*, trouvez et sélectionnez **fedora-kasten-test**. (Kasten voit la VM comme une "Application").
+    * *Backup Frequency:* On-demande
+    * Selectionnez *Enable Backups via Snapshot Exports* et selectionnez le stockage S3-ODF
+    * Laissez les autres options par défaut et cliquez sur *Submit*
 +
-
+image::2025_spring/kasten/7.png[link=self, window=blank, width=100%]
 
 . Cliquez sur *Create Policy*.
 
