@@ -135,7 +135,11 @@ oc annotate volumesnapshotclass \
 oc annotate volumesnapshotclass \
   ocs-external-storagecluster-cephfsplugin-snapclass \
   k10.kasten.io/is-snapshot-class=true
+
+kubectl annotate storageclass ocs-external-storagecluster-ceph-rbd k10.kasten.io/sc-supports-block-mode-exports=true
 ----
+
+
 +
 ====
 [IMPORTANT]
