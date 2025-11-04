@@ -133,13 +133,13 @@ Utilisons maintenant Kasten pour restaurer notre VM à partir du point de sauveg
 
 . Retournez au tableau de bord Kasten K10.
 
-. Cliquez sur *Applications* dans le menu. Vous devriez toujours voir *fedora-kasten-test* dans la liste (marquée comme "Removed" ou avec un point rouge), car elle a des points de restauration.
+. Cliquez sur *Restore Points* dans le menu. Vous devriez toujours voir votre *projet* dans la liste.
 
-. Cliquez sur le nom de l'application *fedora-kasten-test*.
+. Cliquez sur le nom de votre *projet*.
 
-. Vous verrez une liste de *Restore Points*. Localisez le point de restauration valide que nous avons créé à l'étape précédente (il devrait être marqué *Snapshot*).
+. Vous verrez une liste de *Restore Points*. Localisez le point de restauration valide que nous avons créé à l'étape précédente.
 +
-image::2025_spring/module-08-kasten/08_kasten_restore_point.png[link=self, window=blank, width=100%]
+image::2025_spring/kasten/13.png[link=self, window=blank, width=100%]
 
 . Cliquez sur l'icône *Restore* sur la même ligne que ce point de restauration.
 
@@ -147,7 +147,7 @@ image::2025_spring/module-08-kasten/08_kasten_restore_point.png[link=self, windo
 
 . Vous serez redirigé vers le *Dashboard* où vous pourrez suivre le statut du job de restauration. Attendez que le job passe à *Succeeded*.
 +
-image::2025_spring/module-08-kasten/09_kasten_restore_success.png[link=self, window=blank, width=100%]
+image::2025_spring/kasten/16.png[link=self, window=blank, width=100%]
 
 == Vérification de la Restauration
 
