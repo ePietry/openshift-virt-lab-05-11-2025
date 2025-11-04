@@ -89,7 +89,7 @@ image::2025_spring/kasten/6.png[link=self, window=blank, width=100%]
     * Dans la section *Select Applications*, choisissez *By Name*.
     * Dans le *dropdown* *Applications*, trouvez et sélectionnez **fedora-kasten-test**. (Kasten voit la VM comme une "Application").
 +
-image::2025_spring/kasten/5.png[link=self, window=blank, width=100%]
+
 
 . Cliquez sur *Create Policy*.
 
