@@ -91,7 +91,7 @@ image::2025_spring/kasten/6.png[link=self, window=blank, width=100%]
 . Remplissez le formulaire pour notre politique de sauvegarde :
     * *Name:* Nous pouvons le laissez par default
     * *Backup Frequency:* On-demande
-    * Selectionnez *Enable Backups via Snapshot Exports* et selectionnez le stockage S3-ODF
+    * Selectionnez *Enable Backups via Snapshot Exports* et selectionnez le stockage *s3-odf*
     * Laissez les autres options par défaut et cliquez sur *Submit*
 +
 image::2025_spring/kasten/7.png[link=self, window=blank, width=100%]
