@@ -50,7 +50,7 @@ image::2025_spring/module-01-intro/14_Create_VM_Quick.png[link=self, window=blan
 +
 image::2025_spring/module-01-intro/15_Create_VM_Quick_Name.png[link=self, window=blank, width=100%]
 
-. Nous retournerons à notre vue en arborescence et il est possible de voir les informations sur notre nouvelle VM dans la colonne d'aperçu des machines virtuelles. Remarquez aussi que nous voyons maintenant notre *project* *vmexamples-userX* listé dans la colonne de droite car il contient désormais une VM.
+. Nous retournerons à notre vue en arborescence et il est possible de voir les informations sur notre nouvelle VM dans la colonne d'aperçu des machines virtuelles. Remarquez aussi que nous voyons maintenant notre *project* *project-X* listé dans la colonne de droite car il contient désormais une VM.
 +
 Si nous regardons attentivement, nous pouvons voir le statut de la VM passer de *Provisioning* à *Starting* et finalement *Running* quand elle est prête.
 +
