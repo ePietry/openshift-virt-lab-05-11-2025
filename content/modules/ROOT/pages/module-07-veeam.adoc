@@ -98,7 +98,7 @@ image::2025_spring/kasten/10.png[link=self, window=blank, width=100%]
 
 . Cliquez sur *Create Policy*.
 
-. La politique est maintenant créée, mais elle n'a pas encore été exécutée. Sur la ligne de votre nouvelle politique (`backup-vm-projet-x`), cliquez sur l'icône *Run Once* (l'icône "play").
+. La politique est maintenant créée, mais elle n'a pas encore été exécutée. Sur la ligne de votre nouvelle politique (`projet-x-backup`), cliquez sur l'icône a droite puis sur *Run Once*.
 +
 image::2025_spring/kasten/11.png[link=self, window=blank, width=100%]
 
