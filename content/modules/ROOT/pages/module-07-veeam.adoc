@@ -77,6 +77,7 @@ image::2025_spring/kasten/3.png[link=self, window=blank, width=100%]
 . Une nouvelle fenêtre s'ouvrira avec le tableau de bord Kasten K10. Vous pouvez desormais vous identifiez avec vos logins OpenShift.
 +
 image::2025_spring/kasten/4.png[link=self, window=blank, width=100%]
+
 . Si nécessaire, autorisez l'access à Kasten à votre nom d'utilisateur
 +
 image::2025_spring/kasten/9.png[link=self, window=blank, width=100%]
@@ -85,7 +86,7 @@ image::2025_spring/kasten/9.png[link=self, window=blank, width=100%]
 Nous avons maintenant accès à la console Veeam Kasten.
 
 Nous allons maintenant créer une Policy qui dit à Kasten quoi sauvegarder et comment.
-. Commençons par cliquer sur la tuile *Unmanaged* dans la partie application du dashboard 
+. Commençons par cliquer sur la tuile *application* dans le dashboard 
 +
 image::2025_spring/kasten/5.png[link=self, window=blank, width=100%]
 
@@ -95,7 +96,7 @@ image::2025_spring/kasten/5.png[link=self, window=blank, width=100%]
 image::2025_spring/kasten/6.png[link=self, window=blank, width=100%]
 
 . Remplissez le formulaire pour notre politique de sauvegarde :
-    * *Name:* `backup-vm-projet-x`
+    * *Name:* Nous pouvons le laissez par default
     * *Action:* Laissez à *Snapshot*.
     * Laissez les autres options par défaut (Fréquence, etc.).
     * Dans la section *Select Applications*, choisissez *By Name*.
