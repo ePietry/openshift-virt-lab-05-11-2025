@@ -67,11 +67,11 @@ La console Kasten est l'interface web où nous gérerons les politiques de sauve
 +
 image::2025_spring/kasten/3.png[link=self, window=blank, width=100%]
 
-. Une nouvelle fenêtre s'ouvrira avec le tableau de bord Kasten K10. Vous pouvez desormais vous identifiez avec vos logins OpenShift.
+. Une nouvelle fenêtre s'ouvrira avec le tableau de bord Kasten K10. Vous pouvez désormais vous identifier avec vos logins OpenShift.
 +
 image::2025_spring/kasten/4.png[link=self, window=blank, width=100%]
 
-. Si nécessaire, autorisez l'access à Kasten à votre nom d'utilisateur
+. Si nécessaire, autorisez l’accès à Kasten à votre nom d'utilisateur
 +
 image::2025_spring/kasten/9.png[link=self, window=blank, width=100%]
 
@@ -85,21 +85,21 @@ Nous allons maintenant créer une Policy qui dit à Kasten quoi sauvegarder et c
 image::2025_spring/kasten/5.png[link=self, window=blank, width=100%]
 
 
-. Dans le tableau de bord selectionez le menu à trois points de notre *projet-X* et cliquez sur *Create a policy*
+. Dans le tableau de bord sélectionnez le menu à trois points de notre *projet-X* et cliquez sur *Create a policy*
 +
 image::2025_spring/kasten/6.png[link=self, window=blank, width=100%]
 
 . Remplissez le formulaire pour notre politique de sauvegarde :
-    * *Name:* Nous pouvons le laissez par default
+    * *Name:* Nous pouvons le laisser par default
     * *Backup Frequency:* *Daily*
-    * Selectionnez *Enable Backups via Snapshot Exports* et selectionnez le stockage *s3-odf*
+    * Sélectionnez *Enable Backups via Snapshot Exports* et sélectionnez le stockage *s3-odf*
     * Laissez les autres options par défaut et cliquez sur *Submit*
 +
 image::2025_spring/kasten/10.png[link=self, window=blank, width=100%]
 
 . Cliquez sur *Create Policy*.
 
-. La politique est maintenant créée, mais elle n'a pas encore été exécutée. Sur la ligne de votre nouvelle politique (`projet-x-backup`), cliquez sur l'icône a droite puis sur *Run Once*.
+. La politique est maintenant créée, mais elle n'a pas encore été exécutée. Sur la ligne de votre nouvelle politique (`projet-x-backup`), cliquez sur l'icône à droite puis sur *Run Once*.
 +
 image::2025_spring/kasten/11.png[link=self, window=blank, width=100%]
 
