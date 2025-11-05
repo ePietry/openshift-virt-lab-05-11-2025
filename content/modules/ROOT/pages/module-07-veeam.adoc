@@ -69,7 +69,7 @@ image::2025_spring/kasten/3.png[link=self, window=blank, width=100%]
 
 . Une nouvelle fenêtre s'ouvrira avec le tableau de bord Kasten K10. Vous pouvez désormais vous identifier avec vos logins OpenShift.
 +
-image::2025_spring/kasten/4.png[link=self, window=blank, width=100%]
+image::2025_spring/kasten/4.png[link=self, window=blank, width=50%]
 
 . Si nécessaire, autorisez l’accès à Kasten à votre nom d'utilisateur
 +
@@ -95,7 +95,7 @@ image::2025_spring/kasten/6.png[link=self, window=blank, width=100%]
     * Sélectionnez *Enable Backups via Snapshot Exports* et sélectionnez le stockage *s3-odf*
     * Laissez les autres options par défaut et cliquez sur *Submit*
 +
-image::2025_spring/kasten/10.png[link=self, window=blank, width=100%]
+image::2025_spring/kasten/10.png[link=self, window=blank, width=70%]
 
 . Cliquez sur *Create Policy*.
 
@@ -139,7 +139,7 @@ Utilisons maintenant Kasten pour restaurer notre VM à partir du point de sauveg
 
 . Vous verrez une liste de *Restore Points*. Localisez le point de restauration valide que nous avons créé à l'étape précédente.
 +
-image::2025_spring/kasten/13.png[link=self, window=blank, width=100%]
+image::2025_spring/kasten/15.png[link=self, window=blank, width=100%]
 
 . Cliquez sur l'icône *Restore* sur la même ligne que ce point de restauration.
 
@@ -147,7 +147,7 @@ image::2025_spring/kasten/13.png[link=self, window=blank, width=100%]
 
 . Vous serez redirigé vers le *Dashboard* où vous pourrez suivre le statut du job de restauration. Attendez que le job passe à *Succeeded*.
 +
-image::2025_spring/kasten/15.png[link=self, window=blank, width=100%]
+image::2025_spring/kasten/16.png[link=self, window=blank, width=100%]
 
 == Vérification de la Restauration
 
