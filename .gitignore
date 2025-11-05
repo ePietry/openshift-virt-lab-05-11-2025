@@ -9,3 +9,4 @@ strict-nncp-console-viewer-role.yaml
 test.bash
 userrole.yaml
 oauth*
+password-process
